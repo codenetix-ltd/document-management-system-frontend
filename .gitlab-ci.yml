@@ -1,0 +1,49 @@
+image: docker
+stages:
+  - build_source
+  - build_image
+  - deploy
+
+variables:
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+
+build_source:
+  image: node:9
+  stage: build_source
+  artifacts:
+    untracked: true
+    expire_in: 1 day
+    paths:
+      - dist/
+  script:
+    - npm install
+    - npm run build
+  only:
+    - dev
+  tags:
+    - docker-build
+
+build_image:
+  stage: build_image
+  dependencies:
+    - build_source
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker build --pull -t $CONTAINER_IMAGE .
+    - docker push $CONTAINER_IMAGE
+  only:
+    - dev
+  tags:
+    - docker-build
+
+deploy_dev:
+  variables:
+    GIT_STRATEGY: none
+  stage: deploy
+  only:
+    - dev
+  script:
+    - docker run --env RANCHER_URL="http://rancher.codenetix.com/v1/projects/1a17584" --env RANCHER_ACCESS_KEY="$RANCHER_ACCESS_KEY" --env RANCHER_SECRET_KEY="$RANCHER_SECRET_KEY" --env RANCHER_STACK_ID="1st133" --env RANCHER_STACK_NAME="Default" --env RANCHER_SERVICE_NAME="frontend" mildberrydigital/rancher-remote-upgrade:latest frontend
+    - docker run --env RANCHER_URL="http://rancher.codenetix.com/v1/projects/1a17584" --env RANCHER_ACCESS_KEY="$RANCHER_ACCESS_KEY" --env RANCHER_SECRET_KEY="$RANCHER_SECRET_KEY" --env RANCHER_STACK_ID="1st133" --env RANCHER_STACK_NAME="Default" --env RANCHER_SERVICE_NAME="dms-proxy" mildberrydigital/rancher-remote-upgrade:latest dms-proxy
+  tags:
+    - docker-build
