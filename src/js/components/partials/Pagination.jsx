@@ -72,7 +72,6 @@ export default class ReactTablePagination extends Component {
       nextText
     } = this.props;
 
-    // todo: use https://github.com/ultimate-pagination/react-ultimate-pagination
     const pagesList = Array.from({ length: pages }, () => '').map((p, index) => {
       const thresholdMax = page + 5;
       const thresholdMin = thresholdMax - 5;
@@ -88,7 +87,7 @@ export default class ReactTablePagination extends Component {
       if (pageNum === thresholdMax) {
         return (
           <li key={index} className="paginate_button disabled">
-            <DataLink>...</DataLink>
+            <span>...</span>
           </li>
         );
       }
