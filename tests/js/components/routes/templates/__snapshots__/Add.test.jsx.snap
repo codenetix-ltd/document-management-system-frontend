@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Templates Add should render correctly 1`] = `
+<div>
+  <ContentHeader
+    breadcrumbs={
+      Array [
+        Object {
+          "iconCls": "fa fa-copy",
+          "pageLink": "/templates/list",
+          "pageName": "Templates",
+        },
+        Object {
+          "iconCls": "fa fa-plus",
+          "pageLink": "/templates",
+          "pageName": "Template create",
+        },
+      ]
+    }
+    title="Template create"
+  />
+  <ContentWrapper
+    boxClass="box-info"
+    noBox={false}
+  >
+    <div
+      className="box-header with-border"
+    >
+      <h3
+        className="box-title"
+      >
+        Template data
+      </h3>
+    </div>
+    <Connect(TemplateForm)
+      match={
+        Object {
+          "params": Object {},
+        }
+      }
+      validate={[Function]}
+    />
+  </ContentWrapper>
+</div>
+`;
+
+exports[`Users list should render correctly 1`] = `null`;

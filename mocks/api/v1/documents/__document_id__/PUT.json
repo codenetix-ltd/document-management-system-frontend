@@ -1,0 +1,13 @@
+{
+  "name": "Example Document Name",
+  "ownerId": 1,
+  "substituteDocumentId": 1,
+  "attributesValues": [
+    {
+      "id": 1,
+      "value": "Example value"
+    }
+  ],
+  "templateId": 1,
+  "id": 1
+}

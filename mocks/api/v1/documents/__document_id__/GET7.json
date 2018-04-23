@@ -1,0 +1,50 @@
+{
+  "id": 7,
+  "name": "Document with template that has single attribute of type boolean 2",
+  "templateId": 101,
+  "template": {
+    "id": 101,
+    "name": "Template with attribute of type boolean",
+    "attributes": [
+      {
+        "id": 201,
+        "type": {
+          "id": 1,
+          "name": "Boolean",
+          "machineName": "boolean"
+        },
+        "name": "Attribute with type boolean"
+      }
+    ]
+  },
+  "attributeValues": [
+    {
+      "id": 201,
+      "value": false
+    }
+  ],
+  "labelIds": [
+    1
+  ],
+  "labels": [
+    {
+      "id": 1,
+      "name": "Example label"
+    }
+  ],
+  "ownerId": 77815229,
+  "owner": {
+    "id": 95877757,
+    "fullName": "Granite",
+    "email": "Eldon97@gmail.com",
+    "templatesIds": [
+      101
+    ]
+  },
+  "comment": "Lorem ipsum dolor sit amet.",
+  "substituteDocumentId": 40114552,
+  "version": 1,
+  "data": [],
+  "updatedAt": 54133883,
+  "createdAt": 88572716
+}

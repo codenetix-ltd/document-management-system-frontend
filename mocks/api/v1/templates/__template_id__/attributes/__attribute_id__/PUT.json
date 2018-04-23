@@ -1,0 +1,36 @@
+{
+  "name": "Example attribute",
+  "id": 1,
+  "type": {
+    "name": "String",
+    "machineName": "string",
+    "id": 1
+  },
+  "table": {
+    "rows": [
+      {
+        "name": "Example row",
+        "columns": [
+          {
+            "isLocked": false,
+            "type": {
+              "name": "String",
+              "machineName": "string",
+              "id": 1
+            }
+          }
+        ]
+      }
+    ],
+    "columns": [
+      {
+        "name": "Example Column Header",
+        "type": {
+          "name": "String",
+          "machineName": "string",
+          "id": 1
+        }
+      }
+    ]
+  }
+}

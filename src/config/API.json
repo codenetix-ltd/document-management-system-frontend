@@ -1,0 +1,22 @@
+{
+  "baseURL": {
+    "test": "http://mock.dms.codenetix.com",
+    "development": "http://mock.dms.codenetix.com",
+    "production": "http://mock.dms.codenetix.com"
+  },
+  "v1": {
+    "token": "/v1/oauth/token",
+    "logout": "/v1/oauth/logout",
+    "resetEmail": "/v1/oauth/resetEmail",
+    "resetPassword": "/v1/oauth/resetPassword/%s",
+    "users": "/v1/users",
+    "profile": "/v1/users/current",
+    "types": "/v1/types",
+    "templates": "/v1/templates",
+    "documents": "/v1/documents",
+    "labels": "/v1/labels",
+    "roles": "/v1/roles",
+    "attributes": "/v1/templates/%s/attributes",
+    "versions": "/v1/documents/%s/versions"
+  }
+}

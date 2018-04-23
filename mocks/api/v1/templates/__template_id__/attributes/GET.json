@@ -1,0 +1,64 @@
+{
+  "links": {
+    "first": "http://localhost/api/v1/users?page=1",
+    "last": "http://localhost/api/v1/users?page=4",
+    "prev": null,
+    "next": "http://localhost/api/v1/users?page=2"
+  },
+  "meta": {
+    "currentPage": 1,
+    "from": 1,
+    "lastPage": 4,
+    "path": "http://localhost/api/v1/users",
+    "perPage": 15,
+    "to": 15,
+    "total": 51
+  },
+  "data": [
+    {
+      "name": "Used for SKUs (enter ERP codes, comma separated)",
+      "id": 1,
+      "type": {
+        "name": "String",
+        "machineName": "string",
+        "id": 1
+      }
+    },
+    {
+      "name": "General description",
+      "id": 2,
+      "type": {
+        "name": "Table",
+        "machineName": "table",
+        "id": 4
+      },
+      "table": {
+        "rows": [
+          {
+            "name": "Example row",
+            "columns": [
+              {
+                "isLocked": false,
+                "type": {
+                  "name": "String",
+                  "machineName": "string",
+                  "id": 1
+                }
+              }
+            ]
+          }
+        ],
+        "columns": [
+          {
+            "name": "Example Column Header",
+            "type": {
+              "name": "String",
+              "machineName": "string",
+              "id": 1
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

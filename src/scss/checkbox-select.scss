@@ -1,0 +1,60 @@
+.checkboxSelect {
+  position: relative;
+  button {
+    width: 100%;
+    span { // replace this with a js solution cause this doesn't work as expected
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  ul {
+    display: none;
+    white-space: nowrap; // this allows the dropdown autoexpand beyond its parent if needed
+    list-style-type: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    background-color: white;
+    background-clip: padding-box;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    &.isOpen {
+      display: block;
+    }
+    li {
+      user-select: none;
+      label {
+        margin: 0;
+        height: 100%;
+        cursor: pointer;
+        font-weight: 400;
+        padding: 3px 20px 3px 20px;
+        input {
+          margin-top: 0;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.document-filters {
+  .checkboxSelect {
+    button {
+      font-size: 13px;
+      line-height: 16px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}

@@ -1,0 +1,219 @@
+html body,
+body .wrapper {
+  height: auto;
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 100px);
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.attributes-table {
+  margin-bottom: 20px;
+}
+
+.document-actions {
+  margin-bottom: 15px;
+}
+
+.compare-actions {
+  margin-top: 20px;
+}
+
+.compare-show-style-item {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.tab-content > .tab-pane {
+  padding: 10px;
+}
+
+.table-compare-header-cell {
+  h2 {
+    margin: 0 0 5px;
+    font-size: 18px;
+  }
+  span {
+    font-weight: normal;
+  }
+}
+
+.rdt {
+  .form-control {
+    height: 30px;
+    font-size: 12px;
+  }
+  .rdtPicker {
+    top: 36px;
+    left: 1px;
+  }
+}
+
+// react-select drop-down menu
+.Select-menu-outer {
+  z-index: 100;
+}
+
+.table-type-builder-actions {
+  margin-bottom: 10px;
+}
+
+table.attrs-list-sortable {
+  tr {
+    th:first-child {
+      width: 30px;
+    }
+    th:last-child {
+      width: 66px;
+    }
+  }
+}
+
+table.attr-type-cell {
+  width: 100%;
+
+  td:first-child {
+    width: 30px;
+  }
+}
+
+.table-type-builder-wrapper {
+  .ReactTable {
+    border: 0;
+    overflow: visible;
+  }
+  .ReactTable .rt-table,
+  .ReactTable .rt-tbody,
+  .ReactTable .rt-th,
+  .ReactTable .rt-td {
+    overflow: visible;
+  }
+  .ReactTable .rt-thead.-header {
+    border-bottom: 0;
+  }
+  .ReactTable .rt-thead .rt-tr .rt-th,
+  .ReactTable .rt-thead .rt-tr .rt-td,
+  .ReactTable .rt-tbody .rt-tr .rt-td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .ReactTable .rt-thead .rt-tr:first-child .rt-th {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .ReactTable .rt-thead .rt-tr .rt-th:first-child,
+  .ReactTable .rt-tbody .rt-tr .rt-td:first-child {
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .ReactTable .rt-thead .rt-tr .rt-th:last-child,
+  .ReactTable .rt-tbody .rt-tr .rt-td:last-child {
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .ReactTable .rt-thead .rt-th,
+  .ReactTable .rt-thead .rt-td {
+    padding: 8px;
+  }
+  .ReactTable .rt-thead .rt-th.input-as-text,
+  .ReactTable .rt-tbody .rt-td.input-as-text {
+    padding: 0;
+
+    input[type=text] {
+      width: 100%;
+      padding: 0 8px;
+      border-radius: 0;
+      border: 1px dotted transparent;
+      height: 37px;
+      font-weight: bold;
+
+      &:focus {
+        border-color: grey;
+      }
+    }
+  }
+  .attr-remove-cell {
+    text-align: center;
+  }
+}
+
+.dms-alert.alert {
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0;
+  margin-bottom: 0;
+  transition: max-height 0.6s linear, padding-top 0.6s linear, padding-bottom 0.6s linear;
+}
+
+.dms-alert.alert.show {
+  max-height: 52px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-width: 1px;
+  margin-bottom: 20px;
+}
+
+.sortableHelper {
+  display: table !important;
+}
+
+.drag-handle {
+  text-align: center;
+  color: #ccc;
+  cursor: move;
+}
+
+.document-filters {
+  :global .Select-control {
+    height: 30px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  :global .Select-placeholder {
+    line-height: 28px
+  }
+  :global .Select-value {
+    line-height: 26px !important;
+  }
+
+  :global .Select-value-label {
+    line-height: 26px;
+  }
+
+  :global .Select-input {
+    height: 26px;
+  }
+}
+
+.attr-type-select {
+  :global .Select-control {
+    height: 28px;
+  }
+  :global .Select-placeholder {
+    line-height: 20px
+  }
+  :global .Select-value {
+    line-height: 26px !important;
+  }
+
+  :global .Select-value-label {
+    line-height: 26px;
+  }
+
+  :global .Select-input {
+    height: 26px;
+  }
+}
+
+.table-view-document {
+  td:first-child {
+    width: 20%;
+    font-weight: bold;
+  }
+}
+
+body div[class*=Modal-overlay-] {
+  z-index: 9999;
+}

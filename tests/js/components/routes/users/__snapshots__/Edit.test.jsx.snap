@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users list should render correctly 1`] = `
+<div>
+  <ContentHeader
+    breadcrumbs={
+      Array [
+        Object {
+          "iconCls": "fa fa-users",
+          "pageLink": "/users",
+          "pageName": "Users",
+        },
+      ]
+    }
+    title="Edit "
+  />
+  <ContentWrapper
+    boxClass="box-info"
+    noBox={false}
+  >
+    <div
+      className="box-header with-border"
+    >
+      <h3
+        className="box-title"
+      >
+        Profile data
+      </h3>
+    </div>
+    <UserForm
+      getTemplateOptions={[Function]}
+      onSubmit={[Function]}
+      submitButtonText="Update"
+      user={Object {}}
+      validate={[Function]}
+    />
+  </ContentWrapper>
+</div>
+`;

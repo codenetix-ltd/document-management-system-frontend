@@ -1,0 +1,64 @@
+{
+  "columns": [
+    {
+      "name": "Enter title",
+      "type": {
+        "name": "String",
+        "machineName": "string",
+        "id": 1
+      }
+    },
+    {
+      "name": "Enter title",
+      "type": {
+        "name": "String",
+        "machineName": "string",
+        "id": 1
+      }
+    }
+  ],
+  "rows": [
+    {
+      "name": "Enter title",
+      "columns": [
+        {
+          "isLocked": false,
+          "type": {
+            "name": "String",
+            "machineName": "string",
+            "id": 1
+          }
+        },
+        {
+          "isLocked": false,
+          "type": {
+            "name": "String",
+            "machineName": "string",
+            "id": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enter title",
+      "columns": [
+        {
+          "isLocked": false,
+          "type": {
+            "name": "String",
+            "machineName": "string",
+            "id": 1
+          }
+        },
+        {
+          "isLocked": false,
+          "type": {
+            "name": "String",
+            "machineName": "string",
+            "id": 1
+          }
+        }
+      ]
+    }
+  ]
+}

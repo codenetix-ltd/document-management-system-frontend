@@ -1,0 +1,81 @@
+{
+  "auth": {
+    "isAuthorized": false,
+    "tokenType": "",
+    "expiresIn": 99999999,
+    "accessToken": "",
+    "refreshToken": ""
+  },
+  "loading": false,
+  "users": {
+    "list": [],
+    "lastPage": -1
+  },
+  "user": {
+    "fullName": ""
+  },
+  "profile": {
+    "id": 1,
+    "fullName": "",
+    "email": ""
+  },
+  "templates": {
+    "list": [],
+    "lastPage": -1
+  },
+  "template": {
+    "name": ""
+  },
+  "attributes": {
+    "list": []
+  },
+  "attribute": {
+    "name": ""
+  },
+  "documents": {
+    "list": [],
+    "lastPage": -1,
+    "page": 1,
+    "sortField": "id",
+    "sortDirection": "desc",
+    "filterSet": {}
+  },
+  "document": {
+    "actualVersion": {
+      "name": "",
+      "comment": "",
+      "attributeValues": []
+    }
+  },
+  "selectedDocuments": [],
+  "comparedDocuments": [],
+  "versions": {
+    "list": []
+  },
+  "version": {
+    "name": ""
+  },
+  "labels": {
+    "list": [],
+    "lastPage": -1
+  },
+  "label": {
+    "name": ""
+  },
+  "roles": {
+    "list": [],
+    "lastPage": -1
+  },
+  "role": {
+    "name": ""
+  },
+  "types": {
+    "list": [],
+    "lastPage": -1
+  },
+  "message": {
+    "text": "",
+    "type": "success"
+  },
+  "error": {}
+}
