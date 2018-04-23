@@ -1,0 +1,37 @@
+image: docker
+stages:
+  - build_source
+  - build_image
+
+variables:
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+
+build_source:
+  image: node:9
+  stage: build_source
+  artifacts:
+    untracked: true
+    expire_in: 1 day
+    paths:
+      - dist/
+      - node_modules/
+  script:
+    - npm install
+    - npm run build
+  only:
+    - dev
+  tags:
+    - docker-build
+
+build_image:
+  stage: build_image
+  dependencies:
+    - build_source
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker build --pull $CONTAINER_IMAGE .
+    - docker push $CONTAINER_IMAGE
+  only:
+    - dev
+  tags:
+    - docker-build
