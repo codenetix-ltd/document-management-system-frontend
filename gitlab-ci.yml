@@ -1,0 +1,16 @@
+image: docker
+
+variables:
+  CONTAINER_IMAGE_TEST: $CI_REGISTRY_IMAGE:test
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+
+
+build:
+  image: node:9
+  script:
+    - npm install
+    - npm run build
+
+build_test_image:
+  script:
+    - docker build $CONTAINER_IMAGE_TEST .

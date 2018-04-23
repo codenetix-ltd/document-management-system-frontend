@@ -1,0 +1,8 @@
+version: '3'
+services:
+  build:
+    image: node
+    volumes:
+      - .:/code
+    working_dir: /code
+    command: 'npm run build'
