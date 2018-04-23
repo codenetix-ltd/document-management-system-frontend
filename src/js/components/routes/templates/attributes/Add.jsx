@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { format } from 'util';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -8,6 +7,8 @@ import { Redirect } from 'react-router-dom';
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import AttributeForm from 'Routes/templates/attributes/partials/Form';
+
+import axios from 'Services/request';
 import { getAPI } from 'Config';
 
 const API = getAPI();

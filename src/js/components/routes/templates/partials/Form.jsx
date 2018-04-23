@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -14,6 +13,7 @@ import {
   $$templateReset
 } from 'Store/thunks/templates';
 
+import axios from 'Services/request';
 import { API } from 'Config';
 
 @autobind

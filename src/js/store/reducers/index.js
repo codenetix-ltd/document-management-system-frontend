@@ -39,7 +39,7 @@ import {
 import initialState from './initialState.json';
 
 const auth = ls.get('auth');
-initialState.auth.isAuthorized = auth.isAuthorized || false;
+initialState.auth = auth || false;
 
 export default function Reducer(state = initialState, action) {
   switch (action.type) {

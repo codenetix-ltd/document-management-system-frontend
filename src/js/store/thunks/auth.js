@@ -21,28 +21,34 @@ export const $$authFetch = (dispatch, user, callback = fn) => {
     password: user.password,
     scope: 'Global'
   }).then(({ data }) => {
-    dispatch($setAuth({ ...data }));
+    const auth = { isAuthorized: false, ...data };
+    dispatch($setAuth(auth));
+    ls.set('auth', auth);
     callback(data);
   }).catch(err => {
     console.trace(err);
   });
 };
 
-export const $$authUpdate = (dispatch, part) => {
+/* export const $$authUpdate = (dispatch, part) => {
   dispatch($updateAuth(part));
-};
+}; */
 
 export const $$authReset = (dispatch) => {
   dispatch($setAuth(initialState.auth));
-  ls.set('auth', { isAuthorized: false });
+  ls.set('auth', initialState.auth);
 };
 
 export const $$logIn = (dispatch) => {
   dispatch($updateAuth({ isAuthorized: true }));
-  ls.set('auth', { isAuthorized: true });
+  const auth = ls.get('auth');
+  auth.isAuthorized = true;
+  ls.set('auth', auth);
 };
 
 export const $$logOut = (dispatch) => {
   dispatch($updateAuth({ isAuthorized: false }));
-  ls.set('auth', { isAuthorized: false });
+  const auth = ls.get('auth');
+  auth.isAuthorized = false;
+  ls.set('auth', auth);
 };

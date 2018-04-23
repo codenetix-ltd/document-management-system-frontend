@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
@@ -7,6 +6,7 @@ import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import UserForm from 'Routes/users/partials/Form';
 
+import axios from 'Services/request';
 import { API } from 'Config';
 
 @autobind

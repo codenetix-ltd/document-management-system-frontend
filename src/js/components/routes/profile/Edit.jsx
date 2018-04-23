@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,6 +7,7 @@ import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import ProfileForm from 'Routes/profile/partials/Form';
 
+import axios from 'Services/request';
 import { API } from 'Config';
 
 import { $$profileFetch } from 'Store/thunks/profile';

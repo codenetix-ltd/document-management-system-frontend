@@ -1,7 +1,8 @@
 import { API } from 'Config';
 import pickBy from 'lodash/pickBy';
 import identity from 'lodash/identity';
-import axios from 'axios';
+
+import axios from 'Services/request';
 
 import {
   $loading,
@@ -84,6 +85,7 @@ export const $$documentDelete = (dispatch, { id, name }, close = fn) => {
 };
 
 export const $$documentsMassDelete = (dispatch, ids, close = fn) => {
+  // todo: maybe better use axios.all here
   const p = Promise.all(ids.map(id => axios.delete(`${API.documents}/${id}`)));
   p.then(() => {
     $$documentsFetch(dispatch, 1);

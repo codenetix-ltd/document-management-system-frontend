@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import cln from 'classnames';
 import PropTypes from 'prop-types';
 import { If, Then } from 'qc-react-conditionals/lib';
@@ -49,9 +50,8 @@ MenuItem.propTypes = {
   addLink: PropTypes.string.isRequired
 };
 
-export function Sidebar(props) {
-  const { pathname } = props.location;
-  const menuItems = props.menuData.map((item, index) => {
+export function Sidebar({ profile, menuData, location: { pathname } }) {
+  const menuItems = menuData.map((item, index) => {
     const addLink = `/${item.name.toLowerCase()}`;
     const listLink = `/${item.name.toLowerCase()}/list`;
     const iconCls = cln({ fa: true, [item.icon]: item.icon });
@@ -84,8 +84,8 @@ export function Sidebar(props) {
             />
           </div>
           <div className="pull-left info">
-            <p>Andrei Vorobyev</p>
-            <a href="#"><i className="fa fa-circle text-success" /> Online</a>
+            <p>{profile.fullName}</p>
+            <DataLink><i className="fa fa-circle text-success" /> Online</DataLink>
           </div>
         </div>
         <ul className="sidebar-menu">{menuItems}</ul>
@@ -100,7 +100,14 @@ Sidebar.defaultProps = {
 
 Sidebar.propTypes = {
   menuData: PropTypes.array,
+  profile: PropTypes.any.isRequired,
   location: PropTypes.any.isRequired
 };
 
-export default withRouter(Sidebar);
+export const RoutedSidebar = withRouter(Sidebar);
+
+const mapStateToProps = ({ profile }) => ({ profile });
+
+const mapDispatchToProps = (dispatch) => ({ dispatch });
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoutedSidebar);

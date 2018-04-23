@@ -34,7 +34,7 @@ describe('Users list', () => {
   it('should check if user full_name is not empty', () => {
     setTimeout(() => {
       const { loadedUser } = wrapper.state();
-      expect(_.isEmpty(loadedUser.full_name)).toBe(false);
+      expect(_.isEmpty(loadedUser.blabla)).toBe(false);
     }, 1000);
   });
 });

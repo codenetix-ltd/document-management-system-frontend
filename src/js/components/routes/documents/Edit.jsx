@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
@@ -10,6 +9,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 
+import axios from 'Services/request';
 import { API } from 'Config';
 
 import { $$documentFetch } from 'Store/thunks/documents';
