@@ -49,11 +49,13 @@ export class RoleEdit extends Component {
           <div className="box-header with-border">
             <h3 className="box-title">Role</h3>
           </div>
-          <RoleForm
-            role={role}
-            onSubmit={this.onFormSubmit}
-            submitButtonText="Update"
-          />
+          <div className="box-body">
+            <RoleForm
+              role={role}
+              onSubmit={this.onFormSubmit}
+              submitButtonText="Update"
+            />
+          </div>
         </ContentWrapper>
       </div>
     );

@@ -63,10 +63,12 @@ export class RoleAdd extends Component {
           <div className="box-header with-border">
             <h3 className="box-title">Role</h3>
           </div>
-          <RoleForm
-            onSubmit={this.onFormSubmit}
-            validate={this.validate}
-          />
+          <div className="box-body">
+            <RoleForm
+              onSubmit={this.onFormSubmit}
+              validate={this.validate}
+            />
+          </div>
         </ContentWrapper>
       </div>
     );
