@@ -10,15 +10,10 @@ import { $$errorSet } from 'Store/thunks/error';
 
 const fn = () => {};
 
-export const $$typesFetch = (dispatch, page, callback = fn) => {
+export const $$typesFetch = (dispatch, callback = fn) => {
   dispatch($loading(true));
-  axios.get(API.types, {
-    params: { page }
-  }).then(({ data }) => {
-    dispatch($typesList({
-      list: data.data,
-      lastPage: data.meta.lastPage
-    }));
+  axios.get(API.types).then(({ data }) => {
+    dispatch($typesList(data));
     dispatch($loading(false));
     callback(data);
   }).catch(err => {

@@ -263,11 +263,7 @@ export default function Reducer(state = initialState, action) {
     case TYPES_LIST_SET:
       return {
         ...state,
-        types: {
-          ...state.types,
-          list: action.data.list,
-          lastPage: action.data.lastPage
-        }
+        types: action.data
       };
     case MESSAGE_SET:
       return {

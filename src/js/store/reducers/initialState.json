@@ -70,10 +70,7 @@
     "name": ""
   },
   "permissionGroups": [],
-  "types": {
-    "list": [],
-    "lastPage": -1
-  },
+  "types": [],
   "message": {
     "text": "",
     "type": "success"
