@@ -42,9 +42,16 @@ export class RoleForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.role !== this.props.role) {
-      const { name, templateIds } = nextProps.role;
-      this.setState({ ...this.state, name, templateIds });
+    const newRole = JSON.stringify(nextProps.role);
+    const oldRole = JSON.stringify(this.props.role);
+    if (newRole !== oldRole) {
+      const { name, templateIds, permissionValues } = nextProps.role;
+      this.setState({
+        ...this.state,
+        name,
+        templateIds,
+        permissionValues
+      });
     }
   }
 
@@ -55,8 +62,20 @@ export class RoleForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     const formData = { ...this.state };
-    console.log(formData);
     this.props.onSubmit(formData);
+  }
+
+  getPermissionValue(permissionID) {
+    const { permissionValues } = this.state;
+    const perm = permissionValues.find(({ id }) => id === permissionID);
+    return perm ? perm['accessType'].id : null;
+  }
+
+  getQualifierValue(permissionID, qualifierID) {
+    const { permissionValues } = this.state;
+    const perm = permissionValues.find(({ id }) => id === permissionID);
+    const qual = perm ? perm['qualifiers'].find(({ id }) => id === qualifierID) : null;
+    return qual ? qual['accessType'].id : null;
   }
 
   /**
@@ -79,7 +98,7 @@ export class RoleForm extends Component {
   }
 
   render() {
-    const { name, templateIds } = this.state;
+    const { name, templateIds, permissionValues } = this.state;
     const {
       role,
       loading,
@@ -119,7 +138,7 @@ export class RoleForm extends Component {
             </div>
           </div>
         </div>
-        <If is={role}>
+        <If is={permissionValues.length}>
           <Then>
             <div className="row">
               <div className="col-lg-8">
@@ -144,7 +163,11 @@ export class RoleForm extends Component {
                                 <tr key={permission.id}>
                                   <td>{permission.label}</td>
                                   <td>
-                                    <select name="access_type[1]" className="form-control input-sm">
+                                    <select
+                                      defaultValue={this.getPermissionValue(permission.id)}
+                                      name={`permission[${permission.id}]`}
+                                      className="form-control input-sm"
+                                    >
                                       {
                                         permission['accessTypes'].map(accessType => (
                                           <option key={accessType.id} value={accessType.id}>
@@ -160,7 +183,11 @@ export class RoleForm extends Component {
                                         group['qualifiers'].map(qualifier => (
                                           <div key={qualifier.id}>
                                             <span>{qualifier.label}</span>
-                                            <select name="qualifier[1][2]" className="form-control input-sm">
+                                            <select
+                                              defaultValue={this.getQualifierValue(permission.id, qualifier.id)}
+                                              name={`qualifier[${qualifier.id}]`}
+                                              className="form-control input-sm"
+                                            >
                                               {
                                                 qualifier['accessTypes'].map(accessType => (
                                                   <option key={accessType.id} value={accessType.id}>

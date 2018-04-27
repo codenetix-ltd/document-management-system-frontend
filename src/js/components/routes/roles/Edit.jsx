@@ -53,7 +53,6 @@ export class RoleEdit extends Component {
             <RoleForm
               role={role}
               onSubmit={this.onFormSubmit}
-              submitButtonText="Update"
             />
           </div>
         </ContentWrapper>
