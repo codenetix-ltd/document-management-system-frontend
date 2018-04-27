@@ -191,7 +191,7 @@ export class RoleForm extends Component {
           <button
             type="submit"
             className="btn btn-success"
-            disabled={this.props.validate(this.state.name)}
+            disabled={this.props.validate(this.state)}
           >
             { role ? 'Update' : 'Create' }
           </button>

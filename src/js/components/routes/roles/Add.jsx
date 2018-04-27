@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import { Redirect } from 'react-router-dom';
 
@@ -11,14 +9,8 @@ import RoleForm from 'Routes/roles/partials/Form';
 import axios from 'Services/request';
 import { API } from 'Config';
 
-// import { $$messageSet } from 'Store/thunks/message';
-
 @autobind
-export class RoleAdd extends Component {
-  /* static propTypes = {
-    dispatch: PropTypes.any.isRequired
-  }; */
-
+export default class RoleAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,11 +32,8 @@ export class RoleAdd extends Component {
     });
   }
 
-  validate(formFields) {
-    if (formFields) {
-      return !Object.keys(formFields).every(key => !!formFields[key]);
-    }
-    return true;
+  validate({ name }) {
+    return !(name && name.length > 2);
   }
 
   render() {
@@ -71,9 +60,3 @@ export class RoleAdd extends Component {
     );
   }
 }
-
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = (dispatch) => ({ dispatch });
-
-export default connect(mapStateToProps, mapDispatchToProps)(RoleAdd);
