@@ -61,8 +61,15 @@ export class RoleForm extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    const formData = { ...this.state };
-    this.props.onSubmit(formData);
+    const { elements } = event.target;
+    const fields = {};
+    [...elements].filter(e => e.getAttribute('name')).forEach(e => {
+      fields[e.getAttribute('name')] = e.value;
+    });
+    this.props.onSubmit({
+      ...fields,
+      templateIds: this.state.templateIds
+    });
   }
 
   getPermissionValue(permissionID) {
@@ -128,7 +135,6 @@ export class RoleForm extends Component {
               <Select
                 multi
                 isLoading={loading}
-                name="templates"
                 value={userTemplates}
                 onChange={this.handleTemplatesSelect}
                 options={templates.list}
@@ -185,7 +191,7 @@ export class RoleForm extends Component {
                                             <span>{qualifier.label}</span>
                                             <select
                                               defaultValue={this.getQualifierValue(permission.id, qualifier.id)}
-                                              name={`qualifier[${qualifier.id}]`}
+                                              name={`qualifier[${permission.id}][${qualifier.id}]`}
                                               className="form-control input-sm"
                                             >
                                               {
