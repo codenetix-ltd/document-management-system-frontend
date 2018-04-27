@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { If, Then } from 'qc-react-conditionals/lib';
 import { withRouter, Redirect } from 'react-router-dom';
 
-import axios from 'axios';
+import axios from 'Services/request';
 import { API } from 'Config';
 
 import DocumentForm from './Form';

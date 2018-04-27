@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,6 +7,7 @@ import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import RoleForm from 'Routes/roles/partials/Form';
 
+import axios from 'Services/request';
 import { API } from 'Config';
 
 import { $$roleFetch } from 'Store/thunks/roles';
@@ -49,11 +49,12 @@ export class RoleEdit extends Component {
           <div className="box-header with-border">
             <h3 className="box-title">Role</h3>
           </div>
-          <RoleForm
-            role={role}
-            onSubmit={this.onFormSubmit}
-            submitButtonText="Update"
-          />
+          <div className="box-body">
+            <RoleForm
+              role={role}
+              onSubmit={this.onFormSubmit}
+            />
+          </div>
         </ContentWrapper>
       </div>
     );

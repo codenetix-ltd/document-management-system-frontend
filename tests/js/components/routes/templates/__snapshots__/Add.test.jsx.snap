@@ -43,5 +43,3 @@ exports[`Templates Add should render correctly 1`] = `
   </ContentWrapper>
 </div>
 `;
-
-exports[`Users list should render correctly 1`] = `null`;

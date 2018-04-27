@@ -69,10 +69,8 @@
   "role": {
     "name": ""
   },
-  "types": {
-    "list": [],
-    "lastPage": -1
-  },
+  "permissionGroups": [],
+  "types": [],
   "message": {
     "text": "",
     "type": "success"

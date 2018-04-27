@@ -1,11 +1,12 @@
 import { API } from 'Config';
-import axios from 'axios';
+import axios from 'Services/request';
 
 import {
   $loading,
   $rolesList,
   $role,
-  $updateRole
+  $updateRole,
+  $permissionGroups
 } from 'Store/actions';
 
 import { $$messageSet } from 'Store/thunks/message';
@@ -65,6 +66,19 @@ export const $$roleDelete = (dispatch, { id, name }, close = fn) => {
   }).catch(err => {
     console.trace(err);
     close();
+    $$errorSet(dispatch, err);
+  });
+};
+
+export const $$permissionGroupsFetch = (dispatch, callback = fn) => {
+  dispatch($loading(true));
+  axios.get(API.permissionGroups).then(({ data }) => {
+    dispatch($permissionGroups(data));
+    dispatch($loading(false));
+    callback(data);
+  }).catch(err => {
+    console.trace(err);
+    dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
 };

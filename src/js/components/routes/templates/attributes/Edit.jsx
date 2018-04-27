@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -12,6 +11,8 @@ import AlertMessage from 'Components/common/AlertMessage';
 import ErrorMessage from 'Components/common/ErrorMessage';
 
 import { $$attributeFetch } from 'Store/thunks/attributes';
+
+import axios from 'Services/request';
 import { getURL } from 'Config';
 
 @autobind

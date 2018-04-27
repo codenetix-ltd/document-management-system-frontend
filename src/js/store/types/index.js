@@ -26,6 +26,7 @@ export const LABEL_UPDATE = 'LABEL_UPDATE';
 export const ROLES_LIST_SET = 'ROLES_LIST_SET';
 export const ROLE_SET = 'ROLE_SET';
 export const ROLE_UPDATE = 'ROLE_UPDATE';
+export const PERMISSION_GROUPS_SET = 'PERMISSION_GROUPS_SET';
 export const TYPES_LIST_SET = 'TYPES_LIST_SET';
 export const MESSAGE_SET = 'MESSAGE_SET';
 export const ERROR_SET = 'ERROR_SET';

@@ -31,6 +31,7 @@ import {
   ROLES_LIST_SET,
   ROLE_SET,
   ROLE_UPDATE,
+  PERMISSION_GROUPS_SET,
   TYPES_LIST_SET,
   MESSAGE_SET,
   ERROR_SET
@@ -39,7 +40,7 @@ import {
 import initialState from './initialState.json';
 
 const auth = ls.get('auth');
-initialState.auth.isAuthorized = auth.isAuthorized || false;
+initialState.auth = auth || false;
 
 export default function Reducer(state = initialState, action) {
   switch (action.type) {
@@ -254,14 +255,15 @@ export default function Reducer(state = initialState, action) {
           ...action.data
         }
       };
+    case PERMISSION_GROUPS_SET:
+      return {
+        ...state,
+        permissionGroups: action.data
+      };
     case TYPES_LIST_SET:
       return {
         ...state,
-        types: {
-          ...state.types,
-          list: action.data.list,
-          lastPage: action.data.lastPage
-        }
+        types: action.data
       };
     case MESSAGE_SET:
       return {

@@ -3,6 +3,15 @@ body .wrapper {
   height: auto;
 }
 
+@supports (-webkit-appearance:none)
+and (not (overflow:-webkit-marquee))
+and (not (-ms-ime-align:auto))
+and (not (-moz-appearance:none)) {
+  .sidebar-collapse .sidebar-menu > li > .treeview-menu {
+    margin-top: -1px;
+  }
+}
+
 .content-wrapper {
   min-height: calc(100vh - 100px);
 }
@@ -216,4 +225,18 @@ table.attr-type-cell {
 
 body div[class*=Modal-overlay-] {
   z-index: 9999;
+}
+
+.qualifier-wrapper {
+  white-space: nowrap;
+  span {
+    height: 30px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+  select {
+    width: auto;
+    display: inline-block;
+  }
 }

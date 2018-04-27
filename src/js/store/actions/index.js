@@ -27,6 +27,7 @@ import {
   ROLES_LIST_SET,
   ROLE_SET,
   ROLE_UPDATE,
+  PERMISSION_GROUPS_SET,
   TYPES_LIST_SET,
   MESSAGE_SET,
   ERROR_SET
@@ -179,6 +180,11 @@ export const $role = data => ({
 
 export const $updateRole = data => ({
   type: ROLE_UPDATE,
+  data
+});
+
+export const $permissionGroups = data => ({
+  type: PERMISSION_GROUPS_SET,
   data
 });
 
