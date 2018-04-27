@@ -11,11 +11,13 @@ import { $$templatesFetch } from 'Store/thunks/templates';
 @autobind
 export class RoleForm extends Component {
   static defaultProps = {
-    role: null
+    role: null,
+    validate: () => false
   };
 
   static propTypes = {
     role: PropTypes.any,
+    validate: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -41,7 +43,8 @@ export class RoleForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.role !== this.props.role) {
-      this.setState({ ...this.state, ...nextProps.role });
+      const { name, templateIds } = nextProps.role;
+      this.setState({ ...this.state, name, templateIds });
     }
   }
 
@@ -52,6 +55,7 @@ export class RoleForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     const formData = { ...this.state };
+    console.log(formData);
     this.props.onSubmit(formData);
   }
 
@@ -70,7 +74,8 @@ export class RoleForm extends Component {
    * @param value
    */
   handleTemplatesSelect(value) {
-    this.setState({ templatesIds: value });
+    const templateIds = value.map(({ id }) => id);
+    this.setState({ templateIds });
   }
 
   render() {
@@ -81,7 +86,7 @@ export class RoleForm extends Component {
       templates,
       permissionGroups
     } = this.props;
-    const userTemplates = templates.list.filter(tpl => templateIds.includes(tpl));
+    const userTemplates = templates.list.filter(({ id }) => templateIds.includes(id));
     return (
       <form onSubmit={this.onSubmit}>
         <h3>General information</h3>
@@ -183,7 +188,11 @@ export class RoleForm extends Component {
           </Then>
         </If>
         <div>
-          <button type="submit" className="btn btn-success">
+          <button
+            type="submit"
+            className="btn btn-success"
+            disabled={this.props.validate(this.state.name)}
+          >
             { role ? 'Update' : 'Create' }
           </button>
         </div>

@@ -29,10 +29,11 @@ export class RoleAdd extends Component {
     ];
   }
 
-  onFormSubmit(formData) {
-    axios.post(API.roles, formData).then(response => {
+  onFormSubmit({ name }) {
+    if (!name) return;
+    axios.post(API.roles, { name }).then(({ data }) => {
       this.setState({
-        newRoleID: response.id
+        newRoleID: data.id
       });
     }).catch(err => {
       throw err;
