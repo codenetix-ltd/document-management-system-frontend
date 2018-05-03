@@ -174,7 +174,7 @@ table.attr-type-cell {
   cursor: move;
 }
 
-.document-filters {
+.datatables-filters {
   :global .Select-control {
     height: 30px;
     border-top-left-radius: 0;
@@ -193,6 +193,19 @@ table.attr-type-cell {
 
   :global .Select-input {
     height: 26px;
+  }
+
+  .form-group > .input-group {
+    width: 100%;
+  }
+
+  .checkboxSelect {
+    button {
+      font-size: 13px;
+      line-height: 16px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
   }
 }
 
