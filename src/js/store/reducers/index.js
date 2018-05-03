@@ -32,6 +32,8 @@ import {
   ROLE_SET,
   ROLE_UPDATE,
   PERMISSION_GROUPS_SET,
+  LOGS_LIST_SET,
+  LOGS_FILTER_SET,
   TYPES_LIST_SET,
   MESSAGE_SET,
   ERROR_SET
@@ -259,6 +261,25 @@ export default function Reducer(state = initialState, action) {
       return {
         ...state,
         permissionGroups: action.data
+      };
+    case LOGS_LIST_SET:
+      return {
+        ...state,
+        logs: {
+          ...state.logs,
+          ...action.data
+        }
+      };
+    case LOGS_FILTER_SET:
+      return {
+        ...state,
+        logs: {
+          ...state.logs,
+          filterSet: {
+            ...state.logs.filterSet,
+            ...action.data
+          }
+        }
       };
     case TYPES_LIST_SET:
       return {

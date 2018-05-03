@@ -11,6 +11,7 @@ import UsersList from 'Routes/users/List';
 import RoleAdd from 'Routes/roles/Add';
 import RoleEdit from 'Routes/roles/Edit';
 import RolesList from 'Routes/roles/List';
+import LogsList from 'Routes/logs/List';
 import LabelAdd from 'Routes/labels/Add';
 import LabelEdit from 'Routes/labels/Edit';
 import LabelsList from 'Routes/labels/List';
@@ -46,6 +47,7 @@ export function Content({ auth: { isAuthorized } }) {
         <RouteAuth canAccess={isAuthorized} path="/documents/:documentID" component={DocumentEdit} exact />
         <RouteAuth canAccess={isAuthorized} path="/documents/view/:documentID" component={DocumentsView} exact />
         <RouteAuth canAccess={isAuthorized} path="/compare" component={DocumentsCompare} exact />
+        <RouteAuth canAccess={isAuthorized} path="/logs/list" component={LogsList} exact />
         <RouteAuth canAccess={isAuthorized} path="/templates" component={TemplateAdd} exact />
         <RouteAuth canAccess={isAuthorized} path="/templates/list" component={TemplatesList} exact />
         <RouteAuth canAccess={isAuthorized} path="/templates/:templateID" component={TemplateEdit} exact />
