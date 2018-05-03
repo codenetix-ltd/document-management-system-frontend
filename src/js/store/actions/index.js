@@ -28,6 +28,8 @@ import {
   ROLE_SET,
   ROLE_UPDATE,
   PERMISSION_GROUPS_SET,
+  LOGS_LIST_SET,
+  LOGS_FILTER_SET,
   TYPES_LIST_SET,
   MESSAGE_SET,
   ERROR_SET
@@ -185,6 +187,17 @@ export const $updateRole = data => ({
 
 export const $permissionGroups = data => ({
   type: PERMISSION_GROUPS_SET,
+  data
+});
+
+/** Logs */
+export const $logsList = data => ({
+  type: LOGS_LIST_SET,
+  data
+});
+
+export const $logsFilter = data => ({
+  type: LOGS_FILTER_SET,
   data
 });
 

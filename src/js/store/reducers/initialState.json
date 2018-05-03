@@ -70,6 +70,14 @@
     "name": ""
   },
   "permissionGroups": [],
+  "logs": {
+    "list": [],
+    "lastPage": -1,
+    "page": 1,
+    "sortField": "id",
+    "sortDirection": "desc",
+    "filterSet": {}
+  },
   "types": [],
   "message": {
     "text": "",

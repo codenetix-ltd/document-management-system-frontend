@@ -17,6 +17,7 @@
     "documents": "/v1/documents",
     "labels": "/v1/labels",
     "roles": "/v1/roles",
+    "logs": "/v1/logs",
     "attributes": "/v1/templates/%s/attributes",
     "versions": "/v1/documents/%s/versions"
   }
