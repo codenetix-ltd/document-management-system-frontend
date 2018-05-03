@@ -17,6 +17,24 @@ export class FiltersWrapper extends Component {
     logs: PropTypes.any.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      typeOptions: []
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      typeOptions: [
+        { value: 1, label: 'user' },
+        { value: 2, label: 'document' },
+        { value: 3, label: 'template' },
+        { value: 4, label: 'label' }
+      ]
+    });
+  }
+
   onFilterChange(filterType, value) {
     const { dispatch, logs } = this.props;
     const {
@@ -37,13 +55,6 @@ export class FiltersWrapper extends Component {
       });
     }, 1);
   }
-
-  typeOptions = [
-    { id: 1, label: 'user' },
-    { id: 2, label: 'document' },
-    { id: 3, label: 'template' },
-    { id: 4, label: 'label' }
-  ];
 
   render() {
     return (
@@ -70,28 +81,28 @@ export class FiltersWrapper extends Component {
                 <SelectFilter
                   label="Type"
                   onChange={this.onFilterChange}
-                  options={this.typeOptions}
+                  options={this.state.typeOptions}
                   filterType="type"
                 />
               </div>
             </div>
 
-            <div className="form-group col-md-3">
+            <div className="form-group col-md-2">
               <div className="input-group input-group-sm">
                 <DatePicker
                   label="Created at"
                   onChange={this.onFilterChange}
                   filterType="createdAt.from"
-                  placeholder="Created at"
+                  placeholder="From"
                 />
               </div>
             </div>
-            <div className="form-group col-md-3">
+            <div className="form-group col-md-2">
               <div className="input-group input-group-sm">
                 <DatePicker
                   onChange={this.onFilterChange}
                   filterType="createdAt.to"
-                  placeholder="Created at"
+                  placeholder="To"
                 />
               </div>
             </div>

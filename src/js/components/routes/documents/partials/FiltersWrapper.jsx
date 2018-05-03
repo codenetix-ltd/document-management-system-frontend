@@ -11,31 +11,44 @@ import CheckboxFilter from 'Components/common/filters/Checkbox';
 import { $documentsFilter } from 'Store/actions';
 import { $$documentsFetch } from 'Store/thunks/documents';
 import { $$templatesFetch } from 'Store/thunks/templates';
+import { $$labelsFetch } from 'Store/thunks/labels';
 
 @autobind
 export class FiltersWrapper extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     documents: PropTypes.any.isRequired,
-    templates: PropTypes.any.isRequired
+    templates: PropTypes.any.isRequired,
+    labels: PropTypes.any.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      templateOptions: []
+      templateOptions: [],
+      labelOptions: []
     };
   }
 
   componentDidMount() {
-    $$templatesFetch(this.props.dispatch, 1);
+    $$templatesFetch(this.props.dispatch, 1, () => {
+      $$labelsFetch(this.props.dispatch, 1);
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { list } = nextProps.templates;
-    if (list.length) {
+    const { list: templatesList } = nextProps.templates;
+    const { list: labelsList } = nextProps.labels;
+    if (templatesList.length) {
       this.setState({
-        templateOptions: list.map(({ id, name }) => ({
+        templateOptions: templatesList.map(({ id, name }) => ({
+          value: id, label: name
+        }))
+      });
+    }
+    if (labelsList.length) {
+      this.setState({
+        labelOptions: labelsList.map(({ id, name }) => ({
           value: id, label: name
         }))
       });
@@ -64,7 +77,7 @@ export class FiltersWrapper extends Component {
   }
 
   render() {
-    const { templateOptions } = this.state;
+    const { templateOptions, labelOptions } = this.state;
     return (
       <div className="document-filters-wrapper datatables-filters-wrapper">
         <div className="document-filters datatables-filters">
@@ -95,7 +108,7 @@ export class FiltersWrapper extends Component {
               <SelectFilter
                 label="Labels"
                 filterType="label"
-                options={templateOptions}
+                options={labelOptions}
                 onChange={this.onFilterChange}
               />
             </div>
@@ -149,7 +162,7 @@ export class FiltersWrapper extends Component {
   }
 }
 
-const mapStateToProps = ({ documents, templates }) => ({ documents, templates });
+const mapStateToProps = ({ documents, templates, labels }) => ({ documents, templates, labels });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

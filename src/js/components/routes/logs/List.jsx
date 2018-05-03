@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import moment from 'moment';
@@ -54,13 +55,14 @@ export class LogsList extends Component {
         maxWidth: 100
       }, {
         Header: 'User',
-        accessor: 'actualVersion.name'
+        accessor: 'user.fullName'
       }, {
         Header: 'Action',
         accessor: 'action'
       }, {
         Header: 'Link',
-        accessor: 'link.title'
+        accessor: 'link',
+        Cell: ({ value }) => <Link to={value.url}>{value.title}</Link>
       }, {
         Header: 'Type',
         accessor: 'type'
