@@ -40,36 +40,35 @@ export class RolesList extends Component {
     });
   }
 
+  columns = [
+    {
+      Header: 'Id',
+      accessor: 'id',
+      width: 116,
+    }, {
+      Header: 'Name',
+      accessor: 'name',
+    }, {
+      Header: 'Actions',
+      accessor: '',
+      width: 262,
+      sortable: false,
+      Cell: (rowData) => {
+        const editLink = `/roles/${rowData.value.id}`;
+        return <ActionsCell editLink={editLink} rowData={rowData} onDelete={this.onDelete} />;
+      }
+    }
+  ];
+
+  breadcrumbs = [
+    { pageName: 'Roles', pageLink: '/roles/list', iconCls: 'fa fa-tags' }
+  ];
+
   render() {
     const { roles, loading } = this.props;
-
-    const columns = [
-      {
-        Header: 'Id',
-        accessor: 'id',
-        width: 116,
-      }, {
-        Header: 'Name',
-        accessor: 'name',
-      }, {
-        Header: 'Actions',
-        accessor: '',
-        width: 262,
-        sortable: false,
-        Cell: (rowData) => {
-          const editLink = `/roles/${rowData.value.id}`;
-          return <ActionsCell editLink={editLink} rowData={rowData} onDelete={this.onDelete} />;
-        }
-      }
-    ];
-
-    const breadcrumbs = [
-      { pageName: 'Roles', pageLink: '/roles/list', iconCls: 'fa fa-tags' }
-    ];
-
     return (
       <div>
-        <ContentHeader title="Roles" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="Roles" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="">
           <div className="box-header clearfix">
             <Link to="/roles" className="btn btn-success btn-xs pull-right">
@@ -84,7 +83,7 @@ export class RolesList extends Component {
                 <ReactTable
                   manual
                   className="-striped"
-                  columns={columns}
+                  columns={[...this.columns]}
                   data={roles.list}
                   pages={roles.lastPage}
                   loading={loading}

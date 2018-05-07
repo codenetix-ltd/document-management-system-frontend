@@ -12,15 +12,15 @@ export default class TemplateAdd extends Component {
     return !Object.keys(formFields).every(key => !!formFields[key]);
   }
 
-  render() {
-    const breadcrumbs = [
-      { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
-      { pageName: 'Template create', pageLink: '/templates', iconCls: 'fa fa-plus' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
+    { pageName: 'Template create', pageLink: '/templates', iconCls: 'fa fa-plus' }
+  ];
 
+  render() {
     return (
       <div>
-        <ContentHeader title="Template create" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="Template create" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Template data</h3>

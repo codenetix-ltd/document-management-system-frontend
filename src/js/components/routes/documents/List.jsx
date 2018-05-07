@@ -74,63 +74,65 @@ export class DocumentsList extends Component {
     this.props.dispatch($setSelectedDocuments([]));
   }
 
+  breadcrumbs = [
+    { pageName: 'Documents list', pageLink: '/documents/list', iconCls: 'fa fa-list' }
+  ];
+
+  columns = [
+    {
+      Header: 'Id',
+      accessor: 'id',
+      maxWidth: 65,
+    }, {
+      Header: 'Name',
+      accessor: 'actualVersion.name',
+    }, {
+      Header: 'Owner',
+      accessor: 'owner.fullName',
+    }, {
+      Header: 'Template ',
+      accessor: 'actualVersion.template.name',
+    }, {
+      Header: 'Created at',
+      accessor: 'createdAt',
+      Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
+    }, {
+      Header: 'Updated at',
+      accessor: 'updatedAt',
+      Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
+    }, {
+      Header: 'Actions',
+      accessor: '',
+      maxWidth: 122,
+      sortable: false,
+      Cell: rowData => {
+        const viewLink = `/documents/view/${rowData.value.id}`;
+        const editLink = `/documents/${rowData.value.id}`;
+        return (
+          <div>
+            <Link to={viewLink} className="btn btn-primary btn-xs">
+              <i className="fa fa-eye" />
+            </Link>
+            &nbsp;
+            <Link to={editLink} className="btn-success btn btn-xs">
+              <i className="fa fa-edit" />
+            </Link>
+            &nbsp;
+            <DataLink cls="btn btn btn-warning btn-xs" data={rowData} onClick={this.onArchive}>
+              <i className="fa fa-book" />
+            </DataLink>
+            &nbsp;
+            <DataLink cls="btn-danger btn btn-xs" data={rowData} onClick={this.onDelete}>
+              <i className="fa fa-trash" />
+            </DataLink>
+          </div>
+        );
+      }
+    }
+  ];
+
   render() {
     const { match, documents, loading } = this.props;
-    const breadcrumbs = [
-      { pageName: 'Documents list', pageLink: '/documents/list', iconCls: 'fa fa-list' }
-    ];
-    const columns = [
-      {
-        Header: 'Id',
-        accessor: 'id',
-        maxWidth: 65,
-      }, {
-        Header: 'Name',
-        accessor: 'actualVersion.name',
-      }, {
-        Header: 'Owner',
-        accessor: 'owner.fullName',
-      }, {
-        Header: 'Template ',
-        accessor: 'actualVersion.template.name',
-      }, {
-        Header: 'Created at',
-        accessor: 'createdAt',
-        Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
-      }, {
-        Header: 'Updated at',
-        accessor: 'updatedAt',
-        Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
-      }, {
-        Header: 'Actions',
-        accessor: '',
-        maxWidth: 122,
-        sortable: false,
-        Cell: rowData => {
-          const viewLink = `/documents/view/${rowData.value.id}`;
-          const editLink = `/documents/${rowData.value.id}`;
-          return (
-            <div>
-              <Link to={viewLink} className="btn btn-primary btn-xs">
-                <i className="fa fa-eye" />
-              </Link>
-              &nbsp;
-              <Link to={editLink} className="btn-success btn btn-xs">
-                <i className="fa fa-edit" />
-              </Link>
-              &nbsp;
-              <DataLink cls="btn btn btn-warning btn-xs" data={rowData} onClick={this.onArchive}>
-                <i className="fa fa-book" />
-              </DataLink>
-              &nbsp;
-              <DataLink cls="btn-danger btn btn-xs" data={rowData} onClick={this.onDelete}>
-                <i className="fa fa-trash" />
-              </DataLink>
-            </div>
-          );
-        }
-      }
-    ];
 
     if (match.path === '/') return <Redirect to="/documents/list" />;
 
@@ -140,7 +142,7 @@ export class DocumentsList extends Component {
           (prompt) => {
             return (
               <div>
-                <ContentHeader title="Documents" breadcrumbs={breadcrumbs} />
+                <ContentHeader title="Documents" breadcrumbs={this.breadcrumbs} />
                 <ContentWrapper boxClass="box-success">
                   <div className="box-body">
                     <FiltersWrapper />
@@ -154,7 +156,7 @@ export class DocumentsList extends Component {
                           <SelectableTable
                             manual
                             className="-striped"
-                            columns={columns}
+                            columns={[...this.columns]}
                             data={documents.list}
                             pages={documents.lastPage}
                             loading={loading}

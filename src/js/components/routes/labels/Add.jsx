@@ -43,11 +43,11 @@ export class LabelAdd extends Component {
     return true;
   }
 
-  render() {
-    const breadcrumbs = [
-      { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-plus' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-plus' }
+  ];
 
+  render() {
     if (this.state.submitted) {
       $$messageSet(this.props.dispatch, {
         type: 'success',
@@ -58,7 +58,7 @@ export class LabelAdd extends Component {
 
     return (
       <div>
-        <ContentHeader title="Label create" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="Label create" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Label</h3>

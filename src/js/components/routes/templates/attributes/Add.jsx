@@ -38,6 +38,14 @@ export default class AttributeAdd extends Component {
     });
   }
 
+  getBreadcrumbs(templateID) {
+    return [
+      { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
+      { pageName: `Edit template ${templateID}`, pageLink: `/templates/${templateID}`, iconCls: 'fa fa-pencil' },
+      { pageName: 'Template attribute create', pageLink: '', iconCls: 'fa fa-plus' }
+    ];
+  }
+
   validate(formFields) {
     if (formFields) {
       return !Object.keys(formFields).every(key => !!formFields[key]);
@@ -46,22 +54,11 @@ export default class AttributeAdd extends Component {
   }
 
   render() {
-    const { templateID } = this.props.match.params;
-    const breadcrumbs = [
-      { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
-      { pageName: `Edit template ${templateID}`, pageLink: `/templates/${templateID}`, iconCls: 'fa fa-pencil' },
-      { pageName: 'Template attribute create', pageLink: '', iconCls: 'fa fa-plus' }
-    ];
-
-    if (this.state.submitted) {
-      return (
-        <Redirect to={`/templates/${templateID}`} />
-      );
-    }
-
+    const { match: { params: { templateID } } } = this.props;
+    if (this.state.submitted) return <Redirect to={`/templates/${templateID}`} />;
     return (
       <div>
-        <ContentHeader title="Template attribute create" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="Template attribute create" breadcrumbs={this.getBreadcrumbs(templateID)} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Template attribute</h3>

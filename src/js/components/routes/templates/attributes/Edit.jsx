@@ -37,6 +37,14 @@ export class AttributeEdit extends Component {
     });
   }
 
+  getBreadcrumbs(templateID) {
+    return [
+      { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
+      { pageName: `Edit template ${templateID}`, pageLink: `/templates/${templateID}`, iconCls: 'fa fa-pencil' },
+      { pageName: 'Template attribute edit', pageLink: '', iconCls: 'fa fa-plus' }
+    ];
+  }
+
   fetchAttribute() {
     const { dispatch, match } = this.props;
     const { templateID, attributeID } = match.params;
@@ -45,15 +53,9 @@ export class AttributeEdit extends Component {
 
   render() {
     const { templateID } = this.props.match.params;
-    const breadcrumbs = [
-      { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
-      { pageName: `Edit template ${templateID}`, pageLink: `/templates/${templateID}`, iconCls: 'fa fa-pencil' },
-      { pageName: 'Template attribute edit', pageLink: '', iconCls: 'fa fa-plus' }
-    ];
-
     return (
       <div>
-        <ContentHeader title={`Edit ${this.props.attribute.name}`} breadcrumbs={breadcrumbs} />
+        <ContentHeader title={`Edit ${this.props.attribute.name}`} breadcrumbs={this.getBreadcrumbs(templateID)} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Attribute data</h3>

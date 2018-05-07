@@ -3,7 +3,7 @@ import autobind from 'autobind-decorator';
 
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
-import Tabs from 'Components/common/Tabs';
+import Tabs from 'Components/common/Tabs'; // todo: use react-bootstrap's tabs component
 
 import DocumentContent from './partials/DocumentContent';
 
@@ -28,15 +28,16 @@ export default class DocumentAdd extends Component {
     });
   }
 
+  breadcrumbs = [
+    { pageName: 'Documents', pageLink: '/documents/list', iconCls: 'fa fa-copy' },
+    { pageName: 'Document create', pageLink: '/documents', iconCls: 'fa fa-plus' }
+  ];
+
   render() {
     const { tabsConfig } = this.state;
-    const breadcrumbs = [
-      { pageName: 'Documents', pageLink: '/documents/list', iconCls: 'fa fa-copy' },
-      { pageName: 'Document create', pageLink: '/documents', iconCls: 'fa fa-plus' }
-    ];
     return (
       <div>
-        <ContentHeader title="Document create" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="Document create" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper noBox>
           <Tabs list={tabsConfig} />
         </ContentWrapper>

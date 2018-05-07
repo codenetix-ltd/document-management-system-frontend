@@ -17,15 +17,15 @@ export class TemplateEdit extends Component {
     template: PropTypes.any.isRequired
   };
 
-  render() {
-    const breadcrumbs = [
-      { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
-      { pageName: 'Edit template', pageLink: '/templates', iconCls: 'fa fa-pencil' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
+    { pageName: 'Edit template', pageLink: '/templates', iconCls: 'fa fa-pencil' }
+  ];
 
+  render() {
     return (
       <div>
-        <ContentHeader title={`Edit ${this.props.template.name}`} breadcrumbs={breadcrumbs} />
+        <ContentHeader title={`Edit ${this.props.template.name}`} breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Template data</h3>

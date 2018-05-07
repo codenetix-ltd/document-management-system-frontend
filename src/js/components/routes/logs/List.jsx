@@ -42,37 +42,37 @@ export class LogsList extends Component {
     });
   }
 
+  columns = [
+    {
+      Header: 'Id',
+      accessor: 'id',
+      maxWidth: 100
+    }, {
+      Header: 'User',
+      accessor: 'user.fullName'
+    }, {
+      Header: 'Action',
+      accessor: 'action'
+    }, {
+      Header: 'Link',
+      accessor: 'link',
+      Cell: ({ value }) => <Link to={value.url}>{value.title}</Link>
+    }, {
+      Header: 'Type',
+      accessor: 'type'
+    }, {
+      Header: 'Created at',
+      accessor: 'createdAt',
+      Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
+    }
+  ];
+
   breadcrumbs = [
     { pageName: 'Logs list', pageLink: '/logs/list', iconCls: 'fa fa-list' }
   ];
 
   render() {
     const { logs, loading } = this.props;
-    const columns = [
-      {
-        Header: 'Id',
-        accessor: 'id',
-        maxWidth: 100
-      }, {
-        Header: 'User',
-        accessor: 'user.fullName'
-      }, {
-        Header: 'Action',
-        accessor: 'action'
-      }, {
-        Header: 'Link',
-        accessor: 'link',
-        Cell: ({ value }) => <Link to={value.url}>{value.title}</Link>
-      }, {
-        Header: 'Type',
-        accessor: 'type'
-      }, {
-        Header: 'Created at',
-        accessor: 'createdAt',
-        Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
-      }
-    ];
-
     return (
       <div>
         <ContentHeader title="Logs" breadcrumbs={this.breadcrumbs} />
@@ -88,7 +88,7 @@ export class LogsList extends Component {
                   <ReactTable
                     manual
                     className="-striped"
-                    columns={columns}
+                    columns={[...this.columns]}
                     data={logs.list}
                     pages={logs.lastPage}
                     loading={loading}
