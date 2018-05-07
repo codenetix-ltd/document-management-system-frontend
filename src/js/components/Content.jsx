@@ -5,6 +5,7 @@ import { Switch, withRouter } from 'react-router-dom';
 
 import RouteAuth from 'Components/common/RouteAuth';
 
+import Home from 'Routes/home';
 import UserAdd from 'Routes/users/Add';
 import UserEdit from 'Routes/users/Edit';
 import UsersList from 'Routes/users/List';
@@ -31,7 +32,7 @@ export function Content({ auth: { isAuthorized } }) {
   return (
     <div className="content-wrapper">
       <Switch>
-        <RouteAuth canAccess={isAuthorized} path="/" component={DocumentsList} exact />
+        <RouteAuth canAccess={isAuthorized} path="/" component={Home} exact />
         <RouteAuth canAccess={isAuthorized} path="/profile" component={ProfileEdit} exact />
         <RouteAuth canAccess={isAuthorized} path="/users" component={UserAdd} exact />
         <RouteAuth canAccess={isAuthorized} path="/users/list" component={UsersList} exact />

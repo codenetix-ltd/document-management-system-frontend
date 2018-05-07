@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import moment from 'moment';
+import first from 'lodash/first';
 
 import ReactTable from 'react-table';
 
@@ -31,9 +32,10 @@ export class LogsList extends Component {
     let sortDirection = 'desc';
     const { dispatch } = this.props;
     const { page, sorted } = tableProps;
-    if (sorted[0]) {
-      sortField = sorted[0].id;
-      sortDirection = sorted[0].desc ? 'desc' : 'asc';
+    const sortData = first(sorted);
+    if (sortData) {
+      sortField = sortData['id'];
+      sortDirection = sortData['desc'] ? 'desc' : 'asc';
     }
     $$logsFetch(dispatch, {
       page: page + 1,

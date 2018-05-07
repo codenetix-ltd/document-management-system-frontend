@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import moment from 'moment';
+import first from 'lodash/first';
 
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
@@ -29,7 +30,6 @@ import DocumentActions from './partials/DocumentActions';
 @autobind
 export class DocumentsList extends Component {
   static propTypes = {
-    match: PropTypes.any.isRequired,
     documents: PropTypes.any.isRequired,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -44,9 +44,10 @@ export class DocumentsList extends Component {
     let sortDirection = 'desc';
     const { dispatch } = this.props;
     const { page, sorted } = tableProps;
-    if (sorted[0]) {
-      sortField = sorted[0].id;
-      sortDirection = sorted[0].desc ? 'desc' : 'asc';
+    const sortData = first(sorted);
+    if (sortData) {
+      sortField = sortData['id'];
+      sortDirection = sortData['desc'] ? 'desc' : 'asc';
     }
     $$documentsFetch(dispatch, {
       page: page + 1,
@@ -132,10 +133,7 @@ export class DocumentsList extends Component {
   ];
 
   render() {
-    const { match, documents, loading } = this.props;
-
-    if (match.path === '/') return <Redirect to="/documents/list" />;
-
+    const { documents, loading } = this.props;
     return (
       <PromptWrapper ref={p => { this.prompt = p; }} confirmText="Delete">
         {
