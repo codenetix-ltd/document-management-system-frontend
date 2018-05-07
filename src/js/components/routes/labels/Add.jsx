@@ -27,7 +27,7 @@ export class LabelAdd extends Component {
   }
 
   onFormSubmit(formData) {
-    axios.post(API.users, formData).then(() => {
+    axios.post(API.labels, formData).then(() => {
       this.setState({
         submitted: true
       });
