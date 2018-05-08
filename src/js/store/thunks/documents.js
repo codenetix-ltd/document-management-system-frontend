@@ -21,7 +21,7 @@ import initialState from 'Store/reducers/initialState.json';
 const fn = () => {};
 
 export const $$documentsFetch = (dispatch, params, callback = fn) => {
-  const picked = pick(params, ['page', 'sortField', 'sortDirection']);
+  const picked = pick(params, ['page', 'sortField', 'sortDirection', 'ownerID']);
   const filters = pickBy(params.filterSet, identity);
   dispatch($loading(true));
   axios.get(API.documents, {
@@ -39,6 +39,10 @@ export const $$documentsFetch = (dispatch, params, callback = fn) => {
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
+};
+
+export const $$documentsReset = (dispatch) => {
+  dispatch($documentsList(initialState.documents));
 };
 
 export const $$documentFetch = (dispatch, documentID, callback = fn) => {

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import moment from 'moment';
 import first from 'lodash/first';
+import pick from 'lodash/pick';
 
 import ReactTable from 'react-table';
 
@@ -29,6 +30,7 @@ import { $$logsFetch } from 'Store/thunks/logs';
 export class Home extends Component {
   static propTypes = {
     logs: PropTypes.any.isRequired,
+    profile: PropTypes.any.isRequired,
     documents: PropTypes.any.isRequired,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -37,7 +39,7 @@ export class Home extends Component {
   onDocumentsFetch(tableProps) {
     let sortField = 'id';
     let sortDirection = 'desc';
-    const { dispatch } = this.props;
+    const { dispatch, profile } = this.props;
     const { page, sorted } = tableProps;
     const sortData = first(sorted);
     if (sortData) {
@@ -47,7 +49,8 @@ export class Home extends Component {
     $$documentsFetch(dispatch, {
       page: page + 1,
       sortField,
-      sortDirection
+      sortDirection,
+      ownerID: profile.id
     });
   }
 
@@ -162,12 +165,12 @@ export class Home extends Component {
       <div>
         <ContentHeader title="Dashboard" breadcrumbs={[]} />
         <ContentWrapper boxClass="box-success">
-          <div className="box-header with-border">
-            <h3 className="box-title">User documents</h3>
-          </div>
-          <div className="box-body">
+          <div className="box-body user-dashboard">
             <div className="row">
-              <div className="col-sm-12">
+              <div className="col-lg-6">
+                <div className="box-header with-border">
+                  <h3 className="box-title">User documents</h3>
+                </div>
                 <AlertMessage />
                 <ErrorMessage />
                 <ReactTable
@@ -184,14 +187,10 @@ export class Home extends Component {
                   resizable={false}
                 />
               </div>
-            </div>
-          </div>
-          <div className="box-header with-border">
-            <h3 className="box-title">Latest actions</h3>
-          </div>
-          <div className="box-body">
-            <div className="row">
-              <div className="col-sm-12">
+              <div className="col-lg-6">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Latest actions</h3>
+                </div>
                 <ReactTable
                   manual
                   className="-striped"
@@ -215,7 +214,7 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ documents, logs, loading }) => ({ documents, logs, loading });
+const mapStateToProps = (state) => pick(state, ['documents', 'logs', 'loading', 'profile']);
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 
