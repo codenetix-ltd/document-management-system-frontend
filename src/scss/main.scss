@@ -257,3 +257,8 @@ body div[class*=styles_overlay] {
 .user-dashboard .ReactTable .rt-tr {
   height: 36px;
 }
+
+.input-group .form-control,
+.input-group-btn .btn {
+  z-index: inherit !important;
+}
