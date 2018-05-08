@@ -10,7 +10,7 @@ import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import Pagination from 'Components/partials/Pagination';
 
-import PromptWrapper from 'Components/common/PromptWrapper';
+import Prompt from 'Components/common/Prompt';
 import AlertMessage from 'Components/common/AlertMessage';
 import ErrorMessage from 'Components/common/ErrorMessage';
 import SelectableTable from 'Components/common/SelectableTable';
@@ -67,6 +67,7 @@ export class DocumentsList extends Component {
     const { dispatch } = this.props;
     this.prompt.show({
       body: `Do you really want to delete document ${name}?`,
+      confirmText: 'Delete',
       onConfirm: close => $$documentDelete(dispatch, value, close)
     });
   }
@@ -135,46 +136,39 @@ export class DocumentsList extends Component {
   render() {
     const { documents, loading } = this.props;
     return (
-      <PromptWrapper ref={p => { this.prompt = p; }} confirmText="Delete">
-        {
-          (prompt) => {
-            return (
-              <div>
-                <ContentHeader title="Documents" breadcrumbs={this.breadcrumbs} />
-                <ContentWrapper boxClass="box-success">
-                  <div className="box-body">
-                    <FiltersWrapper />
-                    <hr />
-                    <DocumentActions prompt={prompt} />
-                    <div className="box-body">
-                      <div className="row">
-                        <div className="col-sm-12">
-                          <AlertMessage />
-                          <ErrorMessage />
-                          <SelectableTable
-                            manual
-                            className="-striped"
-                            columns={[...this.columns]}
-                            data={documents.list}
-                            pages={documents.lastPage}
-                            loading={loading}
-                            onFetchData={this.onFetchData}
-                            onSelect={this.onSelect}
-                            defaultPageSize={15}
-                            PaginationComponent={Pagination}
-                            multiSort={false}
-                            resizable={false}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </ContentWrapper>
+      <div>
+        <ContentHeader title="Documents" breadcrumbs={this.breadcrumbs} />
+        <ContentWrapper boxClass="box-success">
+          <div className="box-body">
+            <FiltersWrapper />
+            <hr />
+            <DocumentActions prompt={this.prompt} />
+            <div className="box-body">
+              <div className="row">
+                <div className="col-sm-12">
+                  <AlertMessage />
+                  <ErrorMessage />
+                  <SelectableTable
+                    manual
+                    className="-striped"
+                    columns={[...this.columns]}
+                    data={documents.list}
+                    pages={documents.lastPage}
+                    loading={loading}
+                    onFetchData={this.onFetchData}
+                    onSelect={this.onSelect}
+                    defaultPageSize={15}
+                    PaginationComponent={Pagination}
+                    multiSort={false}
+                    resizable={false}
+                  />
+                </div>
               </div>
-            );
-          }
-        }
-      </PromptWrapper>
+            </div>
+          </div>
+        </ContentWrapper>
+        <Prompt ref={p => { this.prompt = p; }} />
+      </div>
     );
   }
 }
