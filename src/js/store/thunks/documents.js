@@ -1,4 +1,5 @@
 import { API } from 'Config';
+import pick from 'lodash/pick';
 import pickBy from 'lodash/pickBy';
 import identity from 'lodash/identity';
 
@@ -19,25 +20,17 @@ import initialState from 'Store/reducers/initialState.json';
 
 const fn = () => {};
 
-export const $$documentsFetch = (dispatch, {
-  page, sortField, sortDirection, filterSet
-}, callback = fn) => {
-  const filters = pickBy(filterSet, identity);
+export const $$documentsFetch = (dispatch, params, callback = fn) => {
+  const picked = pick(params, ['page', 'sortField', 'sortDirection', 'ownerID']);
+  const filters = pickBy(params.filterSet, identity);
   dispatch($loading(true));
   axios.get(API.documents, {
-    params: {
-      page,
-      sortField,
-      sortDirection,
-      ...filters
-    }
+    params: { ...picked, ...filters }
   }).then(({ data }) => {
     dispatch($documentsList({
       list: data.data,
       lastPage: data.meta.lastPage,
-      page,
-      sortField,
-      sortDirection
+      ...picked
     }));
     dispatch($loading(false));
     callback(data);
@@ -46,6 +39,10 @@ export const $$documentsFetch = (dispatch, {
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
+};
+
+export const $$documentsReset = (dispatch) => {
+  dispatch($documentsList(initialState.documents));
 };
 
 export const $$documentFetch = (dispatch, documentID, callback = fn) => {
@@ -85,7 +82,6 @@ export const $$documentDelete = (dispatch, { id, name }, close = fn) => {
 };
 
 export const $$documentsMassDelete = (dispatch, ids, close = fn) => {
-  // todo: maybe better use axios.all here
   const p = Promise.all(ids.map(id => axios.delete(`${API.documents}/${id}`)));
   p.then(() => {
     $$documentsFetch(dispatch, 1);

@@ -37,14 +37,15 @@ export class RoleEdit extends Component {
     $$roleFetch(dispatch, roleID);
   }
 
+  breadcrumbs = [
+    { pageName: 'Roles', pageLink: '/roles', iconCls: 'fa fa-tags' }
+  ];
+
   render() {
-    const breadcrumbs = [
-      { pageName: 'Roles', pageLink: '/roles', iconCls: 'fa fa-tags' }
-    ];
     const { role } = this.props;
     return (
       <div>
-        <ContentHeader title={`Edit ${role.name || ''}`} breadcrumbs={breadcrumbs} />
+        <ContentHeader title={`Edit ${role.name || ''}`} breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Role</h3>

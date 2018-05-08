@@ -57,22 +57,22 @@ export class UserAdd extends Component {
     return true;
   }
 
-  render() {
-    const breadcrumbs = [
-      { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
+  ];
 
+  render() {
     if (this.state.submitted) {
       $$messageSet(this.props.dispatch, {
         type: 'success',
         text: 'The user was successfully created.'
       });
-      return (<Redirect to="/users/list" />);
+      return <Redirect to="/users/list" />;
     }
 
     return (
       <div>
-        <ContentHeader title="User create" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="User create" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Profile data</h3>

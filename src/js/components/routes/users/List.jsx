@@ -40,39 +40,38 @@ export class UsersList extends Component {
     });
   }
 
+  columns = [
+    {
+      Header: 'Id',
+      accessor: 'id',
+      width: 116,
+    }, {
+      Header: 'Full Name',
+      accessor: 'fullName',
+    }, {
+      Header: 'Email',
+      accessor: 'email',
+    }, {
+      Header: 'Actions',
+      accessor: '',
+      width: 262,
+      sortable: false,
+      Cell: (rowData) => {
+        const editLink = `/users/${rowData.value.id}`;
+        return <ActionsCell editLink={editLink} rowData={rowData} onDelete={this.onDelete} />;
+      }
+    }
+  ];
+
+  breadcrumbs = [
+    { pageName: 'Users', pageLink: '/users/list', iconCls: 'fa fa-users' }
+  ];
+
   render() {
     const { users, loading } = this.props;
-
-    const columns = [
-      {
-        Header: 'Id',
-        accessor: 'id',
-        width: 116,
-      }, {
-        Header: 'Full Name',
-        accessor: 'fullName',
-      }, {
-        Header: 'Email',
-        accessor: 'email',
-      }, {
-        Header: 'Actions',
-        accessor: '',
-        width: 262,
-        sortable: false,
-        Cell: (rowData) => {
-          const editLink = `/users/${rowData.value.id}`;
-          return <ActionsCell editLink={editLink} rowData={rowData} onDelete={this.onDelete} />;
-        }
-      }
-    ];
-
-    const breadcrumbs = [
-      { pageName: 'Users', pageLink: '/users/list', iconCls: 'fa fa-users' }
-    ];
-
     return (
       <div>
-        <ContentHeader title="Users" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="Users" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="">
           <div className="box-header clearfix">
             <Link to="/users" className="btn btn-success btn-xs pull-right">
@@ -87,7 +86,7 @@ export class UsersList extends Component {
                 <ReactTable
                   manual
                   className="-striped"
-                  columns={columns}
+                  columns={[...this.columns]}
                   data={users.list}
                   pages={users.lastPage}
                   loading={loading}

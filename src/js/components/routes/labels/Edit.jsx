@@ -37,14 +37,15 @@ export class LabelEdit extends Component {
     $$labelFetch(dispatch, labelID);
   }
 
+  breadcrumbs = [
+    { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-tags' }
+  ];
+
   render() {
-    const breadcrumbs = [
-      { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-tags' }
-    ];
     const { label } = this.props;
     return (
       <div>
-        <ContentHeader title={`Edit ${label.name || ''}`} breadcrumbs={breadcrumbs} />
+        <ContentHeader title={`Edit ${label.name || ''}`} breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Label</h3>

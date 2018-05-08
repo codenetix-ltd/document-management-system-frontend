@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import cln from 'classnames';
 import isFunction from 'lodash/isFunction';
 
+// todo: use react-responsive-modal here
 @autobind
 export default class Prompt extends Component {
   static defaultProps = {

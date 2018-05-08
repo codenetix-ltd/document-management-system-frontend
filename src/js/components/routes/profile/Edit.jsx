@@ -19,13 +19,6 @@ export class ProfileEdit extends Component {
     profile: PropTypes.any.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.breadcrumbs = [
-      { pageName: 'My profile', pageLink: '/profile', iconCls: '' }
-    ];
-  }
-
   componentDidMount() {
     $$profileFetch(this.props.dispatch);
   }
@@ -36,6 +29,10 @@ export class ProfileEdit extends Component {
       throw err;
     });
   }
+
+  breadcrumbs = [
+    { pageName: 'My profile', pageLink: '/profile', iconCls: '' }
+  ];
 
   render() {
     return (

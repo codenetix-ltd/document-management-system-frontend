@@ -70,14 +70,14 @@ export default class UserEdit extends Component {
     });
   }
 
-  render() {
-    const breadcrumbs = [
-      { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
+  ];
 
+  render() {
     return (
       <div>
-        <ContentHeader title={`Edit ${this.state.user.fullName || ''}`} breadcrumbs={breadcrumbs} />
+        <ContentHeader title={`Edit ${this.state.user.fullName || ''}`} breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Profile data</h3>

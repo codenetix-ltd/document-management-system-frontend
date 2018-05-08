@@ -40,34 +40,34 @@ export class TemplatesList extends Component {
     });
   }
 
-  render() {
-    const columns = [
-      {
-        Header: 'Id',
-        accessor: 'id',
-        width: 250,
-      }, {
-        Header: 'Name',
-        accessor: 'name',
-      }, {
-        Header: 'Actions',
-        accessor: '',
-        width: 262,
-        sortable: false,
-        Cell: (rowData) => {
-          const editLink = `/templates/${rowData.value.id}`;
-          return <ActionsCell editLink={editLink} rowData={rowData} onDelete={this.onDelete} />;
-        },
+  columns = [
+    {
+      Header: 'Id',
+      accessor: 'id',
+      width: 250,
+    }, {
+      Header: 'Name',
+      accessor: 'name',
+    }, {
+      Header: 'Actions',
+      accessor: '',
+      width: 262,
+      sortable: false,
+      Cell: (rowData) => {
+        const editLink = `/templates/${rowData.value.id}`;
+        return <ActionsCell editLink={editLink} rowData={rowData} onDelete={this.onDelete} />;
       },
-    ];
+    },
+  ];
 
-    const breadcrumbs = [
-      { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' }
+  ];
 
+  render() {
     return (
       <div>
-        <ContentHeader title="Templates" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="Templates" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="">
           <div className="box-header clearfix">
             <Link to="/users" className="btn btn-success btn-xs pull-right">
@@ -82,7 +82,7 @@ export class TemplatesList extends Component {
                 <ReactTable
                   manual
                   className="-striped"
-                  columns={columns}
+                  columns={[...this.columns]}
                   data={this.props.templates.list}
                   pages={this.props.templates.lastPage}
                   loading={this.props.loading}

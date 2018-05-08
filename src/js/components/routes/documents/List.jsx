@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import moment from 'moment';
+import first from 'lodash/first';
 
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
@@ -29,7 +30,6 @@ import DocumentActions from './partials/DocumentActions';
 @autobind
 export class DocumentsList extends Component {
   static propTypes = {
-    match: PropTypes.any.isRequired,
     documents: PropTypes.any.isRequired,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -44,9 +44,10 @@ export class DocumentsList extends Component {
     let sortDirection = 'desc';
     const { dispatch } = this.props;
     const { page, sorted } = tableProps;
-    if (sorted[0]) {
-      sortField = sorted[0].id;
-      sortDirection = sorted[0].desc ? 'desc' : 'asc';
+    const sortData = first(sorted);
+    if (sortData) {
+      sortField = sortData['id'];
+      sortDirection = sortData['desc'] ? 'desc' : 'asc';
     }
     $$documentsFetch(dispatch, {
       page: page + 1,
@@ -74,73 +75,72 @@ export class DocumentsList extends Component {
     this.props.dispatch($setSelectedDocuments([]));
   }
 
-  render() {
-    const { match, documents, loading } = this.props;
-    const breadcrumbs = [
-      { pageName: 'Documents list', pageLink: '/documents/list', iconCls: 'fa fa-list' }
-    ];
-    const columns = [
-      {
-        Header: 'Id',
-        accessor: 'id',
-        maxWidth: 65,
-      }, {
-        Header: 'Name',
-        accessor: 'actualVersion.name',
-      }, {
-        Header: 'Owner',
-        accessor: 'owner.fullName',
-      }, {
-        Header: 'Template ',
-        accessor: 'actualVersion.template.name',
-      }, {
-        Header: 'Created at',
-        accessor: 'createdAt',
-        Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
-      }, {
-        Header: 'Updated at',
-        accessor: 'updatedAt',
-        Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
-      }, {
-        Header: 'Actions',
-        accessor: '',
-        maxWidth: 122,
-        sortable: false,
-        Cell: rowData => {
-          const viewLink = `/documents/view/${rowData.value.id}`;
-          const editLink = `/documents/${rowData.value.id}`;
-          return (
-            <div>
-              <Link to={viewLink} className="btn btn-primary btn-xs">
-                <i className="fa fa-eye" />
-              </Link>
-              &nbsp;
-              <Link to={editLink} className="btn-success btn btn-xs">
-                <i className="fa fa-edit" />
-              </Link>
-              &nbsp;
-              <DataLink cls="btn btn btn-warning btn-xs" data={rowData} onClick={this.onArchive}>
-                <i className="fa fa-book" />
-              </DataLink>
-              &nbsp;
-              <DataLink cls="btn-danger btn btn-xs" data={rowData} onClick={this.onDelete}>
-                <i className="fa fa-trash" />
-              </DataLink>
-            </div>
-          );
-        }
+  breadcrumbs = [
+    { pageName: 'Documents list', pageLink: '/documents/list', iconCls: 'fa fa-list' }
+  ];
+
+  columns = [
+    {
+      Header: 'Id',
+      accessor: 'id',
+      maxWidth: 65,
+    }, {
+      Header: 'Name',
+      accessor: 'actualVersion.name',
+    }, {
+      Header: 'Owner',
+      accessor: 'owner.fullName',
+    }, {
+      Header: 'Template ',
+      accessor: 'actualVersion.template.name',
+    }, {
+      Header: 'Created at',
+      accessor: 'createdAt',
+      Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
+    }, {
+      Header: 'Updated at',
+      accessor: 'updatedAt',
+      Cell: ({ value }) => moment.unix(value).format('YYYY/MM/DD')
+    }, {
+      Header: 'Actions',
+      accessor: '',
+      maxWidth: 122,
+      sortable: false,
+      Cell: rowData => {
+        const viewLink = `/documents/view/${rowData.value.id}`;
+        const editLink = `/documents/${rowData.value.id}`;
+        return (
+          <div>
+            <Link to={viewLink} className="btn btn-primary btn-xs">
+              <i className="fa fa-eye" />
+            </Link>
+            &nbsp;
+            <Link to={editLink} className="btn-success btn btn-xs">
+              <i className="fa fa-edit" />
+            </Link>
+            &nbsp;
+            <DataLink cls="btn btn btn-warning btn-xs" data={rowData} onClick={this.onArchive}>
+              <i className="fa fa-book" />
+            </DataLink>
+            &nbsp;
+            <DataLink cls="btn-danger btn btn-xs" data={rowData} onClick={this.onDelete}>
+              <i className="fa fa-trash" />
+            </DataLink>
+          </div>
+        );
       }
-    ];
+    }
+  ];
 
-    if (match.path === '/') return <Redirect to="/documents/list" />;
-
+  render() {
+    const { documents, loading } = this.props;
     return (
       <PromptWrapper ref={p => { this.prompt = p; }} confirmText="Delete">
         {
           (prompt) => {
             return (
               <div>
-                <ContentHeader title="Documents" breadcrumbs={breadcrumbs} />
+                <ContentHeader title="Documents" breadcrumbs={this.breadcrumbs} />
                 <ContentWrapper boxClass="box-success">
                   <div className="box-body">
                     <FiltersWrapper />
@@ -154,7 +154,7 @@ export class DocumentsList extends Component {
                           <SelectableTable
                             manual
                             className="-striped"
-                            columns={columns}
+                            columns={[...this.columns]}
                             data={documents.list}
                             pages={documents.lastPage}
                             loading={loading}

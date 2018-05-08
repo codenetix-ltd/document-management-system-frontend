@@ -16,13 +16,10 @@ export default class RoleAdd extends Component {
     this.state = {
       newRoleID: false
     };
-    this.breadcrumbs = [
-      { pageName: 'Roles', pageLink: '/roles', iconCls: 'fa fa-plus' }
-    ];
   }
 
   onFormSubmit({ name }) {
-    if (!name) return;
+    if (!name) return; // todo: check if this is really neccessary
     axios.post(API.roles, { name }).then(({ data }) => {
       this.setState({
         newRoleID: data.id
@@ -36,12 +33,13 @@ export default class RoleAdd extends Component {
     return !(name && name.length > 2);
   }
 
+  breadcrumbs = [
+    { pageName: 'Roles', pageLink: '/roles', iconCls: 'fa fa-plus' }
+  ];
+
   render() {
     const { newRoleID } = this.state;
-    if (newRoleID) {
-      return (<Redirect to={`/roles/${newRoleID}`} />);
-    }
-
+    if (newRoleID) return (<Redirect to={`/roles/${newRoleID}`} />);
     return (
       <div>
         <ContentHeader title="Role create" breadcrumbs={this.breadcrumbs} />

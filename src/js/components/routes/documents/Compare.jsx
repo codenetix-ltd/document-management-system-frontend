@@ -25,10 +25,6 @@ export class DocumentsCompare extends Component {
 
   constructor(props) {
     super(props);
-    this.breadcrumbs = [
-      { pageName: 'Documents list', pageLink: '/documents/list', iconCls: 'fa fa-list' },
-      { pageName: 'Documents comparison', pageLink: '/compare', iconCls: '' }
-    ];
     this.state = {
       activeKey: 0,
       showAll: true
@@ -65,6 +61,11 @@ export class DocumentsCompare extends Component {
       return firstVal !== currVal;
     });
   }
+
+  breadcrumbs = [
+    { pageName: 'Documents list', pageLink: '/documents/list', iconCls: 'fa fa-list' },
+    { pageName: 'Documents comparison', pageLink: '/compare', iconCls: '' }
+  ];
 
   render() {
     const { activeKey, showAll } = this.state;
