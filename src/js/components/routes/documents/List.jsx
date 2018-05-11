@@ -63,7 +63,7 @@ export class DocumentsList extends Component {
   onArchive() {}
 
   onDelete({ value }) {
-    const { name } = value;
+    const { actualVersion: { name } } = value;
     const { dispatch } = this.props;
     this.prompt.show({
       body: `Do you really want to delete document ${name}?`,

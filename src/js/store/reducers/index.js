@@ -41,7 +41,13 @@ import {
 
 import initialState from './initialState.json';
 
-const auth = ls.get('auth');
+let auth;
+try {
+  auth = ls.get('auth');
+} catch (e) {
+  console.trace(e);
+}
+
 initialState.auth = auth || false;
 
 export default function Reducer(state = initialState, action) {

@@ -11,8 +11,12 @@ import MassArchiveModal from './MassArchiveModal';
 
 @autobind
 export class DocumentActions extends Component {
+  static defaultProps = {
+    prompt: null
+  };
+
   static propTypes = {
-    prompt: PropTypes.func.isRequired,
+    prompt: PropTypes.any,
     dispatch: PropTypes.func.isRequired,
     selectedDocuments: PropTypes.array.isRequired
   };
