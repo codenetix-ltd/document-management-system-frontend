@@ -4,26 +4,26 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 
-import { $newActualDocument } from 'Store/actions';
+import { $substituteDocument } from 'Store/actions';
 
 @autobind
 export class MassArchiveModal extends Component {
   static defaultProps = {
-    newActualDocument: null
+    substituteDocument: null
   };
 
   static propTypes = {
-    newActualDocument: PropTypes.any,
+    substituteDocument: PropTypes.any,
     dispatch: PropTypes.func.isRequired,
     documents: PropTypes.any.isRequired
   };
 
   onChange(value) {
-    this.props.dispatch($newActualDocument(value));
+    this.props.dispatch($substituteDocument(value));
   }
 
   render() {
-    const { documents: { list }, newActualDocument } = this.props;
+    const { documents: { list }, substituteDocument } = this.props;
     const options = list.map(({ actualVersion }) => actualVersion);
     return (
       <div>
@@ -37,7 +37,7 @@ export class MassArchiveModal extends Component {
                 options={options}
                 labelKey="name"
                 valueKey="id"
-                value={newActualDocument}
+                value={substituteDocument}
                 onChange={this.onChange}
               />
             </div>
@@ -48,7 +48,7 @@ export class MassArchiveModal extends Component {
   }
 }
 
-const mapStateToProps = ({ documents, newActualDocument }) => ({ documents, newActualDocument });
+const mapStateToProps = ({ documents, substituteDocument }) => ({ documents, substituteDocument });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

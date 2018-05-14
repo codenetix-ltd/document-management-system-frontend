@@ -16,14 +16,14 @@ import MassArchiveModal from './MassArchiveModal';
 export class DocumentActions extends Component {
   static defaultProps = {
     prompt: null,
-    newActualDocument: null
+    substituteDocument: null
   };
 
   static propTypes = {
     prompt: PropTypes.any,
-    newActualDocument: PropTypes.any,
+    substituteDocument: PropTypes.any,
     dispatch: PropTypes.func.isRequired,
-    selectedDocuments: PropTypes.array.isRequired,
+    selectedDocuments: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -41,8 +41,8 @@ export class DocumentActions extends Component {
       body: <MassArchiveModal />,
       confirmText: 'Archive',
       onConfirm: close => {
-        const { newActualDocument: { id: substDocId } } = this.props;
-        $$documentsMassArchive(dispatch, ids, substDocId, () => {
+        const { substituteDocument: { id } } = this.props;
+        $$documentsMassArchive(dispatch, ids, id, () => {
           close();
           dispatch($setSelectedDocuments([]));
         });
@@ -124,7 +124,7 @@ export class DocumentActions extends Component {
   }
 }
 
-const mapStateToProps = ({ selectedDocuments, newActualDocument }) => ({ selectedDocuments, newActualDocument });
+const mapStateToProps = ({ selectedDocuments, substituteDocument }) => ({ selectedDocuments, substituteDocument });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

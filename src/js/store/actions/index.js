@@ -17,7 +17,7 @@ import {
   DOCUMENT_UPDATE,
   DOC_ATTR_VALUES_SET,
   DOC_ATTR_VALUES_UPDATE,
-  NEW_ACTUAL_DOCUMENT_SET,
+  SUBSTITUTE_DOCUMENT_SET,
   SELECTED_DOCS_SET,
   COMPARED_DOCS_SET,
   VERSIONS_LIST_SET,
@@ -133,8 +133,8 @@ export const $updateAttributeValues = data => ({
   data: Array.isArray(data) ? data : [data]
 });
 
-export const $newActualDocument = data => ({
-  type: NEW_ACTUAL_DOCUMENT_SET,
+export const $substituteDocument = data => ({
+  type: SUBSTITUTE_DOCUMENT_SET,
   data
 });
 
