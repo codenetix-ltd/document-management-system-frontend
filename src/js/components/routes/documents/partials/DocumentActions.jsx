@@ -5,20 +5,25 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { $setSelectedDocuments } from 'Store/actions';
-import { $$documentsMassDelete } from 'Store/thunks/documents';
+import {
+  $$documentsMassArchive,
+  $$documentsMassDelete
+} from 'Store/thunks/documents';
 
 import MassArchiveModal from './MassArchiveModal';
 
 @autobind
 export class DocumentActions extends Component {
   static defaultProps = {
-    prompt: null
+    prompt: null,
+    newActualDocument: null
   };
 
   static propTypes = {
     prompt: PropTypes.any,
+    newActualDocument: PropTypes.any,
     dispatch: PropTypes.func.isRequired,
-    selectedDocuments: PropTypes.array.isRequired
+    selectedDocuments: PropTypes.array.isRequired,
   };
 
   constructor(props) {
@@ -29,13 +34,19 @@ export class DocumentActions extends Component {
   }
 
   onMassArchive() {
-    const { /* selectedDocuments, dispatch, */ prompt } = this.props;
-    // const ids = selectedDocuments.map(({ id }) => id);
+    const { prompt, dispatch, selectedDocuments } = this.props;
+    const ids = selectedDocuments.map(({ id }) => id);
     prompt.show({
       width: 555,
       body: <MassArchiveModal />,
       confirmText: 'Archive',
-      onConfirm: () => {}
+      onConfirm: close => {
+        const { newActualDocument: { id: substDocId } } = this.props;
+        $$documentsMassArchive(dispatch, ids, substDocId, () => {
+          close();
+          dispatch($setSelectedDocuments([]));
+        });
+      }
     });
   }
 
@@ -113,7 +124,7 @@ export class DocumentActions extends Component {
   }
 }
 
-const mapStateToProps = ({ selectedDocuments }) => ({ selectedDocuments });
+const mapStateToProps = ({ selectedDocuments, newActualDocument }) => ({ selectedDocuments, newActualDocument });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

@@ -81,6 +81,26 @@ export const $$documentDelete = (dispatch, { id, name }, close = fn) => {
   });
 };
 
+export const $$documentsMassArchive = (dispatch, ids, substDocId, close = fn) => {
+  const p = Promise.all(ids.map(id => {
+    return axios.patch(`${API.documents}/${id}`, {
+      substituteDocumentId: substDocId
+    });
+  }));
+  p.then(() => {
+    $$documentsFetch(dispatch, 1);
+    $$messageSet(dispatch, {
+      type: 'success',
+      text: 'Selected documents were successfully archived.'
+    });
+    close();
+  }).catch(err => {
+    console.trace(err);
+    close();
+    $$errorSet(dispatch, err);
+  });
+};
+
 export const $$documentsMassDelete = (dispatch, ids, close = fn) => {
   const p = Promise.all(ids.map(id => axios.delete(`${API.documents}/${id}`)));
   p.then(() => {
