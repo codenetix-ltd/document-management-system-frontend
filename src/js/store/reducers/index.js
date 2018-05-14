@@ -21,6 +21,7 @@ import {
   DOCUMENT_UPDATE,
   DOC_ATTR_VALUES_SET,
   DOC_ATTR_VALUES_UPDATE,
+  SUBSTITUTE_DOCUMENT_SET,
   SELECTED_DOCS_SET,
   COMPARED_DOCS_SET,
   VERSIONS_LIST_SET,
@@ -41,8 +42,14 @@ import {
 
 import initialState from './initialState.json';
 
-const auth = ls.get('auth');
-initialState.auth = auth || false;
+let auth;
+try {
+  auth = ls.get('auth');
+} catch (e) {
+  console.trace(e);
+}
+
+initialState.auth = auth || initialState.auth;
 
 export default function Reducer(state = initialState, action) {
   switch (action.type) {
@@ -189,6 +196,11 @@ export default function Reducer(state = initialState, action) {
             )
           }
         }
+      };
+    case SUBSTITUTE_DOCUMENT_SET:
+      return {
+        ...state,
+        substituteDocument: action.data
       };
     case SELECTED_DOCS_SET:
       return {

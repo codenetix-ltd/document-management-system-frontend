@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import moment from 'moment';
 import first from 'lodash/first';
+import pick from 'lodash/pick';
 
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import Pagination from 'Components/partials/Pagination';
 
-import PromptWrapper from 'Components/common/PromptWrapper';
+import Prompt from 'Components/common/Prompt';
 import AlertMessage from 'Components/common/AlertMessage';
 import ErrorMessage from 'Components/common/ErrorMessage';
 import SelectableTable from 'Components/common/SelectableTable';
@@ -18,6 +19,7 @@ import SelectableTable from 'Components/common/SelectableTable';
 import { DataLink } from 'Components/common/dataControls';
 
 import {
+  $$documentArchive,
   $$documentDelete,
   $$documentsFetch
 } from 'Store/thunks/documents';
@@ -26,10 +28,16 @@ import { $setSelectedDocuments } from 'Store/actions';
 
 import FiltersWrapper from './partials/FiltersWrapper';
 import DocumentActions from './partials/DocumentActions';
+import ArchiveModalContent from './partials/ArchiveModalContent';
 
 @autobind
 export class DocumentsList extends Component {
+  static defaultProps = {
+    substituteDocument: null
+  };
+
   static propTypes = {
+    substituteDocument: PropTypes.any,
     documents: PropTypes.any.isRequired,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -60,14 +68,25 @@ export class DocumentsList extends Component {
     this.props.dispatch($setSelectedDocuments(selected));
   }
 
-  onArchive() {}
-
-  onDelete({ value }) {
-    const { name } = value;
+  onArchive({ value: { actualVersion } }) {
     const { dispatch } = this.props;
     this.prompt.show({
-      body: `Do you really want to delete document ${name}?`,
-      onConfirm: close => $$documentDelete(dispatch, value, close)
+      width: 555,
+      body: <ArchiveModalContent />,
+      confirmText: 'Archive',
+      onConfirm: close => {
+        const { substituteDocument: { id } } = this.props;
+        $$documentArchive(dispatch, actualVersion, id, close);
+      }
+    });
+  }
+
+  onDelete({ value: { actualVersion } }) {
+    const { dispatch } = this.props;
+    this.prompt.show({
+      body: `Do you really want to delete document ${actualVersion.name}?`,
+      confirmText: 'Delete',
+      onConfirm: close => $$documentDelete(dispatch, actualVersion, close)
     });
   }
 
@@ -135,51 +154,44 @@ export class DocumentsList extends Component {
   render() {
     const { documents, loading } = this.props;
     return (
-      <PromptWrapper ref={p => { this.prompt = p; }} confirmText="Delete">
-        {
-          (prompt) => {
-            return (
-              <div>
-                <ContentHeader title="Documents" breadcrumbs={this.breadcrumbs} />
-                <ContentWrapper boxClass="box-success">
-                  <div className="box-body">
-                    <FiltersWrapper />
-                    <hr />
-                    <DocumentActions prompt={prompt} />
-                    <div className="box-body">
-                      <div className="row">
-                        <div className="col-sm-12">
-                          <AlertMessage />
-                          <ErrorMessage />
-                          <SelectableTable
-                            manual
-                            className="-striped"
-                            columns={[...this.columns]}
-                            data={documents.list}
-                            pages={documents.lastPage}
-                            loading={loading}
-                            onFetchData={this.onFetchData}
-                            onSelect={this.onSelect}
-                            defaultPageSize={15}
-                            PaginationComponent={Pagination}
-                            multiSort={false}
-                            resizable={false}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </ContentWrapper>
+      <div>
+        <ContentHeader title="Documents" breadcrumbs={this.breadcrumbs} />
+        <ContentWrapper boxClass="box-success">
+          <div className="box-body">
+            <FiltersWrapper />
+            <hr />
+            <DocumentActions prompt={this.prompt} />
+            <div className="box-body">
+              <div className="row">
+                <div className="col-sm-12">
+                  <AlertMessage />
+                  <ErrorMessage />
+                  <SelectableTable
+                    manual
+                    className="-striped"
+                    columns={[...this.columns]}
+                    data={documents.list}
+                    pages={documents.lastPage}
+                    loading={loading}
+                    onFetchData={this.onFetchData}
+                    onSelect={this.onSelect}
+                    defaultPageSize={15}
+                    PaginationComponent={Pagination}
+                    multiSort={false}
+                    resizable={false}
+                  />
+                </div>
               </div>
-            );
-          }
-        }
-      </PromptWrapper>
+            </div>
+          </div>
+        </ContentWrapper>
+        <Prompt ref={p => { this.prompt = p; }} />
+      </div>
     );
   }
 }
 
-const mapStateToProps = ({ documents, loading }) => ({ documents, loading });
+const mapStateToProps = (state) => pick(state, ['documents', 'loading', 'substituteDocument']);
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

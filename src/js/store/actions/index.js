@@ -17,6 +17,7 @@ import {
   DOCUMENT_UPDATE,
   DOC_ATTR_VALUES_SET,
   DOC_ATTR_VALUES_UPDATE,
+  SUBSTITUTE_DOCUMENT_SET,
   SELECTED_DOCS_SET,
   COMPARED_DOCS_SET,
   VERSIONS_LIST_SET,
@@ -130,6 +131,11 @@ export const $setAttributeValues = data => ({
 export const $updateAttributeValues = data => ({
   type: DOC_ATTR_VALUES_UPDATE,
   data: Array.isArray(data) ? data : [data]
+});
+
+export const $substituteDocument = data => ({
+  type: SUBSTITUTE_DOCUMENT_SET,
+  data
 });
 
 export const $setSelectedDocuments = data => ({
