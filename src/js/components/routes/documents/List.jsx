@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import moment from 'moment';
 import first from 'lodash/first';
+import pick from 'lodash/pick';
 
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
@@ -18,6 +19,7 @@ import SelectableTable from 'Components/common/SelectableTable';
 import { DataLink } from 'Components/common/dataControls';
 
 import {
+  $$documentArchive,
   $$documentDelete,
   $$documentsFetch
 } from 'Store/thunks/documents';
@@ -26,10 +28,16 @@ import { $setSelectedDocuments } from 'Store/actions';
 
 import FiltersWrapper from './partials/FiltersWrapper';
 import DocumentActions from './partials/DocumentActions';
+import ArchiveModalContent from './partials/ArchiveModalContent';
 
 @autobind
 export class DocumentsList extends Component {
+  static defaultProps = {
+    substituteDocument: null
+  };
+
   static propTypes = {
+    substituteDocument: PropTypes.any,
     documents: PropTypes.any.isRequired,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -60,15 +68,25 @@ export class DocumentsList extends Component {
     this.props.dispatch($setSelectedDocuments(selected));
   }
 
-  onArchive() {}
-
-  onDelete({ value }) {
-    const { actualVersion: { name } } = value;
+  onArchive({ value: { actualVersion } }) {
     const { dispatch } = this.props;
     this.prompt.show({
-      body: `Do you really want to delete document ${name}?`,
+      width: 555,
+      body: <ArchiveModalContent />,
+      confirmText: 'Archive',
+      onConfirm: close => {
+        const { substituteDocument: { id } } = this.props;
+        $$documentArchive(dispatch, actualVersion, id, close);
+      }
+    });
+  }
+
+  onDelete({ value: { actualVersion } }) {
+    const { dispatch } = this.props;
+    this.prompt.show({
+      body: `Do you really want to delete document ${actualVersion.name}?`,
       confirmText: 'Delete',
-      onConfirm: close => $$documentDelete(dispatch, value, close)
+      onConfirm: close => $$documentDelete(dispatch, actualVersion, close)
     });
   }
 
@@ -173,7 +191,7 @@ export class DocumentsList extends Component {
   }
 }
 
-const mapStateToProps = ({ documents, loading }) => ({ documents, loading });
+const mapStateToProps = (state) => pick(state, ['documents', 'loading', 'substituteDocument']);
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

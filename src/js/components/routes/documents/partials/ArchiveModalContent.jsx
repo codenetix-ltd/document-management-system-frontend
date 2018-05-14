@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
+import pick from 'lodash/pick';
 
 import { $substituteDocument } from 'Store/actions';
 
 @autobind
-export class MassArchiveModal extends Component {
+export class ArchiveModalContent extends Component {
   static defaultProps = {
     substituteDocument: null
   };
@@ -15,7 +16,8 @@ export class MassArchiveModal extends Component {
   static propTypes = {
     substituteDocument: PropTypes.any,
     dispatch: PropTypes.func.isRequired,
-    documents: PropTypes.any.isRequired
+    documents: PropTypes.any.isRequired,
+    selectedDocuments: PropTypes.array.isRequired
   };
 
   onChange(value) {
@@ -23,11 +25,16 @@ export class MassArchiveModal extends Component {
   }
 
   render() {
-    const { documents: { list }, substituteDocument } = this.props;
+    const {
+      documents: { list },
+      substituteDocument,
+      selectedDocuments
+    } = this.props;
     const options = list.map(({ actualVersion }) => actualVersion);
+    const titlePart = selectedDocuments.length > 1 ? 'selected documents' : 'the document';
     return (
       <div>
-        <p>Do you really want to archive selected documents?</p>
+        <p>{`Do you really want to archive ${titlePart}?`}</p>
         <hr />
         <form className="form-horizontal">
           <div className="form-group">
@@ -48,8 +55,8 @@ export class MassArchiveModal extends Component {
   }
 }
 
-const mapStateToProps = ({ documents, substituteDocument }) => ({ documents, substituteDocument });
+const mapStateToProps = (state) => pick(state, ['documents', 'substituteDocument', 'selectedDocuments']);
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MassArchiveModal);
+export default connect(mapStateToProps, mapDispatchToProps)(ArchiveModalContent);

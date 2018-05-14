@@ -10,7 +10,7 @@ import {
   $$documentsMassDelete
 } from 'Store/thunks/documents';
 
-import MassArchiveModal from './MassArchiveModal';
+import ArchiveModalContent from './ArchiveModalContent';
 
 @autobind
 export class DocumentActions extends Component {
@@ -38,7 +38,7 @@ export class DocumentActions extends Component {
     const ids = selectedDocuments.map(({ id }) => id);
     prompt.show({
       width: 555,
-      body: <MassArchiveModal />,
+      body: <ArchiveModalContent />,
       confirmText: 'Archive',
       onConfirm: close => {
         const { substituteDocument: { id } } = this.props;

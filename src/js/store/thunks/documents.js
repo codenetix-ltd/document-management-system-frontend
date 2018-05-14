@@ -66,6 +66,23 @@ export const $$documentReset = (dispatch) => {
   dispatch($document(initialState.document));
 };
 
+export const $$documentArchive = (dispatch, { id, name }, substDocId, close = fn) => {
+  axios.patch(`${API.documents}/${id}`, {
+    substituteDocumentId: substDocId
+  }).then(() => {
+    $$documentsFetch(dispatch, 1);
+    $$messageSet(dispatch, {
+      type: 'success',
+      text: `The document ${name} was successfully archived.`
+    });
+    close();
+  }).catch(err => {
+    console.trace(err);
+    close();
+    $$errorSet(dispatch, err);
+  });
+};
+
 export const $$documentDelete = (dispatch, { id, name }, close = fn) => {
   axios.delete(`${API.documents}/${id}`).then(() => {
     $$documentsFetch(dispatch, 1);
