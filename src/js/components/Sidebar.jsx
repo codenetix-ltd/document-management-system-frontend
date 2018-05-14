@@ -59,7 +59,7 @@ export class Sidebar extends Component {
                 const listLink = `/${name.toLowerCase()}/list`;
                 const addLinkActive = pathname === addLink;
                 const listLinkActive = pathname === listLink;
-                let isActive = pathname === listLink || pathname === addLink;
+                let isActive = pathname.includes(listLink) || pathname.includes(addLink);
                 if (activeName) isActive = name === activeName;
                 const itemCls = cln('treeview', { active: isActive });
                 const iconCls = cln('fa', { [icon]: icon });

@@ -48,7 +48,7 @@ try {
   console.trace(e);
 }
 
-initialState.auth = auth || false;
+initialState.auth = auth || initialState.auth;
 
 export default function Reducer(state = initialState, action) {
   switch (action.type) {
