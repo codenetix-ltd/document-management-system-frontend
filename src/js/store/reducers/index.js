@@ -21,6 +21,7 @@ import {
   DOCUMENT_UPDATE,
   DOC_ATTR_VALUES_SET,
   DOC_ATTR_VALUES_UPDATE,
+  NEW_ACTUAL_DOCUMENT_SET,
   SELECTED_DOCS_SET,
   COMPARED_DOCS_SET,
   VERSIONS_LIST_SET,
@@ -195,6 +196,11 @@ export default function Reducer(state = initialState, action) {
             )
           }
         }
+      };
+    case NEW_ACTUAL_DOCUMENT_SET:
+      return {
+        ...state,
+        newActualDocument: action.data
       };
     case SELECTED_DOCS_SET:
       return {
