@@ -164,7 +164,7 @@ export class DocumentForm extends Component {
           <div className="form-group">
             <label htmlFor="file" className="col-sm-2 control-label">Files</label>
             <div className="col-sm-6">
-              <FileUpload onSuccess={this.handleFileUpload} />
+              <FileUpload multiple onSuccess={this.handleFileUpload} />
             </div>
           </div>
         </div>

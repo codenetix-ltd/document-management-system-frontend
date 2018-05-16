@@ -9,11 +9,13 @@ import { API } from 'config';
 @autobind
 export default class FileUpload extends Component {
   static defaultProps = {
+    multiple: false,
     onSuccess: () => {},
     onFailure: () => {}
   };
 
   static propTypes = {
+    multiple: PropTypes.bool,
     onSuccess: PropTypes.func,
     onFailure: PropTypes.func
   };
@@ -42,13 +44,14 @@ export default class FileUpload extends Component {
 
   render() {
     const { files } = this.state;
+    const { multiple } = this.props;
     return (
       <div>
         <span className="btn btn-success fileinput-button">
           <i className="glyphicon glyphicon-plus" />
           <span>Add files...</span>
           <input
-            multiple
+            multiple={multiple}
             type="file"
             name="files[]"
             onChange={this.handleFileUpload}
