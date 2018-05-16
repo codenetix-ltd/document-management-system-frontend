@@ -18,6 +18,7 @@
     "labels": "/v1/labels",
     "roles": "/v1/roles",
     "logs": "/v1/logs",
+    "files": "/v1/files",
     "attributes": "/v1/templates/%s/attributes",
     "versions": "/v1/documents/%s/versions"
   }
