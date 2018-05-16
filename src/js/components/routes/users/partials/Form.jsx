@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import { Async as Select } from 'react-select';
 
+import FileUpload from 'Components/common/FileUpload';
+
 @autobind
 export default class UserForm extends Component {
   static defaultProps = {
@@ -59,6 +61,16 @@ export default class UserForm extends Component {
     const { value, name } = target;
     this.setState({
       [name]: value
+    });
+  }
+
+  /**
+   * Hanler for avatar upload component
+   * @param fileIds
+   */
+  handleAvatarUpload(fileIds) {
+    this.setState({
+      avatarId: fileIds[0]
     });
   }
 
@@ -152,14 +164,7 @@ export default class UserForm extends Component {
           <div className="form-group">
             <label htmlFor="file" className="col-sm-2 control-label">Avatar</label>
             <div className="col-sm-6">
-              <input
-                id="file"
-                className="form-control"
-                type="file"
-                ref={input => {
-                  this.fileInput = input;
-                }}
-              />
+              <FileUpload onSuccess={this.handleAvatarUpload} />
             </div>
           </div>
         </div>

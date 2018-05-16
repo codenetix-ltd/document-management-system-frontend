@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
+import FileUpload from 'Components/common/FileUpload';
+
 import { $$profileUpdate } from 'Store/thunks/profile';
 
 @autobind
@@ -34,6 +36,16 @@ export class ProfileForm extends Component {
   handleChange({ target: { value, name } }) {
     $$profileUpdate(this.props.dispatch, {
       [name]: value
+    });
+  }
+
+  /**
+   * Handler for file upload component
+   * @param fileIds
+   */
+  handleAvatarUpload(fileIds) {
+    $$profileUpdate(this.props.dispatch, {
+      avatarId: fileIds[0]
     });
   }
 
@@ -73,14 +85,7 @@ export class ProfileForm extends Component {
           <div className="form-group">
             <label htmlFor="file" className="col-sm-2 control-label">Avatar</label>
             <div className="col-sm-6">
-              <input
-                id="file"
-                className="form-control"
-                type="file"
-                ref={input => {
-                  this.fileInput = input;
-                }}
-              />
+              <FileUpload onSuccess={this.handleAvatarUpload} />
             </div>
           </div>
         </div>
