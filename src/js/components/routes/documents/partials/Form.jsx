@@ -6,6 +6,8 @@ import { Async as Select } from 'react-select';
 import { If, Then } from 'qc-react-conditionals/lib';
 import pick from 'lodash/pick';
 
+import FileUpload from 'Components/common/FileUpload';
+
 import {
   $$documentUpdate,
   $$documentReset
@@ -54,13 +56,19 @@ export class DocumentForm extends Component {
   }
 
   handleLabelsSelect(value) {
-    $$documentUpdate(this.props.dispatch, { labels: value });
+    $$documentUpdate(this.props.dispatch, {
+      labels: value
+    });
   }
 
   handleTemplateSelect(value) {
     const { dispatch } = this.props;
     dispatch($setAttributeValues([]));
     $$documentUpdate(dispatch, { template: value });
+  }
+
+  handleFileUpload(fileIds) {
+    $$documentUpdate(this.props.dispatch, { fileIds });
   }
 
   render() {
@@ -154,9 +162,9 @@ export class DocumentForm extends Component {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="file" className="col-sm-2 control-label">Avatar</label>
+            <label htmlFor="file" className="col-sm-2 control-label">Files</label>
             <div className="col-sm-6">
-              <input name="file" type="file" className="form-control" value="" />
+              <FileUpload onSuccess={this.handleFileUpload} />
             </div>
           </div>
         </div>

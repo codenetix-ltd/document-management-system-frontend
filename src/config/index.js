@@ -20,7 +20,8 @@ const { NODE_ENV } = process.env;
  *    documents: String,
  *    labels: String,
  *    roles: String,
- *    logs: String
+ *    logs: String,
+ *    files: String
  * }}
  */
 export function getAPI(version = 'v1') {
@@ -67,7 +68,8 @@ export function getURL(endpointName, parameter) {
  *    documents: String,
  *    labels: String,
  *    roles: String,
- *    logs: String
+ *    logs: String,
+ *    files: String
  * }}
  */
 export const API = getAPI();
