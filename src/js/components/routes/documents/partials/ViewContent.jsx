@@ -4,6 +4,7 @@ import moment from 'moment';
 
 export default function DocumentViewContent(props) {
   const { document, document: { actualVersion } } = props;
+  console.log(document);
   const { attributeValues: attrValues, template } = actualVersion;
   return (
     <div>
@@ -32,7 +33,15 @@ export default function DocumentViewContent(props) {
           </tr>
           <tr>
             <td>Files</td>
-            <td>{ /* todo: to be done when files API is ready */ }</td>
+            <td>
+              {
+                actualVersion.files && actualVersion.files.map(file => {
+                  return (
+                    <a key={file.id} href={file.url} target="_blank">{file.name}&nbsp;</a>
+                  );
+                })
+              }
+            </td>
           </tr>
           <tr>
             <td>Comment</td>
