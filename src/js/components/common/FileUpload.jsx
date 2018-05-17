@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { If, Then } from 'qc-react-conditionals/lib';
 
 import axios from 'Services/request';
-import { API } from 'config';
+import { API } from 'Config';
 
 @autobind
 export default class FileUpload extends Component {

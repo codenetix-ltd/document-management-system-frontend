@@ -4,7 +4,6 @@ import moment from 'moment';
 
 export default function DocumentViewContent(props) {
   const { document, document: { actualVersion } } = props;
-  console.log(document);
   const { attributeValues: attrValues, template } = actualVersion;
   return (
     <div>
