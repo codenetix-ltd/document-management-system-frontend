@@ -1,11 +1,10 @@
-import _ from 'lodash';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
 import UserEdit from 'Components/routes/users/Edit';
 
-describe('Users list', () => {
+describe('User edit', () => {
   let wrapper;
   let match;
 
@@ -20,21 +19,5 @@ describe('Users list', () => {
 
   it('should render correctly', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();
-  });
-
-  it('should check if user data has been loaded', () => {
-    const { user } = wrapper.state();
-    expect(_.isEmpty(user)).toBe(true);
-    setTimeout(() => {
-      const { loadedUser } = wrapper.state();
-      expect(_.isEmpty(loadedUser)).toBe(false);
-    }, 1000);
-  });
-
-  it('should check if user full_name is not empty', () => {
-    setTimeout(() => {
-      const { loadedUser } = wrapper.state();
-      expect(_.isEmpty(loadedUser.blabla)).toBe(false);
-    }, 1000);
   });
 });

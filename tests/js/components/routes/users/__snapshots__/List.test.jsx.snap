@@ -204,6 +204,7 @@ exports[`Users list should render correctly 1`] = `
     </div>
   </ContentWrapper>
   <Prompt
+    body=""
     cancelText="Cancel"
     confirmText="Delete"
     headerText="Confirmation"

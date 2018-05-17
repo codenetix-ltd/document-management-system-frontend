@@ -16,6 +16,7 @@ exports[`Templates list should render correctly 1`] = `
   />
   <ContentWrapper
     boxClass=""
+    noBox={false}
   >
     <div
       className="box-header clearfix"
@@ -40,6 +41,8 @@ exports[`Templates list should render correctly 1`] = `
         <div
           className="col-sm-12"
         >
+          <Connect(AlertMessage) />
+          <Connect(ErrorMessage) />
           <ReactTable
             AggregatedComponent={[Function]}
             ExpanderComponent={[Function]}
@@ -161,7 +164,7 @@ exports[`Templates list should render correctly 1`] = `
             manual={true}
             multiSort={true}
             nestingLevelKey="_nestingLevel"
-            nextText=">>"
+            nextText="Next"
             noDataText="No rows found"
             ofText="of"
             onFetchData={[Function]}
@@ -177,15 +180,14 @@ exports[`Templates list should render correctly 1`] = `
               ]
             }
             pageText="Page"
-            pages={-1}
             pivotDefaults={Object {}}
             pivotIDKey="_pivotID"
             pivotValKey="_pivotVal"
-            previousText="<<"
+            previousText="Previous"
             resizable={true}
             rowsText="rows"
             showPageJump={true}
-            showPageSizeOptions={false}
+            showPageSizeOptions={true}
             showPagination={true}
             showPaginationBottom={true}
             showPaginationTop={false}
@@ -198,6 +200,7 @@ exports[`Templates list should render correctly 1`] = `
     </div>
   </ContentWrapper>
   <Prompt
+    body=""
     cancelText="Cancel"
     confirmText="Delete"
     headerText="Confirmation"
