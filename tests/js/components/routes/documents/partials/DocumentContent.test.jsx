@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
-import { DocumentEdit } from 'Components/routes/documents/Edit';
+import { DocumentContent } from 'Routes/documents/partials/DocumentContent';
 
-describe('Documents Edit', () => {
+describe('Documents Add', () => {
   let wrapper;
   let match;
   let document;
@@ -18,7 +18,7 @@ describe('Documents Edit', () => {
     document = {
       actualVersion: {}
     };
-    wrapper = shallow(<DocumentEdit match={match} dispatch={() => {}} document={document} />);
+    wrapper = shallow(<DocumentContent document={document} match={match} />);
   });
 
   it('should render correctly', () => {

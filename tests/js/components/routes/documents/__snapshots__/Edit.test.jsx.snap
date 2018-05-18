@@ -66,7 +66,7 @@ exports[`Documents Edit should render correctly 1`] = `
             onClick={[Function]}
             type="button"
           >
-            Create
+            Update
           </button>
         </div>
       </Tab>
@@ -78,7 +78,7 @@ exports[`Documents Edit should render correctly 1`] = `
           match={
             Object {
               "params": Object {
-                "userID": 1,
+                "documentID": 1,
               },
             }
           }
