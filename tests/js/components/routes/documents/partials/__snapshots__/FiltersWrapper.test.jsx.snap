@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents FiltersWrapper should render correctly 1`] = `
+<div
+  className="document-filters-wrapper datatables-filters-wrapper"
+>
+  <div
+    className="document-filters datatables-filters"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="form-group col-lg-1 col-md-4 col-sm-6"
+      >
+        <InputFilter
+          filterType="id"
+          label="ID"
+          onChange={[Function]}
+          placeholder="Id"
+        />
+      </div>
+      <div
+        className="form-group col-lg-3 col-md-4 col-sm-6"
+      >
+        <InputFilter
+          filterType="name"
+          label="Name"
+          onChange={[Function]}
+          placeholder="Document name"
+        />
+      </div>
+      <div
+        className="form-group col-lg-2 col-md-4 col-sm-6"
+      >
+        <InputFilter
+          filterType="owner"
+          label="Owner"
+          onChange={[Function]}
+          placeholder="Username"
+        />
+      </div>
+      <div
+        className="form-group col-lg-2 col-md-4 col-sm-6"
+      >
+        <SelectFilter
+          filterType="template"
+          label="Template"
+          onChange={[Function]}
+          options={Array []}
+        />
+      </div>
+      <div
+        className="form-group col-lg-2 col-md-4 col-sm-6"
+      >
+        <SelectFilter
+          filterType="label"
+          label="Labels"
+          onChange={[Function]}
+          options={Array []}
+        />
+      </div>
+      <div
+        className="form-group col-lg-3 col-md-6 col-sm-6"
+      >
+        <DatePickerFilter
+          filterType="createdAt.from"
+          label="Created at"
+          onChange={[Function]}
+          placeholder="Date from"
+        />
+      </div>
+      <div
+        className="form-group col-lg-2 col-md-6 col-sm-6"
+      >
+        <DatePickerFilter
+          filterType="createdAt.to"
+          label=""
+          onChange={[Function]}
+          placeholder="Date to"
+        />
+      </div>
+      <div
+        className="form-group col-lg-3 col-md-6 col-sm-6"
+      >
+        <DatePickerFilter
+          filterType="updatedAt.from"
+          label="Updated at"
+          onChange={[Function]}
+          placeholder="Date from"
+        />
+      </div>
+      <div
+        className="form-group col-lg-2 col-md-6 col-sm-6"
+      >
+        <DatePickerFilter
+          filterType="updatedAt.to"
+          label=""
+          onChange={[Function]}
+          placeholder="Date to"
+        />
+      </div>
+      <div
+        className="form-group col-lg-1 col-md-2 col-sm-2"
+      >
+        <CheckboxFilter
+          filterType="archived"
+          label="Archived"
+          onChange={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

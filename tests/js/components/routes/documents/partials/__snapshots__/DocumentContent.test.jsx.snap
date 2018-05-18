@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Documents Add should render correctly 1`] = `
+exports[`Documents DocumentContent should render correctly 1`] = `
 <div>
   <div
     className="box-header with-border"
