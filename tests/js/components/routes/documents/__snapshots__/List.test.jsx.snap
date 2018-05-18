@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents list should render correctly 1`] = `
+<div>
+  <ContentHeader
+    breadcrumbs={
+      Array [
+        Object {
+          "iconCls": "fa fa-list",
+          "pageLink": "/documents/list",
+          "pageName": "Documents list",
+        },
+      ]
+    }
+    title="Documents"
+  />
+  <ContentWrapper
+    boxClass="box-success"
+    noBox={false}
+  >
+    <div
+      className="box-body"
+    >
+      <Connect(FiltersWrapper) />
+      <hr />
+      <Connect(DocumentActions) />
+      <div
+        className="box-body"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-sm-12"
+          >
+            <Connect(AlertMessage) />
+            <Connect(ErrorMessage) />
+            <SelectableTable
+              PaginationComponent={[Function]}
+              className="-striped"
+              columns={
+                Array [
+                  Object {
+                    "Header": "Id",
+                    "accessor": "id",
+                    "maxWidth": 65,
+                  },
+                  Object {
+                    "Header": "Name",
+                    "accessor": "actualVersion.name",
+                  },
+                  Object {
+                    "Header": "Owner",
+                    "accessor": "owner.fullName",
+                  },
+                  Object {
+                    "Header": "Template ",
+                    "accessor": "actualVersion.template.name",
+                  },
+                  Object {
+                    "Cell": [Function],
+                    "Header": "Created at",
+                    "accessor": "createdAt",
+                  },
+                  Object {
+                    "Cell": [Function],
+                    "Header": "Updated at",
+                    "accessor": "updatedAt",
+                  },
+                  Object {
+                    "Cell": [Function],
+                    "Header": "Actions",
+                    "accessor": "",
+                    "maxWidth": 122,
+                    "sortable": false,
+                  },
+                ]
+              }
+              data={Array []}
+              defaultPageSize={15}
+              loading={false}
+              manual={true}
+              multiSort={false}
+              onFetchData={[Function]}
+              onSelect={[Function]}
+              resizable={false}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </ContentWrapper>
+  <Prompt
+    body=""
+    cancelText="Cancel"
+    confirmText="Confirm"
+    headerText="Confirmation"
+  />
+</div>
+`;

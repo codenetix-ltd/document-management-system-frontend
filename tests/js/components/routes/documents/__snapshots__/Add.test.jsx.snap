@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents Add should render correctly 1`] = `
+<div>
+  <ContentHeader
+    breadcrumbs={
+      Array [
+        Object {
+          "iconCls": "fa fa-copy",
+          "pageLink": "/documents/list",
+          "pageName": "Documents",
+        },
+        Object {
+          "iconCls": "fa fa-plus",
+          "pageLink": "/documents",
+          "pageName": "Document create",
+        },
+      ]
+    }
+    title="Document create"
+  />
+  <ContentWrapper
+    boxClass=""
+    noBox={true}
+  >
+    <Uncontrolled(Tabs)
+      id="tabs"
+    >
+      <Tab
+        eventKey={1}
+        title="Content"
+      >
+        <withRouter(Connect(DocumentContent)) />
+      </Tab>
+    </Uncontrolled(Tabs)>
+  </ContentWrapper>
+</div>
+`;

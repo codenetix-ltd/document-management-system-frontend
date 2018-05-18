@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents Edit should render correctly 1`] = `
+<div>
+  <ContentHeader
+    breadcrumbs={
+      Array [
+        Object {
+          "iconCls": "fa fa-copy",
+          "pageLink": "/documents/list",
+          "pageName": "Documents",
+        },
+        Object {
+          "iconCls": "fa fa-pencil",
+          "pageLink": "",
+          "pageName": "Edit document",
+        },
+      ]
+    }
+    title="Edit document undefined"
+  />
+  <ContentWrapper
+    boxClass=""
+    noBox={true}
+  >
+    <Uncontrolled(Tabs)
+      activeKey={1}
+      animation={false}
+      id="tabs"
+      onSelect={[Function]}
+    >
+      <Tab
+        eventKey={1}
+        title="Content"
+      >
+        <div
+          className="box-header with-border"
+        >
+          <h3
+            className="box-title"
+          >
+            General information
+          </h3>
+        </div>
+        <Connect(DocumentForm) />
+        <If>
+          <Then>
+            <div
+              className="box-header with-border"
+            >
+              <h3
+                className="box-title"
+              >
+                Document attributes
+              </h3>
+            </div>
+            <Connect(AttributesForm) />
+          </Then>
+        </If>
+        <div
+          className="box-footer"
+        >
+          <button
+            className="btn btn-success"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            Create
+          </button>
+        </div>
+      </Tab>
+      <Tab
+        eventKey={2}
+        title="Versions"
+      >
+        <Connect(DocumentVersions)
+          match={
+            Object {
+              "params": Object {
+                "userID": 1,
+              },
+            }
+          }
+        />
+      </Tab>
+    </Uncontrolled(Tabs)>
+  </ContentWrapper>
+</div>
+`;
