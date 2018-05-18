@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
-import DocumentAdd from 'Components/routes/documents/Add';
+import DocumentAdd from 'Routes/documents/Add';
 
 describe('Documents Add', () => {
   let wrapper;
