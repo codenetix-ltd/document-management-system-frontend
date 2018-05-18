@@ -2,23 +2,28 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
-import { DocumentContent } from 'Routes/documents/partials/DocumentContent';
+import { DocumentVersions } from 'Routes/documents/partials/DocumentVersions';
 
-describe('Documents DocumentContent', () => {
+describe('Documents Versions', () => {
   let wrapper;
+  let versions;
   let match;
-  let document;
 
   beforeEach(() => {
+    versions = {
+      list: []
+    };
     match = {
       params: {
         documentID: 1
       }
     };
-    document = {
-      actualVersion: {}
-    };
-    wrapper = shallow(<DocumentContent document={document} match={match} />);
+    wrapper = shallow(<DocumentVersions
+      dispatch={() => {}}
+      match={match}
+      version={{}}
+      versions={versions}
+    />);
   });
 
   it('should render correctly', () => {
