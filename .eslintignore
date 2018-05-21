@@ -1,1 +1,4 @@
-/src/js/admin-lte.js
+coverage/
+dist/
+mocks/
+**/node_modules

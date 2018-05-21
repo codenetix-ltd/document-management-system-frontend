@@ -1,7 +1,7 @@
 {
   "roots": ["<rootDir>/src/", "<rootDir>/tests/"],
   "setupFiles": [
-    "<rootDir>/tests/test-setup.js"
+    "<rootDir>/tests/setup.js"
   ],
   "moduleNameMapper": {
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3)$": "<rootDir>/tests/fileMock.js",
