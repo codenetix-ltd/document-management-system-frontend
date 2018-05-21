@@ -185,6 +185,7 @@ exports[`Templates list should render correctly 1`] = `
             pivotValKey="_pivotVal"
             previousText="Previous"
             resizable={true}
+            resolveData={[Function]}
             rowsText="rows"
             showPageJump={true}
             showPageSizeOptions={true}

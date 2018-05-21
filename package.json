@@ -25,7 +25,7 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
-    "qc-react-conditionals": "0.0.0-alpha",
+    "qc-react-conditionals": "^0.0.0-alpha",
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
     "react-datetime": "^2.14.0",
