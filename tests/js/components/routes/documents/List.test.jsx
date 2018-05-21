@@ -4,16 +4,19 @@ import { shallowToJson } from 'enzyme-to-json';
 
 import { DocumentsList as List } from 'Components/routes/documents/List';
 
+import { $$documentsFetch } from 'Store/thunks/documents';
+
+jest.mock('Store/thunks/documents', () => ({
+  $$documentsFetch: jest.fn()
+}));
+
 describe('Documents list', () => {
   let spy;
   let props;
-  let onSelectSpy;
-  let onFetchDataSpy;
-  let onArchiveSpy;
-  let onDeleteSpy;
   let clearSelectionSpy;
   let wrapper;
   let instance;
+  let promptShowSpy;
 
   beforeEach(() => {
     spy = jest.fn();
@@ -22,16 +25,13 @@ describe('Documents list', () => {
       dispatch: spy,
       loading: false
     };
-    onSelectSpy = jest.spyOn(List.prototype, 'onSelect');
-    onFetchDataSpy = jest.spyOn(List.prototype, 'onFetchData');
-    onArchiveSpy = jest.spyOn(List.prototype, 'onArchive');
-    onDeleteSpy = jest.spyOn(List.prototype, 'onDelete');
     clearSelectionSpy = jest.spyOn(List.prototype, 'clearSelection');
     wrapper = shallow(<List {...props} />);
     instance = wrapper.instance();
     instance.prompt = {
       show: () => {}
     };
+    promptShowSpy = jest.spyOn(instance.prompt, 'show');
   });
 
   afterEach(() => {
@@ -55,17 +55,12 @@ describe('Documents list', () => {
     expect(clearSelectionSpy.mock.calls.length).toBe(1);
   });
 
-  it('should call clearSelection', () => {
-    instance.clearSelection();
-    expect(clearSelectionSpy.mock.calls.length).toBe(1);
-  });
-
   it('should call onFetchData', () => {
     instance.onFetchData({
       page: 1,
       sorted: [{ id: 1, desc: true }]
     });
-    expect(onFetchDataSpy.mock.calls.length).toBe(1);
+    expect($$documentsFetch.mock.calls.length).toBe(1);
   });
 
   it('should call onArchive', () => {
@@ -74,7 +69,7 @@ describe('Documents list', () => {
         actualVersion: {}
       }
     });
-    expect(onArchiveSpy.mock.calls.length).toBe(1);
+    expect(promptShowSpy.mock.calls.length).toBe(1);
   });
 
   it('should call onDelete', () => {
@@ -83,11 +78,6 @@ describe('Documents list', () => {
         actualVersion: {}
       }
     });
-    expect(onDeleteSpy.mock.calls.length).toBe(1);
-  });
-
-  it('should call onSelect', () => {
-    instance.onSelect();
-    expect(onSelectSpy.mock.calls.length).toBe(1);
+    expect(promptShowSpy.mock.calls.length).toBe(1);
   });
 });
