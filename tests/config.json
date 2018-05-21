@@ -1,0 +1,17 @@
+{
+  "roots": ["<rootDir>/src/", "<rootDir>/tests/"],
+  "setupFiles": [
+    "<rootDir>/tests/test-setup.js"
+  ],
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3)$": "<rootDir>/tests/fileMock.js",
+    "\\.(css|scss)$": "<rootDir>/tests/styleMock.js",
+    "^Config$": "<rootDir>/src/config/index.js",
+    "^Config/(.*)$": "<rootDir>/src/config/$1",
+    "^Images/(.*)$": "<rootDir>/src/images/$1",
+    "^Store/(.*)$": "<rootDir>/src/js/store/$1",
+    "^Services/(.*)$": "<rootDir>/src/js/services/$1",
+    "^Components/(.*)$": "<rootDir>/src/js/components/$1",
+    "^Routes/(.*)$": "<rootDir>/src/js/components/routes/$1"
+  }
+}

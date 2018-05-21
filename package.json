@@ -16,22 +16,6 @@
   "lint-staged": {
     "*.{js,jsx}": "eslint"
   },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/tests/test-setup.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3)$": "<rootDir>/tests/mocks/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/tests/mocks/styleMock.js",
-      "^Config$": "<rootDir>/src/config/index.js",
-      "^Config/(.*)$": "<rootDir>/src/config/$1",
-      "^Images/(.*)$": "<rootDir>/src/images/$1",
-      "^Store/(.*)$": "<rootDir>/src/js/store/$1",
-      "^Services/(.*)$": "<rootDir>/src/js/services/$1",
-      "^Components/(.*)$": "<rootDir>/src/js/components/$1",
-      "^Routes/(.*)$": "<rootDir>/src/js/components/routes/$1"
-    }
-  },
   "dependencies": {
     "array-merge-by-key": "^1.0.1",
     "autobind-decorator": "^2.1.0",
