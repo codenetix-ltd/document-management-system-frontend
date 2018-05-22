@@ -11,7 +11,7 @@ jest.mock('Store/thunks/documents', () => ({
 }));
 
 describe('Documents list', () => {
-  let spy;
+  let dispatchSpy;
   let props;
   let clearSelectionSpy;
   let wrapper;
@@ -19,11 +19,11 @@ describe('Documents list', () => {
   let promptShowSpy;
 
   beforeEach(() => {
-    spy = jest.fn();
+    dispatchSpy = jest.fn();
     props = {
-      documents: { list: [] },
-      dispatch: spy,
-      loading: false
+      dispatch: dispatchSpy,
+      loading: false,
+      documents: { list: [] }
     };
     clearSelectionSpy = jest.spyOn(List.prototype, 'clearSelection');
     wrapper = shallow(<List {...props} />);
@@ -79,5 +79,10 @@ describe('Documents list', () => {
       }
     });
     expect(promptShowSpy.mock.calls.length).toBe(1);
+  });
+
+  it('should call onSelect', () => {
+    instance.onSelect([]);
+    expect(dispatchSpy.mock.calls.length).toBe(1);
   });
 });

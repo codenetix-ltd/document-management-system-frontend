@@ -6,19 +6,17 @@ import { DocumentsCompare } from 'Routes/documents/Compare';
 
 describe('Documents Compare', () => {
   let wrapper;
-  let location;
-  let comparedDocuments;
+  let props;
 
   beforeEach(() => {
-    location = {
-      search: 'documentIds=1,2,3'
+    props = {
+      location: {
+        search: 'documentIds=1,2,3'
+      },
+      dispatch: () => {},
+      comparedDocuments: []
     };
-    comparedDocuments = [];
-    wrapper = shallow(<DocumentsCompare
-      dispatch={() => {}}
-      comparedDocuments={comparedDocuments}
-      location={location}
-    />);
+    wrapper = shallow(<DocumentsCompare {...props} />);
   });
 
   it('should render correctly', () => {
