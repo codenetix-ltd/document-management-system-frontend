@@ -13,5 +13,6 @@
     "^Services/(.*)$": "<rootDir>/src/js/services/$1",
     "^Components/(.*)$": "<rootDir>/src/js/components/$1",
     "^Routes/(.*)$": "<rootDir>/src/js/components/routes/$1"
-  }
+  },
+  "resetMocks": true
 }

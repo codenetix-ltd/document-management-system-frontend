@@ -34,10 +34,6 @@ describe('Documents list', () => {
     promptShowSpy = jest.spyOn(instance.prompt, 'show');
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should render correctly', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });

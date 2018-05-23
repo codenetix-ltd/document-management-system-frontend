@@ -48,10 +48,6 @@ describe('Documents Compare', () => {
     instance = wrapper.instance();
   });
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should render correctly', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
