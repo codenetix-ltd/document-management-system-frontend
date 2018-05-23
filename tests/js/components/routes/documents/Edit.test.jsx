@@ -37,7 +37,7 @@ describe('Documents Edit', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call $$documentsFetch in componentDidMount', () => {
+  it('should call $$documentFetch in componentDidMount', () => {
     expect($$documentFetch.mock.calls.length).toBe(1);
   });
 
