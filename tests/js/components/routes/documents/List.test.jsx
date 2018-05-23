@@ -42,20 +42,12 @@ describe('Documents list', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call componentWillUnmount', () => {
-    const { componentWillUnmount } = List.prototype;
-    class ExtendedList extends List {
-      componentWillUnmount = componentWillUnmount;
-      render() {
-        return <List {...props} />;
-      }
-    }
-    const list = shallow(<ExtendedList {...props} />);
-    list.unmount();
+  it('should call clearSelection in componentWillUnmount', () => {
+    wrapper.unmount();
     expect(clearSelectionSpy.mock.calls.length).toBe(1);
   });
 
-  it('should call onFetchData', () => {
+  it('should call $$documentsFetch in onFetchData', () => {
     instance.onFetchData({
       page: 1,
       sorted: [{ id: 1, desc: true }]
@@ -63,7 +55,7 @@ describe('Documents list', () => {
     expect($$documentsFetch.mock.calls.length).toBe(1);
   });
 
-  it('should call onArchive', () => {
+  it('should call prompt.show in onArchive', () => {
     instance.onArchive({
       value: {
         actualVersion: {}
@@ -72,7 +64,7 @@ describe('Documents list', () => {
     expect(promptShowSpy.mock.calls.length).toBe(1);
   });
 
-  it('should call onDelete', () => {
+  it('should call prompt.show in onDelete', () => {
     instance.onDelete({
       value: {
         actualVersion: {}
@@ -81,7 +73,7 @@ describe('Documents list', () => {
     expect(promptShowSpy.mock.calls.length).toBe(1);
   });
 
-  it('should call onSelect', () => {
+  it('should call dispatch in onSelect', () => {
     instance.onSelect([]);
     expect(dispatchSpy.mock.calls.length).toBe(1);
   });
