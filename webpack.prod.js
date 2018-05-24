@@ -13,15 +13,15 @@ const production = {
       chunks: 'all',
       minSize: 30000,
       minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
+      maxAsyncRequests: 7,
+      maxInitialRequests: 5,
       automaticNameDelimiter: '-',
       name: true,
       cacheGroups: {
         default: {
           minChunks: 2,
           priority: -20,
-          reuseExistingChunk: false
+          reuseExistingChunk: true
         },
         vendors: {
           test: /[\\/]node_modules[\\/]/,

@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     path: paths.DIST,
-    filename: '[name]-[chunkhash:6].bundle.js'
+    filename: '[name].bundle.js?[hash]'
   },
   plugins: [
     new WebpackBar(),
