@@ -3,6 +3,7 @@ const common = require('./webpack.config.js');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 /* eslint-enable */
 
 const production = {
@@ -31,6 +32,7 @@ const production = {
   },
   plugins: [
     new CleanWebpackPlugin('dist', {}),
+    new MomentLocalesPlugin(),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' })
   ],
   devtool: 'source-map'
