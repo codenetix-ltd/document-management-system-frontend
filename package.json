@@ -4,7 +4,6 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --debug --watch --config webpack.dev.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --debug --watch --open --config webpack.dev.js",
-    "dev:chrome": "cross-env NODE_ENV=development webpack-dev-server --debug --watch --open google-chrome --config webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack -p --config webpack.prod.js",
     "test": "cross-env NODE_ENV=test jest --verbose",
     "test:update": "cross-env NODE_ENV=test jest --verbose --updateSnapshot",

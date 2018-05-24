@@ -30,39 +30,39 @@ import {
   ProfileEdit
 } from 'Components/routes';
 
-export function Content({ auth: { isAuthorized } }) {
+export function Content({ auth: { isAuthorized: isAuth } }) {
   return (
     <div className="content-wrapper">
       <Switch>
-        <RouteAuth canAccess={isAuthorized} path="/" component={Home} exact />
+        <RouteAuth canAccess={isAuth} path="/" cmp={Home} exact />
 
-        <RouteAuth canAccess={isAuthorized} path="/users" component={UserAdd} exact />
-        <RouteAuth canAccess={isAuthorized} path="/users/list" component={UsersList} exact />
-        <RouteAuth canAccess={isAuthorized} path="/users/:userID" component={UserEdit} exact />
+        <RouteAuth canAccess={isAuth} path="/users" cmp={UserAdd} exact />
+        <RouteAuth canAccess={isAuth} path="/users/list" cmp={UsersList} exact />
+        <RouteAuth canAccess={isAuth} path="/users/:userID" cmp={UserEdit} exact />
 
-        <RouteAuth canAccess={isAuthorized} path="/roles" component={RoleAdd} exact />
-        <RouteAuth canAccess={isAuthorized} path="/roles/list" component={RolesList} exact />
-        <RouteAuth canAccess={isAuthorized} path="/roles/:roleID" component={RoleEdit} exact />
+        <RouteAuth canAccess={isAuth} path="/roles" cmp={RoleAdd} exact />
+        <RouteAuth canAccess={isAuth} path="/roles/list" cmp={RolesList} exact />
+        <RouteAuth canAccess={isAuth} path="/roles/:roleID" cmp={RoleEdit} exact />
 
-        <RouteAuth canAccess={isAuthorized} path="/labels" component={LabelAdd} exact />
-        <RouteAuth canAccess={isAuthorized} path="/labels/list" component={LabelsList} exact />
-        <RouteAuth canAccess={isAuthorized} path="/labels/:labelID" component={LabelEdit} exact />
+        <RouteAuth canAccess={isAuth} path="/labels" cmp={LabelAdd} exact />
+        <RouteAuth canAccess={isAuth} path="/labels/list" cmp={LabelsList} exact />
+        <RouteAuth canAccess={isAuth} path="/labels/:labelID" cmp={LabelEdit} exact />
 
-        <RouteAuth canAccess={isAuthorized} path="/templates" component={TemplateAdd} exact />
-        <RouteAuth canAccess={isAuthorized} path="/templates/list" component={TemplatesList} exact />
-        <RouteAuth canAccess={isAuthorized} path="/templates/:templateID" component={TemplateEdit} exact />
-        <RouteAuth canAccess={isAuthorized} path="/templates/:templateID/attributes" component={AttrAdd} exact />
-        <RouteAuth canAccess={isAuthorized} path="/templates/:templateID/attributes/:attributeID" component={AttrEdit} exact />
+        <RouteAuth canAccess={isAuth} path="/templates" cmp={TemplateAdd} exact />
+        <RouteAuth canAccess={isAuth} path="/templates/list" cmp={TemplatesList} exact />
+        <RouteAuth canAccess={isAuth} path="/templates/:templateID" cmp={TemplateEdit} exact />
+        <RouteAuth canAccess={isAuth} path="/templates/:templateID/attributes" cmp={AttrAdd} exact />
+        <RouteAuth canAccess={isAuth} path="/templates/:templateID/attributes/:attributeID" cmp={AttrEdit} exact />
 
-        <RouteAuth canAccess={isAuthorized} path="/documents" component={DocumentAdd} exact />
-        <RouteAuth canAccess={isAuthorized} path="/documents/list" component={DocumentsList} exact />
-        <RouteAuth canAccess={isAuthorized} path="/documents/:documentID" component={DocumentEdit} exact />
-        <RouteAuth canAccess={isAuthorized} path="/documents/view/:documentID" component={DocumentView} exact />
-        <RouteAuth canAccess={isAuthorized} path="/compare" component={DocumentsCompare} exact />
+        <RouteAuth canAccess={isAuth} path="/documents" cmp={DocumentAdd} exact />
+        <RouteAuth canAccess={isAuth} path="/documents/list" cmp={DocumentsList} exact />
+        <RouteAuth canAccess={isAuth} path="/documents/:documentID" cmp={DocumentEdit} exact />
+        <RouteAuth canAccess={isAuth} path="/documents/view/:documentID" cmp={DocumentView} exact />
+        <RouteAuth canAccess={isAuth} path="/compare" cmp={DocumentsCompare} exact />
 
-        <RouteAuth canAccess={isAuthorized} path="/logs/list" component={LogsList} exact />
+        <RouteAuth canAccess={isAuth} path="/logs/list" cmp={LogsList} exact />
 
-        <RouteAuth canAccess={isAuthorized} path="/profile" component={ProfileEdit} exact />
+        <RouteAuth canAccess={isAuth} path="/profile" cmp={ProfileEdit} exact />
       </Switch>
     </div>
   );
