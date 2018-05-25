@@ -8,9 +8,6 @@ import onClickOutside from 'react-onclickoutside';
 
 import { DataLink } from 'Components/common/dataControls';
 
-import { $$profileFetch } from 'Store/thunks/profile';
-import { $$logOut } from 'Store/thunks/auth';
-
 @autobind
 export class ProfileDropdown extends Component {
   static propTypes = {
@@ -26,11 +23,15 @@ export class ProfileDropdown extends Component {
   }
 
   componentDidMount() {
-    $$profileFetch(this.props.dispatch);
+    import('Store/thunks/profile').then(({ $$profileFetch }) => {
+      $$profileFetch(this.props.dispatch);
+    });
   }
 
   onLogout() {
-    $$logOut(this.props.dispatch);
+    import('Store/thunks/auth').then(({ $$logOut }) => {
+      $$logOut(this.props.dispatch);
+    });
   }
 
   handleClickOutside() {

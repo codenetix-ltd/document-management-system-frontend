@@ -19,13 +19,6 @@ import ErrorMessage from 'Components/common/ErrorMessage';
 
 import { DataLink } from 'Components/common/dataControls';
 
-import {
-  $$documentDelete,
-  $$documentsFetch
-} from 'Store/thunks/documents';
-
-import { $$logsFetch } from 'Store/thunks/logs';
-
 @autobind
 export class Home extends Component {
   static propTypes = {
@@ -46,11 +39,13 @@ export class Home extends Component {
       sortField = sortData['id'];
       sortDirection = sortData['desc'] ? 'desc' : 'asc';
     }
-    $$documentsFetch(dispatch, {
-      page: page + 1,
-      sortField,
-      sortDirection,
-      ownerID: profile.id
+    import('Store/thunks/documents').then(({ $$documentsFetch }) => {
+      $$documentsFetch(dispatch, {
+        page: page + 1,
+        sortField,
+        sortDirection,
+        ownerID: profile.id
+      });
     });
   }
 
@@ -63,21 +58,25 @@ export class Home extends Component {
       sortField = sorted[0].id;
       sortDirection = sorted[0].desc ? 'desc' : 'asc';
     }
-    $$logsFetch(dispatch, {
-      page: page + 1,
-      sortField,
-      sortDirection
+    import('Store/thunks/logs').then(({ $$logsFetch }) => {
+      $$logsFetch(dispatch, {
+        page: page + 1,
+        sortField,
+        sortDirection
+      });
     });
   }
 
   onArchive() {}
 
   onDelete({ value }) {
-    const { name } = value;
+    const { actualVersion } = value;
     const { dispatch } = this.props;
-    this.prompt.show({
-      body: `Do you really want to delete document ${name}?`,
-      onConfirm: close => $$documentDelete(dispatch, value, close)
+    import('Store/thunks/documents').then(({ $$documentDelete }) => {
+      this.prompt.show({
+        body: `Do you really want to delete document ${actualVersion.name}?`,
+        onConfirm: close => $$documentDelete(dispatch, actualVersion, close)
+      });
     });
   }
 

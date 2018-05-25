@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import cln from 'classnames';
 
-import { $$messageClear } from 'Store/thunks/message';
-
 let showTimeout = null;
 let hideTimeout = null;
 
@@ -42,10 +40,12 @@ export class AlertMessage extends Component {
   componentDidUpdate() {
     const { dispatch } = this.props;
     if (this.state.visible) {
-      hideTimeout = setTimeout(() => {
-        this.setState({ visible: false }, this.props.onHide);
-        $$messageClear(dispatch);
-      }, 5000);
+      import('Store/thunks/message').then(({ $$messageClear }) => {
+        hideTimeout = setTimeout(() => {
+          this.setState({ visible: false }, this.props.onHide);
+          $$messageClear(dispatch);
+        }, 5000);
+      });
     }
   }
 

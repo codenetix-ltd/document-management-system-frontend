@@ -7,11 +7,6 @@ import pick from 'lodash/pick';
 
 import AuthForm from 'Routes/auth/partials/Form';
 
-import {
-  $$logIn,
-  $$authFetch
-} from 'Store/thunks/auth';
-
 @autobind
 export class Login extends Component {
   static propTypes = {
@@ -31,8 +26,10 @@ export class Login extends Component {
 
   onSubmit(user) {
     const { dispatch } = this.props;
-    $$authFetch(dispatch, user, () => {
-      $$logIn(dispatch);
+    import('Store/thunks/auth').then(({ $$authFetch, $$logIn }) => {
+      $$authFetch(dispatch, user, () => {
+        $$logIn(dispatch);
+      });
     });
   }
 
