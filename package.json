@@ -19,7 +19,6 @@
     "array-merge-by-key": "^1.0.1",
     "autobind-decorator": "^2.1.0",
     "axios": "^0.18.0",
-    "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
