@@ -3,6 +3,13 @@ import React from 'react';
 
 import SplashScreen from 'Components/common/SplashScreen';
 
+export const Login = Loadable({
+  loader: () => import('Routes/auth/Login'),
+  loading() {
+    return <SplashScreen />;
+  }
+});
+
 export const Home = Loadable({
   loader: () => import('Routes/home'),
   loading() {
@@ -158,6 +165,7 @@ export const ProfileEdit = Loadable({
 });
 
 export default {
+  Login,
   Home,
   UserAdd,
   UserEdit,
