@@ -34,8 +34,7 @@ const production = {
     new CleanWebpackPlugin('dist', {}),
     new MomentLocalesPlugin(),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' })
-  ],
-  devtool: 'source-map'
+  ]
 };
 
 module.exports = merge(common, production);
