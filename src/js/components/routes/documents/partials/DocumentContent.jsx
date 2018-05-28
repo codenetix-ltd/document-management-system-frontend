@@ -42,9 +42,8 @@ export class DocumentContent extends Component {
     }
   }
 
-  validate() {
-    const { document } = this.props;
-    return !Object.keys(document).every(key => !!document[key]);
+  validate(document) {
+    return Object.keys(document).every(key => !!document[key]);
   }
 
   render() {
@@ -73,7 +72,7 @@ export class DocumentContent extends Component {
             className="btn btn-success"
             type="button"
             onClick={this.onFormSubmit}
-            disabled={this.validate()}
+            disabled={!this.validate(document)}
           >
             { documentID ? 'Update' : 'Create' }
           </button>
