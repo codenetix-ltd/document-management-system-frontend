@@ -29,7 +29,7 @@ export function getAPI(version = 'v1') {
   const endpoints = Object.keys(APIConfig[version]).map(name => {
     let url = APIConfig.baseURL[NODE_ENV] + APIConfig[version][name];
     if (APIConfig.useSameURL) {
-      url = location.host + APIConfig[version][name]; // eslint-disable-line
+      url = `${location.origin}/api${APIConfig[version][name]}`; // eslint-disable-line
     }
     return { name, url };
   });
