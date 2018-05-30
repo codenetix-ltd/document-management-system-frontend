@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  frontend_app:
+    image: codenetix/laravel-dms-frontend:dev
+    container_name: dms_frontend_app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks:
+      - frontend
+    ports:
+      - 80:80/tcp
+
+networks:
+  frontend:
+    driver: bridge
