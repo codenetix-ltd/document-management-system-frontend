@@ -1,14 +1,43 @@
 {
   "presets": [
-    "env",
+    ["env", {
+      "targets": {
+        "browsers": ["Chrome > 65", "Firefox > 58"]
+      }
+    }],
     "react"
   ],
-  "plugins": [
-    "dynamic-import-node",
-    "transform-decorators-legacy",
-    "transform-class-properties",
-    "transform-es2015-destructuring",
-    "transform-es2015-parameters",
-    "transform-object-rest-spread"
-  ]
+  "env": {
+    "development": {
+      "plugins": [
+        "syntax-dynamic-import",
+        "transform-decorators-legacy",
+        "transform-class-properties",
+        "transform-es2015-destructuring",
+        "transform-es2015-parameters",
+        "transform-object-rest-spread"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "syntax-dynamic-import",
+        "transform-decorators-legacy",
+        "transform-class-properties",
+        "transform-es2015-destructuring",
+        "transform-es2015-parameters",
+        "transform-object-rest-spread"
+      ]
+    },
+    "test": {
+      "plugins": [
+        "syntax-dynamic-import",
+        "dynamic-import-node",
+        "transform-decorators-legacy",
+        "transform-class-properties",
+        "transform-es2015-destructuring",
+        "transform-es2015-parameters",
+        "transform-object-rest-spread"
+      ]
+    }
+  }
 }

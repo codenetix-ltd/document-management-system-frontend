@@ -8,8 +8,7 @@ import isBool from 'lodash/isBoolean';
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
+import { Nav, NavItem } from 'react-bootstrap';
 
 import { DataLink } from 'Components/common/dataControls';
 
