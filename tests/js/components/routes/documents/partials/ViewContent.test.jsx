@@ -6,13 +6,15 @@ import ViewContent from 'Routes/documents/partials/ViewContent';
 
 describe('Documents ViewContent', () => {
   let wrapper;
-  let document;
+  let props;
 
   beforeEach(() => {
-    document = {
-      actualVersion: {}
+    props = {
+      document: {
+        actualVersion: {}
+      }
     };
-    wrapper = shallow(<ViewContent document={document} />);
+    wrapper = shallow(<ViewContent {...props} />);
   });
 
   it('should render correctly', () => {
