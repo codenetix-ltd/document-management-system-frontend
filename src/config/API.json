@@ -1,4 +1,5 @@
 {
+  "useSameURL": true,
   "baseURL": {
     "test": "http://dev.mock.dms.codenetix.com",
     "development": "http://dev.mock.dms.codenetix.com",
