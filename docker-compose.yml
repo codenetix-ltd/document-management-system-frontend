@@ -9,8 +9,6 @@ services:
       dockerfile: Dockerfile
     networks:
       - frontend
-    ports:
-      - 80:80/tcp
 
 networks:
   frontend:
