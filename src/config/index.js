@@ -11,6 +11,7 @@ const { NODE_ENV } = process.env;
  *    logout: String,
  *    resetEmail: String,
  *    resetPassword: String,
+ *    permissionGroups: String,
  *    users: String,
  *    profile: String,
  *    types: String,
@@ -18,15 +19,20 @@ const { NODE_ENV } = process.env;
  *    attributes: String,
  *    documents: String,
  *    labels: String,
- *    roles: String
+ *    roles: String,
+ *    logs: String,
+ *    files: String
  * }}
  */
 export function getAPI(version = 'v1') {
   const result = {};
-  const endpoints = Object.keys(APIConfig[version]).map(name => ({
-    name,
-    url: APIConfig.baseURL[NODE_ENV] + APIConfig[version][name]
-  }));
+  const endpoints = Object.keys(APIConfig[version]).map(name => {
+    let url = APIConfig.baseURL[NODE_ENV] + APIConfig[version][name];
+    if (APIConfig.useSameURL) {
+      url = `${location.origin}/api${APIConfig[version][name]}`; // eslint-disable-line
+    }
+    return { name, url };
+  });
   endpoints.forEach(endpoint => {
     result[endpoint.name] = endpoint.url;
   });
@@ -56,6 +62,7 @@ export function getURL(endpointName, parameter) {
  *    logout: String,
  *    resetEmail: String,
  *    resetPassword: String,
+ *    permissionGroups: String,
  *    users: String,
  *    profile: String,
  *    types: String,
@@ -63,7 +70,9 @@ export function getURL(endpointName, parameter) {
  *    attributes: String,
  *    documents: String,
  *    labels: String,
- *    roles: String
+ *    roles: String,
+ *    logs: String,
+ *    files: String
  * }}
  */
 export const API = getAPI();

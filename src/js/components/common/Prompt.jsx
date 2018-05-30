@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import cln from 'classnames';
 import isFunction from 'lodash/isFunction';
 
+// todo: use react-responsive-modal here
 @autobind
 export default class Prompt extends Component {
   static defaultProps = {
+    body: '',
     headerText: 'Confirmation',
     confirmText: 'Confirm',
     cancelText: 'Cancel'
@@ -14,6 +16,7 @@ export default class Prompt extends Component {
 
   // todo: remove confirm and cancel props from files using this component
   static propTypes = {
+    body: PropTypes.any,
     headerText: PropTypes.any,
     confirmText: PropTypes.string,
     cancelText: PropTypes.string
@@ -21,46 +24,61 @@ export default class Prompt extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { visible: false };
+    this.state = {
+      visible: false,
+      onConfirm: () => {}
+    };
   }
 
   onConfirm() {
-    const { onConfirm } = this.settings;
+    const { onConfirm } = this.state;
     if (isFunction(onConfirm)) {
       onConfirm(() => {
         this.setState({ visible: false });
       });
+    } else {
+      throw new Error('onConfirm option should be a function');
     }
   }
 
   onCancel() {
-    this.setState({ visible: false });
+    this.setState({
+      visible: false
+    });
   }
 
   show(settings) {
-    const { body } = settings;
-    this.settings = settings;
-    this.setState({ visible: true, body });
+    if (!settings.width) {
+      settings.width = 360; // eslint-disable-line
+    }
+    this.setState({
+      visible: true,
+      ...settings
+    });
   }
 
   render() {
-    const { body, visible } = this.state;
-    const { headerText, cancelText, confirmText } = this.props;
-    const classes = cln('dms-prompt', { show: visible });
+    const {
+      body,
+      headerText,
+      cancelText,
+      confirmText
+    } = this.props;
+    const classes = cln('dms-prompt', { show: this.state.visible });
     return (
       <div className={classes}>
         <div className="dms-prompt-overlay" role="none" onClick={this.onCancel} />
-        <div className="dms-prompt-dialog">
+        <div className="dms-prompt-dialog" style={{ width: `${this.state.width || 360}px` }}>
           <div className="dms-prompt-header">
-            <h3>{headerText}</h3>
+            <h3>{this.state.headerText || headerText}</h3>
           </div>
-          <div className="dms-prompt-body">{body}</div>
+          <div className="dms-prompt-body">{this.state.body || body}</div>
           <div className="dms-prompt-footer">
             <button type="button" className="btn btn-danger" onClick={this.onCancel}>
-              {cancelText}
+              {this.state.cancelText || cancelText}
             </button>
             <button type="button" className="btn btn-primary" onClick={this.onConfirm}>
-              {confirmText}
+              {this.state.confirmText || confirmText}
             </button>
           </div>
         </div>

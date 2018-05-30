@@ -47,6 +47,7 @@
       "attributeValues": []
     }
   },
+  "substituteDocument": null,
   "selectedDocuments": [],
   "comparedDocuments": [],
   "versions": {
@@ -69,10 +70,16 @@
   "role": {
     "name": ""
   },
-  "types": {
+  "permissionGroups": [],
+  "logs": {
     "list": [],
-    "lastPage": -1
+    "lastPage": -1,
+    "page": 1,
+    "sortField": "id",
+    "sortDirection": "desc",
+    "filterSet": {}
   },
+  "types": [],
   "message": {
     "text": "",
     "type": "success"

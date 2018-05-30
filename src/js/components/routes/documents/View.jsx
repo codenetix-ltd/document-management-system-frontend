@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
+import { Tabs, Tab } from 'react-bootstrap';
 
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
-import { Tabs, Tab } from 'react-bootstrap';
 
 import AlertMessage from 'Components/common/AlertMessage';
 import ErrorMessage from 'Components/common/ErrorMessage';
@@ -28,11 +28,9 @@ export class DocumentView extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { activeKey: 1 };
-    this.breadcrumbs = [
-      { pageName: 'Documents', pageLink: '/documents/list', iconCls: 'fa fa-list' },
-      { pageName: 'View document', pageLink: '', iconCls: 'fa fa-eye' }
-    ];
+    this.state = {
+      activeKey: 1
+    };
   }
 
   componentDidMount() {
@@ -50,6 +48,11 @@ export class DocumentView extends Component {
   onTabSelect(activeKey) {
     this.setState({ activeKey });
   }
+
+  breadcrumbs = [
+    { pageName: 'Documents', pageLink: '/documents/list', iconCls: 'fa fa-list' },
+    { pageName: 'View document', pageLink: '', iconCls: 'fa fa-eye' }
+  ];
 
   render() {
     const { activeKey } = this.state;

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,6 +7,8 @@ import { Redirect } from 'react-router-dom';
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import LabelForm from 'Routes/labels/partials/Form';
+
+import axios from 'Services/request';
 import { API } from 'Config';
 
 import { $$messageSet } from 'Store/thunks/message';
@@ -26,7 +27,7 @@ export class LabelAdd extends Component {
   }
 
   onFormSubmit(formData) {
-    axios.post(API.users, formData).then(() => {
+    axios.post(API.labels, formData).then(() => {
       this.setState({
         submitted: true
       });
@@ -42,11 +43,11 @@ export class LabelAdd extends Component {
     return true;
   }
 
-  render() {
-    const breadcrumbs = [
-      { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-plus' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-plus' }
+  ];
 
+  render() {
     if (this.state.submitted) {
       $$messageSet(this.props.dispatch, {
         type: 'success',
@@ -57,7 +58,7 @@ export class LabelAdd extends Component {
 
     return (
       <div>
-        <ContentHeader title="Label create" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="Label create" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Label</h3>

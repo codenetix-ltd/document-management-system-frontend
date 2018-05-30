@@ -21,6 +21,7 @@ import {
   DOCUMENT_UPDATE,
   DOC_ATTR_VALUES_SET,
   DOC_ATTR_VALUES_UPDATE,
+  SUBSTITUTE_DOCUMENT_SET,
   SELECTED_DOCS_SET,
   COMPARED_DOCS_SET,
   VERSIONS_LIST_SET,
@@ -31,6 +32,9 @@ import {
   ROLES_LIST_SET,
   ROLE_SET,
   ROLE_UPDATE,
+  PERMISSION_GROUPS_SET,
+  LOGS_LIST_SET,
+  LOGS_FILTER_SET,
   TYPES_LIST_SET,
   MESSAGE_SET,
   ERROR_SET
@@ -38,8 +42,14 @@ import {
 
 import initialState from './initialState.json';
 
-const auth = ls.get('auth');
-initialState.auth.isAuthorized = auth.isAuthorized || false;
+let auth;
+try {
+  auth = ls.get('auth');
+} catch (e) {
+  console.trace(e);
+}
+
+initialState.auth = auth || initialState.auth;
 
 export default function Reducer(state = initialState, action) {
   switch (action.type) {
@@ -187,6 +197,11 @@ export default function Reducer(state = initialState, action) {
           }
         }
       };
+    case SUBSTITUTE_DOCUMENT_SET:
+      return {
+        ...state,
+        substituteDocument: action.data
+      };
     case SELECTED_DOCS_SET:
       return {
         ...state,
@@ -254,14 +269,34 @@ export default function Reducer(state = initialState, action) {
           ...action.data
         }
       };
+    case PERMISSION_GROUPS_SET:
+      return {
+        ...state,
+        permissionGroups: action.data
+      };
+    case LOGS_LIST_SET:
+      return {
+        ...state,
+        logs: {
+          ...state.logs,
+          ...action.data
+        }
+      };
+    case LOGS_FILTER_SET:
+      return {
+        ...state,
+        logs: {
+          ...state.logs,
+          filterSet: {
+            ...state.logs.filterSet,
+            ...action.data
+          }
+        }
+      };
     case TYPES_LIST_SET:
       return {
         ...state,
-        types: {
-          ...state.types,
-          list: action.data.list,
-          lastPage: action.data.lastPage
-        }
+        types: action.data
       };
     case MESSAGE_SET:
       return {

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
@@ -10,6 +9,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 
+import axios from 'Services/request';
 import { API } from 'Config';
 
 import { $$documentFetch } from 'Store/thunks/documents';
@@ -32,10 +32,6 @@ export class DocumentEdit extends Component {
       activeKey: 1,
       newDocumentID: null
     };
-    this.breadcrumbs = [
-      { pageName: 'Documents', pageLink: '/documents/list', iconCls: 'fa fa-copy' },
-      { pageName: 'Edit document', pageLink: '', iconCls: 'fa fa-pencil' }
-    ];
   }
 
   componentDidMount() {
@@ -70,9 +66,14 @@ export class DocumentEdit extends Component {
     return !Object.keys(document).every(key => !!document[key]);
   }
 
+  breadcrumbs = [
+    { pageName: 'Documents', pageLink: '/documents/list', iconCls: 'fa fa-copy' },
+    { pageName: 'Edit document', pageLink: '', iconCls: 'fa fa-pencil' }
+  ];
+
   render() {
     const { activeKey, newDocumentID } = this.state;
-    const { document: { actualVersion }, match, match: { params: documentID } } = this.props;
+    const { document: { actualVersion }, match, match: { params: { documentID } } } = this.props;
     if (newDocumentID) {
       return <Redirect to={`/documents/${newDocumentID}`} />;
     }

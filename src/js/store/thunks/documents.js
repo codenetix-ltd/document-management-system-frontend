@@ -1,7 +1,9 @@
 import { API } from 'Config';
+import pick from 'lodash/pick';
 import pickBy from 'lodash/pickBy';
 import identity from 'lodash/identity';
-import axios from 'axios';
+
+import axios from 'Services/request';
 
 import {
   $loading,
@@ -18,25 +20,17 @@ import initialState from 'Store/reducers/initialState.json';
 
 const fn = () => {};
 
-export const $$documentsFetch = (dispatch, {
-  page, sortField, sortDirection, filterSet
-}, callback = fn) => {
-  const filters = pickBy(filterSet, identity);
+export const $$documentsFetch = (dispatch, params, callback = fn) => {
+  const picked = pick(params, ['page', 'sortField', 'sortDirection', 'ownerID']);
+  const filters = pickBy(params.filterSet, identity);
   dispatch($loading(true));
   axios.get(API.documents, {
-    params: {
-      page,
-      sortField,
-      sortDirection,
-      ...filters
-    }
+    params: { ...picked, ...filters }
   }).then(({ data }) => {
     dispatch($documentsList({
       list: data.data,
       lastPage: data.meta.lastPage,
-      page,
-      sortField,
-      sortDirection
+      ...picked
     }));
     dispatch($loading(false));
     callback(data);
@@ -45,6 +39,10 @@ export const $$documentsFetch = (dispatch, {
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
+};
+
+export const $$documentsReset = (dispatch) => {
+  dispatch($documentsList(initialState.documents));
 };
 
 export const $$documentFetch = (dispatch, documentID, callback = fn) => {
@@ -68,12 +66,49 @@ export const $$documentReset = (dispatch) => {
   dispatch($document(initialState.document));
 };
 
+export const $$documentArchive = (dispatch, { id, name }, substDocId, close = fn) => {
+  axios.patch(`${API.documents}/${id}`, {
+    substituteDocumentId: substDocId
+  }).then(() => {
+    $$documentsFetch(dispatch, 1);
+    $$messageSet(dispatch, {
+      type: 'success',
+      text: `The document ${name} was successfully archived.`
+    });
+    close();
+  }).catch(err => {
+    console.trace(err);
+    close();
+    $$errorSet(dispatch, err);
+  });
+};
+
 export const $$documentDelete = (dispatch, { id, name }, close = fn) => {
   axios.delete(`${API.documents}/${id}`).then(() => {
     $$documentsFetch(dispatch, 1);
     $$messageSet(dispatch, {
       type: 'success',
       text: `The document ${name} was successfully deleted.`
+    });
+    close();
+  }).catch(err => {
+    console.trace(err);
+    close();
+    $$errorSet(dispatch, err);
+  });
+};
+
+export const $$documentsMassArchive = (dispatch, ids, substDocId, close = fn) => {
+  const p = Promise.all(ids.map(id => {
+    return axios.patch(`${API.documents}/${id}`, {
+      substituteDocumentId: substDocId
+    });
+  }));
+  p.then(() => {
+    $$documentsFetch(dispatch, 1);
+    $$messageSet(dispatch, {
+      type: 'success',
+      text: 'Selected documents were successfully archived.'
     });
     close();
   }).catch(err => {

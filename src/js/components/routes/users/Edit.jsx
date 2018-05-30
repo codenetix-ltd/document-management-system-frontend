@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
@@ -7,6 +6,7 @@ import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import UserForm from 'Routes/users/partials/Form';
 
+import axios from 'Services/request';
 import { API } from 'Config';
 
 @autobind
@@ -70,14 +70,14 @@ export default class UserEdit extends Component {
     });
   }
 
-  render() {
-    const breadcrumbs = [
-      { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
+  ];
 
+  render() {
     return (
       <div>
-        <ContentHeader title={`Edit ${this.state.user.fullName || ''}`} breadcrumbs={breadcrumbs} />
+        <ContentHeader title={`Edit ${this.state.user.fullName || ''}`} breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Profile data</h3>

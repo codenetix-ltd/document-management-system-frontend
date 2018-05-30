@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,6 +7,8 @@ import { Redirect } from 'react-router-dom';
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import UserForm from 'Routes/users/partials/Form';
+
+import axios from 'Services/request';
 import { API } from 'Config';
 
 import { $$messageSet } from 'Store/thunks/message';
@@ -56,22 +57,22 @@ export class UserAdd extends Component {
     return true;
   }
 
-  render() {
-    const breadcrumbs = [
-      { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
-    ];
+  breadcrumbs = [
+    { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
+  ];
 
+  render() {
     if (this.state.submitted) {
       $$messageSet(this.props.dispatch, {
         type: 'success',
         text: 'The user was successfully created.'
       });
-      return (<Redirect to="/users/list" />);
+      return <Redirect to="/users/list" />;
     }
 
     return (
       <div>
-        <ContentHeader title="User create" breadcrumbs={breadcrumbs} />
+        <ContentHeader title="User create" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Profile data</h3>

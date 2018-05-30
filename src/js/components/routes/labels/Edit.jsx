@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,6 +7,7 @@ import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 import LabelForm from 'Routes/labels/partials/Form';
 
+import axios from 'Services/request';
 import { API } from 'Config';
 
 import { $$labelFetch } from 'Store/thunks/labels';
@@ -37,14 +37,15 @@ export class LabelEdit extends Component {
     $$labelFetch(dispatch, labelID);
   }
 
+  breadcrumbs = [
+    { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-tags' }
+  ];
+
   render() {
-    const breadcrumbs = [
-      { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-tags' }
-    ];
     const { label } = this.props;
     return (
       <div>
-        <ContentHeader title={`Edit ${label.name || ''}`} breadcrumbs={breadcrumbs} />
+        <ContentHeader title={`Edit ${label.name || ''}`} breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="box-info">
           <div className="box-header with-border">
             <h3 className="box-title">Label</h3>

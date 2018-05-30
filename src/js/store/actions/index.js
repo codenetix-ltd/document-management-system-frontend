@@ -17,6 +17,7 @@ import {
   DOCUMENT_UPDATE,
   DOC_ATTR_VALUES_SET,
   DOC_ATTR_VALUES_UPDATE,
+  SUBSTITUTE_DOCUMENT_SET,
   SELECTED_DOCS_SET,
   COMPARED_DOCS_SET,
   VERSIONS_LIST_SET,
@@ -27,6 +28,9 @@ import {
   ROLES_LIST_SET,
   ROLE_SET,
   ROLE_UPDATE,
+  PERMISSION_GROUPS_SET,
+  LOGS_LIST_SET,
+  LOGS_FILTER_SET,
   TYPES_LIST_SET,
   MESSAGE_SET,
   ERROR_SET
@@ -129,6 +133,11 @@ export const $updateAttributeValues = data => ({
   data: Array.isArray(data) ? data : [data]
 });
 
+export const $substituteDocument = data => ({
+  type: SUBSTITUTE_DOCUMENT_SET,
+  data
+});
+
 export const $setSelectedDocuments = data => ({
   type: SELECTED_DOCS_SET,
   data
@@ -179,6 +188,22 @@ export const $role = data => ({
 
 export const $updateRole = data => ({
   type: ROLE_UPDATE,
+  data
+});
+
+export const $permissionGroups = data => ({
+  type: PERMISSION_GROUPS_SET,
+  data
+});
+
+/** Logs */
+export const $logsList = data => ({
+  type: LOGS_LIST_SET,
+  data
+});
+
+export const $logsFilter = data => ({
+  type: LOGS_FILTER_SET,
   data
 });
 

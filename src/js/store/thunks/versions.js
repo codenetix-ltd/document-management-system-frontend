@@ -1,5 +1,5 @@
 import { getURL } from 'Config';
-import axios from 'axios';
+import axios from 'Services/request';
 
 import {
   $loading,

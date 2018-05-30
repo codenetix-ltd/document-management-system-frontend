@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import { If, Then } from 'qc-react-conditionals/lib';
-import { Async as Select } from 'react-select';
+import Select from 'react-select';
 
 import { DataInput as Input } from 'Components/common/dataControls';
 import AttributesTable from 'Routes/templates/attributes/partials/Table';
@@ -23,12 +23,17 @@ export class AttributeForm extends Component {
   };
 
   static propTypes = {
+    types: PropTypes.array.isRequired,
     attribute: PropTypes.any.isRequired,
     dispatch: PropTypes.any.isRequired,
     onSubmit: PropTypes.func.isRequired,
     submitButtonText: PropTypes.string,
     validate: PropTypes.func
   };
+
+  componentDidMount() {
+    $$typesFetch(this.props.dispatch);
+  }
 
   componentWillUnmount() {
     $$attributeReset(this.props.dispatch);
@@ -55,16 +60,8 @@ export class AttributeForm extends Component {
     $$attributeUpdate(dispatch, { type });
   }
 
-  loadTypes(input, callback) {
-    $$typesFetch(this.props.dispatch, 1, ({ data }) => {
-      callback(null, {
-        options: data
-      });
-    });
-  }
-
   render() {
-    const { attribute } = this.props;
+    const { attribute, types } = this.props;
     return (
       <form className="form-horizontal" onSubmit={this.onSubmit}>
         <div className="box-body">
@@ -87,17 +84,16 @@ export class AttributeForm extends Component {
             <label htmlFor="type" className="col-sm-2 control-label">Type</label>
             <div className="col-sm-6">
               <Select
-                autoload
                 name="type"
                 value={attribute.type}
                 onChange={this.handleSelectChange}
-                loadOptions={this.loadTypes}
+                options={types}
                 valueKey="id"
                 labelKey="name"
               />
             </div>
           </div>
-          <If is={attribute.type && attribute.type.id === 4}>
+          <If is={attribute.type && attribute.type.name === 'Table'}>
             <Then>
               <div className="form-group form-group-table">
                 <label className="col-sm-2 control-label">Table definition</label>
@@ -122,7 +118,7 @@ export class AttributeForm extends Component {
   }
 }
 
-const mapStateToProps = ({ attribute }) => ({ attribute });
+const mapStateToProps = ({ attribute, types }) => ({ attribute, types });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

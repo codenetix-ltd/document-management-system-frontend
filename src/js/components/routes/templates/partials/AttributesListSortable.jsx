@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
@@ -14,6 +13,7 @@ import {
 import Prompt from 'Components/common/Prompt';
 import ActionsCell from 'Components/partials/ActionsCell';
 
+import axios from 'Services/request';
 import { getURL } from 'Config';
 
 import { $$attributesFetch } from 'Store/thunks/attributes';
