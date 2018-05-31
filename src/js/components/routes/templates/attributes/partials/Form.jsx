@@ -13,8 +13,6 @@ import {
   $$attributeReset
 } from 'Store/thunks/attributes';
 
-import { $$typesFetch } from 'Store/thunks/types';
-
 @autobind
 export class AttributeForm extends Component {
   static defaultProps = {
@@ -30,10 +28,6 @@ export class AttributeForm extends Component {
     submitButtonText: PropTypes.string,
     validate: PropTypes.func
   };
-
-  componentDidMount() {
-    $$typesFetch(this.props.dispatch);
-  }
 
   componentWillUnmount() {
     $$attributeReset(this.props.dispatch);

@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents View should render correctly 1`] = `
+<div>
+  <ContentHeader
+    breadcrumbs={
+      Array [
+        Object {
+          "iconCls": "fa fa-list",
+          "pageLink": "/documents/list",
+          "pageName": "Documents",
+        },
+        Object {
+          "iconCls": "fa fa-eye",
+          "pageLink": "",
+          "pageName": "View document",
+        },
+      ]
+    }
+    title="View document undefined"
+  />
+  <ContentWrapper
+    boxClass=""
+    noBox={true}
+  >
+    <Connect(AlertMessage) />
+    <Connect(ErrorMessage) />
+    <Uncontrolled(Tabs)
+      activeKey={1}
+      animation={false}
+      id="tabs"
+      onSelect={[Function]}
+    >
+      <Tab
+        eventKey={1}
+        title="Content"
+      >
+        <DocumentViewContent
+          document={
+            Object {
+              "actualVersion": Object {},
+            }
+          }
+        />
+      </Tab>
+      <Tab
+        eventKey={2}
+        title="Versions"
+      >
+        <Connect(DocumentVersions)
+          match={
+            Object {
+              "params": Object {
+                "documentID": 1,
+              },
+            }
+          }
+        />
+      </Tab>
+    </Uncontrolled(Tabs)>
+  </ContentWrapper>
+</div>
+`;

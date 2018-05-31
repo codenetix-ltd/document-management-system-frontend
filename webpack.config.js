@@ -1,11 +1,11 @@
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { resolve, join } = path;
-const NODE_ENV = JSON.stringify(process.env.NODE_ENV);
+// const NODE_ENV = JSON.stringify(process.env.NODE_ENV);
 const paths = {
   DIST: resolve(__dirname, 'dist'),
   SRC: resolve(__dirname, 'src'),
@@ -19,11 +19,11 @@ module.exports = {
   },
   output: {
     path: paths.DIST,
-    filename: '[name]-[chunkhash:6].bundle.js'
+    filename: '[name].bundle.js?[hash]'
   },
   plugins: [
     new WebpackBar(),
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV } }),
+    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV } }),
     new MiniCssExtractPlugin({ filename: '[name].css?[hash]' }),
     new HtmlWebpackPlugin({ template: join(paths.SRC, 'index.html') })
   ],

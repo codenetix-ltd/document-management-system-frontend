@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents Compare should render correctly 1`] = `
+<div>
+  <ContentHeader
+    breadcrumbs={
+      Array [
+        Object {
+          "iconCls": "fa fa-list",
+          "pageLink": "/documents/list",
+          "pageName": "Documents list",
+        },
+        Object {
+          "iconCls": "",
+          "pageLink": "/compare",
+          "pageName": "Documents comparison",
+        },
+      ]
+    }
+    title="Documents comparison"
+  />
+  <ContentWrapper
+    boxClass=""
+    noBox={true}
+  >
+    <div
+      className="box box-default"
+    >
+      <div
+        className="box-body"
+      >
+        <Nav
+          activeKey={0}
+          bsClass="nav"
+          bsStyle="pills"
+          justified={false}
+          onSelect={[Function]}
+          pullLeft={false}
+          pullRight={false}
+          stacked={false}
+        />
+        <p
+          className="compare-actions"
+        >
+          <span
+            className="compare-show-style"
+          >
+            Show only:
+            <span
+              className="compare-show-style-item"
+            >
+              <DataLink
+                cls=""
+                data={true}
+                disabled={true}
+                onClick={[Function]}
+              >
+                all characteristics
+              </DataLink>
+            </span>
+            |
+            <span
+              className="compare-show-style-item"
+            >
+              <DataLink
+                cls=""
+                data={false}
+                disabled={false}
+                onClick={[Function]}
+              >
+                differences
+              </DataLink>
+            </span>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div
+      className="box"
+    >
+      <div
+        className="box-body"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-sm-12"
+          >
+            <table
+              className="table table-bordered table-compare"
+            >
+              <thead>
+                <tr>
+                  <th>
+                     
+                  </th>
+                </tr>
+              </thead>
+              <tbody />
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ContentWrapper>
+</div>
+`;

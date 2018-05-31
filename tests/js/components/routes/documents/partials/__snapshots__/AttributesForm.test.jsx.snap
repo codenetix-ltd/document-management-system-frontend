@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents AttributesForm should render correctly 1`] = `
+<table
+  className="table table-bordered table-view-document"
+>
+  <tbody />
+</table>
+`;

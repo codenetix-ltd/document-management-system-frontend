@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents ViewContent should render correctly 1`] = `
+<div>
+  <h2
+    className="page-header"
+  >
+    General information
+  </h2>
+  <table
+    className="table table-striped table-view-document"
+  >
+    <tbody>
+      <tr>
+        <td>
+          Document name
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          Version name
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          Owner
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          Template
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          Labels
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          Files
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          Comment
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          Created At
+        </td>
+        <td>
+          Invalid date
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2
+    className="page-header"
+  >
+    Attributes
+  </h2>
+  <table
+    className="table table-bordered table-view-document"
+  >
+    <tbody />
+  </table>
+</div>
+`;

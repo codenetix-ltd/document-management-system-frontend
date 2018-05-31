@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents Versions should render correctly 1`] = `
+<div>
+  <table
+    className="table table-striped"
+  >
+    <thead>
+      <tr>
+        <td>
+          Version name
+        </td>
+        <td>
+          Comment
+        </td>
+        <td>
+          Created
+        </td>
+        <td>
+          Actions
+        </td>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+  <Modal
+    animationDuration={500}
+    center={false}
+    classNames={Object {}}
+    classes={
+      Object {
+        "closeButton": "styles_closeButton__20ID4",
+        "closeIcon": "styles_closeIcon__1QwbI",
+        "modal": "styles_modal__gNwvD",
+        "overlay": "styles_overlay__CLSq-",
+        "overlayCenter": "styles_overlayCenter__YHoO7",
+        "transitionEnter": "styles_transitionEnter__3j_-a",
+        "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+        "transitionExit": "styles_transitionExit__1KmEf",
+        "transitionExitActive": "styles_transitionExitActive__1nQXw",
+      }
+    }
+    closeIconSize={28}
+    closeIconSvgPath={
+      <path
+        d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+      />
+    }
+    closeOnEsc={true}
+    closeOnOverlayClick={true}
+    onClose={[Function]}
+    onEntered={null}
+    onEscKeyDown={null}
+    onExited={null}
+    onOverlayClick={null}
+    open={false}
+    showCloseIcon={true}
+    styles={Object {}}
+  >
+    <h4>
+      Document version overview
+    </h4>
+    <hr />
+    <DocumentViewContent
+      document={
+        Object {
+          "actualVersion": Object {},
+        }
+      }
+    />
+    <button
+      className="btn btn-default"
+      onClick={[Function]}
+      type="button"
+    >
+      Close
+    </button>
+  </Modal>
+</div>
+`;

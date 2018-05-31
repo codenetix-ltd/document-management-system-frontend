@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents Actions should render correctly 1`] = `
+<div
+  className="form-inline pull-right document-actions"
+>
+  <div
+    className="form-group"
+  >
+    <Link
+      className="btn btn-success"
+      replace={false}
+      to="/documents"
+    >
+      <i
+        className="fa fa-plus"
+      />
+       Add document
+    </Link>
+  </div>
+   
+  <div
+    className="form-group"
+  >
+    <button
+      className="btn btn-warning"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      <i
+        className="fa fa-book"
+      />
+       Archive selected
+    </button>
+  </div>
+   
+  <div
+    className="form-group"
+  >
+    <button
+      className="btn btn-danger"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      <i
+        className="fa fa-book"
+      />
+       Delete selected
+    </button>
+  </div>
+   
+  <div
+    className="form-group"
+  >
+    <button
+      className="btn btn-primary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      <i
+        className="fa fa-copy"
+      />
+       Compare selected
+    </button>
+  </div>
+</div>
+`;

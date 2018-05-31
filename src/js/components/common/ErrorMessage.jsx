@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import cln from 'classnames';
 
-import { $$errorClear } from 'Store/thunks/error';
-
 let showTimeout = null;
 let hideTimeout = null;
 
@@ -42,10 +40,12 @@ export class ErrorMessage extends Component {
   componentDidUpdate() {
     const { dispatch } = this.props;
     if (this.state.visible) {
-      hideTimeout = setTimeout(() => {
-        this.setState({ visible: false }, this.props.onHide);
-        $$errorClear(dispatch);
-      }, 5000);
+      import('Store/thunks/error').then(({ $$errorClear }) => {
+        hideTimeout = setTimeout(() => {
+          this.setState({ visible: false }, this.props.onHide);
+          $$errorClear(dispatch);
+        }, 5000);
+      });
     }
   }
 

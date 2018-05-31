@@ -8,8 +8,7 @@ import isBool from 'lodash/isBoolean';
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
+import { Nav, NavItem } from 'react-bootstrap';
 
 import { DataLink } from 'Components/common/dataControls';
 
@@ -54,12 +53,46 @@ export class DocumentsCompare extends Component {
     });
   }
 
+  /**
+   * Checks if a value of cellID differs in one of the docs of currentSet
+   * @param currentSet - set of documents that have the same templateID
+   * @param cellID - id of a cell which value should be compared within the currentSet
+   * @returns {Boolean}
+   */
   valueDiffers(currentSet, cellID) {
     return currentSet.some(doc => {
       const { value: firstVal } = currentSet[0].attributeValues.find(at => at.id === cellID);
       const { value: currVal } = doc.attributeValues.find(at => at.id === cellID);
       return firstVal !== currVal;
     });
+  }
+
+  /**
+   * Merge document's actualVersion property with the top level properties
+   * @param comparedDocs - set of documents to compare
+   * @returns {Array}
+   */
+  mergeActualVersion(comparedDocs) {
+    return comparedDocs.map(doc => {
+      const { actualVersion, ...rest } = doc;
+      return { ...actualVersion, ...rest };
+    });
+  }
+
+  /**
+   * Split a set of documents into groups joined by template ID
+   * @param actualDocs
+   * @returns {Array}
+   */
+  joinByTemplateID(actualDocs) {
+    return actualDocs.map(doc => [doc]).reduce((acc, curr) => {
+      const ids = acc.map(doc => doc[0].template.id);
+      if (ids.includes(curr[0].template.id)) {
+        const index = acc.findIndex(doc => doc[0].template.id === curr[0].template.id);
+        return acc[index].push(curr[0]) && acc;
+      }
+      return acc.push(curr) && acc;
+    }, []);
   }
 
   breadcrumbs = [
@@ -70,15 +103,8 @@ export class DocumentsCompare extends Component {
   render() {
     const { activeKey, showAll } = this.state;
     const { comparedDocuments: comparedDocs } = this.props;
-    const actualDocs = comparedDocs.map(doc => ({ ...doc.actualVersion, ...doc }));
-    const joinedByTemplateID = actualDocs.map(doc => [doc]).reduce((acc, curr) => {
-      const ids = acc.map(doc => doc[0].template.id);
-      if (ids.includes(curr[0].template.id)) {
-        const index = acc.findIndex(doc => doc[0].template.id === curr[0].template.id);
-        return acc[index].push(curr[0]) && acc;
-      }
-      return acc.push(curr) && acc;
-    }, []);
+    const actualDocs = this.mergeActualVersion(comparedDocs);
+    const joinedByTemplateID = this.joinByTemplateID(actualDocs);
     const currentSet = joinedByTemplateID[activeKey];
     const { attributes: attrs } = currentSet ? currentSet[0].template : { attributes: [] };
     return (

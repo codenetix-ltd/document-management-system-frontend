@@ -21,11 +21,14 @@ import initialState from 'Store/reducers/initialState.json';
 const fn = () => {};
 
 export const $$documentsFetch = (dispatch, params, callback = fn) => {
-  const picked = pick(params, ['page', 'sortField', 'sortDirection', 'ownerID']);
+  const picked = pick(params, ['page', 'orderBy', 'sortedBy', 'ownerID']);
   const filters = pickBy(params.filterSet, identity);
+  const extra = {
+    with: 'user,template'
+  };
   dispatch($loading(true));
   axios.get(API.documents, {
-    params: { ...picked, ...filters }
+    params: { ...picked, ...filters, ...extra }
   }).then(({ data }) => {
     dispatch($documentsList({
       list: data.data,

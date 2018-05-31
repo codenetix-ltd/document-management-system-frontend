@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 
-import Login from 'Routes/auth/Login';
-import Wrapper from 'Components/Wrapper';
+import { Login } from 'Components/routes';
+import { Wrapper } from 'Components/index';
 
 import { Provider } from 'react-redux';
 import store from './store';

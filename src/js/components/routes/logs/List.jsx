@@ -28,19 +28,19 @@ export class LogsList extends Component {
   };
 
   onFetchData(tableProps) {
-    let sortField = 'id';
-    let sortDirection = 'desc';
+    let orderBy = 'id';
+    let sortedBy = 'desc';
     const { dispatch } = this.props;
     const { page, sorted } = tableProps;
     const sortData = first(sorted);
     if (sortData) {
-      sortField = sortData['id'];
-      sortDirection = sortData['desc'] ? 'desc' : 'asc';
+      orderBy = sortData['id'];
+      sortedBy = sortData['desc'] ? 'desc' : 'asc';
     }
     $$logsFetch(dispatch, {
       page: page + 1,
-      sortField,
-      sortDirection
+      orderBy,
+      sortedBy
     });
   }
 

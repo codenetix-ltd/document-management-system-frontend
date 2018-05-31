@@ -30,11 +30,7 @@ export class AttributeEdit extends Component {
   onFormSubmit(formData) {
     const { templateID, attributeID } = this.props.match.params;
     const url = getURL('attributes', templateID);
-    axios.put(`${url}/${attributeID}`, formData).then(response => {
-      console.log(response);
-    }).catch(err => {
-      throw err;
-    });
+    axios.put(`${url}/${attributeID}`, formData).catch(console.trace);
   }
 
   getBreadcrumbs(templateID) {

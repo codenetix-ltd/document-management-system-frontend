@@ -41,7 +41,7 @@ export class AttributesForm extends Component {
         <tbody>
           {
             template.attributes.map((attr, index) => {
-              if (attr.type.name === 'Table') {
+              if (attr.typeId === 5) {
                 const { columns: cols, rows } = attr.data;
                 return (
                   <tr key={index}>
@@ -78,7 +78,7 @@ export class AttributesForm extends Component {
                     </td>
                   </tr>
                 );
-              } else if (attr.type.name === 'Boolean') {
+              } else if (attr.typeId === 1) {
                 const found = attrValues.find(at => at.id === attr.id);
                 const val = found ? found.value : false;
                 return (
@@ -93,7 +93,7 @@ export class AttributesForm extends Component {
                     </td>
                   </tr>
                 );
-              } else if (attr.type.name === 'Value with deviations') {
+              } else if (attr.typeId === 2) {
                 const found = attrValues.find(at => at.id === attr.id);
                 const val = found ? found.value : '';
                 return (

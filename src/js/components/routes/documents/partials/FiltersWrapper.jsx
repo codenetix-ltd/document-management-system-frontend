@@ -59,8 +59,8 @@ export class FiltersWrapper extends Component {
     const { dispatch, documents } = this.props;
     const {
       page,
-      sortField,
-      sortDirection
+      orderBy,
+      sortedBy
     } = documents;
     if (Array.isArray(value)) {
       value = value.map(item => item.value).join(','); // eslint-disable-line
@@ -71,7 +71,7 @@ export class FiltersWrapper extends Component {
     setTimeout(() => {
       const { documents: docs } = this.props;
       $$documentsFetch(dispatch, {
-        page, sortField, sortDirection, filterSet: docs.filterSet
+        page, orderBy, sortedBy, filterSet: docs.filterSet
       });
     }, 1);
   }

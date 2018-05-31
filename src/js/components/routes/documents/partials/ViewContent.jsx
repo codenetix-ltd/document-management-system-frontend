@@ -4,7 +4,6 @@ import moment from 'moment';
 
 export default function DocumentViewContent(props) {
   const { document, document: { actualVersion } } = props;
-  console.log(document);
   const { attributeValues: attrValues, template } = actualVersion;
   return (
     <div>
@@ -58,8 +57,8 @@ export default function DocumentViewContent(props) {
         <tbody>
           {
             template && template.attributes.map((attr, index) => {
-              const { value } = attrValues.find(({ id }) => id === attr.id);
-              if (attr.type.name === 'Table') {
+              const { value } = attrValues.find(({ id }) => id === attr.id) || { value: '' };
+              if (attr.typeId === 5) { // table
                 const { columns: cols, rows } = attr.data;
                 return (
                   <tr key={index}>
@@ -91,7 +90,7 @@ export default function DocumentViewContent(props) {
                     </td>
                   </tr>
                 );
-              } else if (attr.type.name === 'Boolean') {
+              } else if (attr.typeId === 1) {
                 return (
                   <tr key={index}>
                     <td>{attr.name}</td>

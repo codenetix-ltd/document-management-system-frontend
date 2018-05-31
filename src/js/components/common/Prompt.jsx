@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import cln from 'classnames';
 import isFunction from 'lodash/isFunction';
 
-// todo: use react-responsive-modal here
 @autobind
 export default class Prompt extends Component {
   static defaultProps = {
@@ -14,7 +13,6 @@ export default class Prompt extends Component {
     cancelText: 'Cancel'
   };
 
-  // todo: remove confirm and cancel props from files using this component
   static propTypes = {
     body: PropTypes.any,
     headerText: PropTypes.any,

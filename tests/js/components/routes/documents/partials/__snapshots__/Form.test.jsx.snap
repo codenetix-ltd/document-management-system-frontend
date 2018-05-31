@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Documents Form should render correctly 1`] = `
+<form
+  className="form-horizontal"
+>
+  <div
+    className="box-body"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="name"
+      >
+        Name
+      </label>
+      <div
+        className="col-sm-6"
+      >
+        <input
+          className="form-control"
+          id="name"
+          name="name"
+          onChange={[Function]}
+          placeholder="Document name"
+          type="text"
+        />
+      </div>
+    </div>
+    <If>
+      <Then>
+        <div
+          className="form-group"
+        >
+          <label
+            className="col-sm-2 control-label"
+            htmlFor="owner"
+          >
+            Actual version
+          </label>
+          <div
+            className="col-sm-6"
+          >
+            <Async
+              autoload={true}
+              cache={Object {}}
+              disabled={true}
+              ignoreAccents={true}
+              ignoreCase={true}
+              labelKey="name"
+              loadOptions={[Function]}
+              loadingPlaceholder="Loading..."
+              name="version"
+              options={Array []}
+              searchPromptText="Type to search"
+              value={
+                Object {
+                  "id": 1,
+                  "name": undefined,
+                }
+              }
+              valueKey="id"
+            />
+          </div>
+        </div>
+      </Then>
+    </If>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="template"
+      >
+        Template
+      </label>
+      <div
+        className="col-sm-6"
+      >
+        <Async
+          autoload={true}
+          cache={Object {}}
+          ignoreAccents={true}
+          ignoreCase={true}
+          labelKey="name"
+          loadOptions={[Function]}
+          loadingPlaceholder="Loading..."
+          name="template"
+          onChange={[Function]}
+          options={Array []}
+          searchPromptText="Type to search"
+          value={
+            Object {
+              "attributes": Array [],
+            }
+          }
+          valueKey="id"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="comment"
+      >
+        Comment
+      </label>
+      <div
+        className="col-sm-6"
+      >
+        <textarea
+          className="form-control"
+          name="comment"
+          onChange={[Function]}
+          placeholder="Document comment"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="labels"
+      >
+        Labels
+      </label>
+      <div
+        className="col-sm-6"
+      >
+        <Async
+          autoload={true}
+          cache={Object {}}
+          ignoreAccents={true}
+          ignoreCase={true}
+          labelKey="name"
+          loadOptions={[Function]}
+          loadingPlaceholder="Loading..."
+          multi={true}
+          name="labels"
+          onChange={[Function]}
+          options={Array []}
+          searchPromptText="Type to search"
+          valueKey="id"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="owner"
+      >
+        Owner
+      </label>
+      <div
+        className="col-sm-6"
+      >
+        <Async
+          autoload={true}
+          cache={Object {}}
+          disabled={true}
+          ignoreAccents={true}
+          ignoreCase={true}
+          labelKey="fullName"
+          loadOptions={[Function]}
+          loadingPlaceholder="Loading..."
+          name="owner"
+          options={Array []}
+          searchPromptText="Type to search"
+          value={Object {}}
+          valueKey="id"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="file"
+      >
+        Files
+      </label>
+      <div
+        className="col-sm-6"
+      >
+        <FileUpload
+          multiple={true}
+          onFailure={[Function]}
+          onSuccess={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</form>
+`;

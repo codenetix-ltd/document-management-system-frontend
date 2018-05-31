@@ -1,10 +1,10 @@
 {
   "auth": {
     "isAuthorized": false,
-    "tokenType": "",
-    "expiresIn": 99999999,
-    "accessToken": "",
-    "refreshToken": ""
+    "token_type": "Bearer",
+    "expires_in": 99999999,
+    "access_token": "",
+    "refresh_token": ""
   },
   "loading": false,
   "users": {
@@ -36,8 +36,8 @@
     "list": [],
     "lastPage": -1,
     "page": 1,
-    "sortField": "id",
-    "sortDirection": "desc",
+    "orderBy": "id",
+    "sortedBy": "desc",
     "filterSet": {}
   },
   "document": {
@@ -75,8 +75,8 @@
     "list": [],
     "lastPage": -1,
     "page": 1,
-    "sortField": "id",
-    "sortDirection": "desc",
+    "orderBy": "id",
+    "sortedBy": "desc",
     "filterSet": {}
   },
   "types": [],
