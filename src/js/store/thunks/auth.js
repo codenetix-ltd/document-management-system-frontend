@@ -15,8 +15,8 @@ const fn = () => {};
 export const $$authFetch = (dispatch, user, callback = fn) => {
   axios.post(`${API.token}`, {
     grant_type: 'password',
-    client_id: 'cohesive',
-    client_secret: 'local area network',
+    client_id: 1,
+    client_secret: 'PASSWORD_GRANT_CLIENT_SECRET_PUBLIC',
     username: user.email,
     password: user.password
   }).then(({ data }) => {

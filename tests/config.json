@@ -9,6 +9,7 @@
     "^Config$": "<rootDir>/src/config/index.js",
     "^Config/(.*)$": "<rootDir>/src/config/$1",
     "^Images/(.*)$": "<rootDir>/src/images/$1",
+    "^Store$": "<rootDir>/src/js/store/index.js",
     "^Store/(.*)$": "<rootDir>/src/js/store/$1",
     "^Services/(.*)$": "<rootDir>/src/js/services/$1",
     "^Components/(.*)$": "<rootDir>/src/js/components/$1",
