@@ -22,27 +22,34 @@ import { $attributesList } from 'Store/actions';
 import { $$messageSet } from 'Store/thunks/message';
 import { $$errorSet } from 'Store/thunks/error';
 
-
 const DragHandle = SortableHandle(() => (<td className="drag-handle"><i className="fa fa-arrows-v" /></td>));
 
-const Row = SortableElement(({ value }) => {
+const Row = SortableElement(({ value, types }) => {
   const {
-    id,
-    name,
-    type,
+    id: attrID,
+    name: attrName,
+    typeId,
     tableComp
   } = value;
   const { templateID } = tableComp.props;
-  const editLink = `/templates/${templateID}/attributes/${id}`;
+  const editLink = `/templates/${templateID}/attributes/${attrID}`;
+  const { name: typeName } = types.length ? types.find(type => type.id === typeId) : { name: '' };
   return (
     <tr>
       <DragHandle />
-      <td>{ name }</td>
-      <td>{ type.name }</td>
+      <td>{ attrName }</td>
+      <td>{ typeName }</td>
       <td><ActionsCell editLink={editLink} rowData={value} onDelete={tableComp.onAttributeDelete} /></td>
     </tr>
   );
 });
+
+const mapState2Props = ({ types }) => ({ types });
+
+const mapDispatch2Props = (dispatch) => ({ dispatch });
+
+const ConnectedRow = connect(mapState2Props, mapDispatch2Props)(Row);
+
 
 const SortableTable = SortableContainer(({ items }) => {
   return (
@@ -55,7 +62,7 @@ const SortableTable = SortableContainer(({ items }) => {
           <th>Actions</th>
         </tr>
         {items.map((value, index) => (
-          <Row key={`item-${index}`} index={index} value={value} />
+          <ConnectedRow key={`item-${index}`} index={index} value={value} />
         ))}
       </tbody>
     </table>

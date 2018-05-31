@@ -36,8 +36,8 @@
     "list": [],
     "lastPage": -1,
     "page": 1,
-    "sortField": "id",
-    "sortDirection": "desc",
+    "orderBy": "id",
+    "sortedBy": "desc",
     "filterSet": {}
   },
   "document": {
@@ -75,8 +75,8 @@
     "list": [],
     "lastPage": -1,
     "page": 1,
-    "sortField": "id",
-    "sortDirection": "desc",
+    "orderBy": "id",
+    "sortedBy": "desc",
     "filterSet": {}
   },
   "types": [],

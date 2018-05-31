@@ -16,13 +16,25 @@ export class Sidebar extends Component {
 
   static propTypes = {
     menuData: PropTypes.array,
+    types: PropTypes.any.isRequired,
     profile: PropTypes.any.isRequired,
-    location: PropTypes.any.isRequired
+    location: PropTypes.any.isRequired,
+    dispatch: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = { activeName: null };
+  }
+
+  // prefetch types for later usage
+  componentDidMount() {
+    const { types, dispatch } = this.props;
+    if (!types.length) {
+      import('Store/thunks/types').then(({ $$typesFetch }) => {
+        $$typesFetch(dispatch);
+      });
+    }
   }
 
   onNameClick(name) {
@@ -95,7 +107,7 @@ export class Sidebar extends Component {
   }
 }
 
-const mapStateToProps = ({ profile }) => ({ profile });
+const mapStateToProps = ({ profile, types }) => ({ profile, types });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

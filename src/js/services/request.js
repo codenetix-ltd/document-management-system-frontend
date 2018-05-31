@@ -1,5 +1,5 @@
 import axios from 'axios';
-import store from 'Store/index';
+import store from 'Store';
 
 function listener() {
   const state = store.getState();
