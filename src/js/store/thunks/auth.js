@@ -14,20 +14,17 @@ const fn = () => {};
 
 export const $$authFetch = (dispatch, user, callback = fn) => {
   axios.post(`${API.token}`, {
-    grantType: 'password',
-    clientId: 'cohesive',
-    clientSecret: 'local area network',
+    grant_type: 'password',
+    client_id: 'cohesive',
+    client_secret: 'local area network',
     username: user.email,
-    password: user.password,
-    scope: 'Global'
+    password: user.password
   }).then(({ data }) => {
     const auth = { isAuthorized: false, ...data };
     dispatch($setAuth(auth));
     ls.set('auth', auth);
     callback(data);
-  }).catch(err => {
-    console.trace(err);
-  });
+  }).catch(console.trace);
 };
 
 /* export const $$authUpdate = (dispatch, part) => {
@@ -47,8 +44,10 @@ export const $$logIn = (dispatch) => {
 };
 
 export const $$logOut = (dispatch) => {
-  dispatch($updateAuth({ isAuthorized: false }));
-  const auth = ls.get('auth');
-  auth.isAuthorized = false;
-  ls.set('auth', auth);
+  axios.post(API.logout).then(() => {
+    dispatch($updateAuth({ isAuthorized: false }));
+    const auth = ls.get('auth');
+    auth.isAuthorized = false;
+    ls.set('auth', auth);
+  }).catch(console.trace);
 };

@@ -1,10 +1,10 @@
 {
   "auth": {
     "isAuthorized": false,
-    "tokenType": "",
-    "expiresIn": 99999999,
-    "accessToken": "",
-    "refreshToken": ""
+    "token_type": "Bearer",
+    "expires_in": 99999999,
+    "access_token": "",
+    "refresh_token": ""
   },
   "loading": false,
   "users": {
