@@ -1,5 +1,4 @@
 import { API } from 'Config';
-import axios from 'Services/request';
 
 import {
   $profile,
@@ -11,11 +10,11 @@ import initialState from 'Store/reducers/initialState.json';
 const fn = () => {};
 
 export const $$profileFetch = (dispatch, callback = fn) => {
-  axios.get(`${API.profile}`).then(({ data }) => {
-    dispatch($profile({ ...data }));
-    callback(data);
-  }).catch(err => {
-    console.trace(err);
+  import('Services/request').then(({ request }) => {
+    request.get(`${API.profile}`).then(({ data }) => {
+      dispatch($profile({ ...data }));
+      callback(data);
+    }).catch(console.trace);
   });
 };
 

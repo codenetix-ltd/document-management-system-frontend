@@ -147,7 +147,16 @@ export class Home extends Component {
     }, {
       Header: 'Link',
       accessor: 'link',
-      Cell: ({ value }) => <Link to={value.url}>{value.title}</Link>
+      Cell: ({ value }) => {
+        if (value) {
+          return (
+            <Link to={value && value.url}>
+              {value && value.title}
+            </Link>
+          );
+        }
+        return <span />;
+      }
     }, {
       Header: 'Type',
       accessor: 'type'

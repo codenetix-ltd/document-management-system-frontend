@@ -10,6 +10,35 @@ export const Wrapper = Loadable({
   }
 });
 
+export const Header = Loadable({
+  loader: () => import('Components/Header'),
+  loading() {
+    return <SplashScreen />;
+  }
+});
+
+export const Sidebar = Loadable({
+  loader: () => import('Components/Sidebar'),
+  loading() {
+    return <SplashScreen />;
+  }
+});
+
+export const Content = Loadable({
+  loader: () => import('Components/Content'),
+  loading() {
+    return <SplashScreen />;
+  }
+});
+
+export const Footer = Loadable({
+  loader: () => import('Components/Footer'),
+  loading() {
+    return <SplashScreen />;
+  }
+});
+
 export default {
-  Wrapper
+  Wrapper,
+  Header
 };

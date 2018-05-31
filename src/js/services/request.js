@@ -1,15 +1,17 @@
 import axios from 'axios';
-import store from 'Store';
+import ls from 'Services/SecureLS';
 
-function listener() {
-  const state = store.getState();
-  const token = state.auth['access_token'];
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+const auth = ls.get('auth');
+const token = auth['access_token'];
+
+if (!token) {
+  throw new Error('No access_token found. Probably attempting to use request prior to authorization!');
 }
 
-store.subscribe(listener);
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-const request = axios.create({
+/* todo: rewrite this as a set of methods to avoid executing on synchronous import */
+export const request = axios.create({
   headers: {
     'Content-Type': 'application/json',
   }

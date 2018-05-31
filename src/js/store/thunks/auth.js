@@ -44,10 +44,12 @@ export const $$logIn = (dispatch) => {
 };
 
 export const $$logOut = (dispatch) => {
-  axios.post(API.logout).then(() => {
-    dispatch($updateAuth({ isAuthorized: false }));
-    const auth = ls.get('auth');
-    auth.isAuthorized = false;
-    ls.set('auth', auth);
-  }).catch(console.trace);
+  import('Services/request').then(({ request }) => {
+    request.post(API.logout).then(() => {
+      dispatch($updateAuth({ isAuthorized: false }));
+      const auth = ls.get('auth');
+      auth.isAuthorized = false;
+      ls.set('auth', auth);
+    }).catch(console.trace);
+  });
 };
