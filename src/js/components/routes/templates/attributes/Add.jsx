@@ -46,13 +46,6 @@ export default class AttributeAdd extends Component {
     ];
   }
 
-  validate(formFields) {
-    if (formFields) {
-      return !Object.keys(formFields).every(key => !!formFields[key]);
-    }
-    return true;
-  }
-
   render() {
     const { match: { params: { templateID } } } = this.props;
     if (this.state.submitted) return <Redirect to={`/templates/${templateID}`} />;
@@ -63,10 +56,7 @@ export default class AttributeAdd extends Component {
           <div className="box-header with-border">
             <h3 className="box-title">Template attribute</h3>
           </div>
-          <AttributeForm
-            onSubmit={this.onFormSubmit}
-            validate={this.validate}
-          />
+          <AttributeForm onSubmit={this.onFormSubmit} />
         </ContentWrapper>
       </div>
     );

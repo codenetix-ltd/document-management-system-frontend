@@ -16,8 +16,7 @@ import {
 @autobind
 export class AttributeForm extends Component {
   static defaultProps = {
-    submitButtonText: 'Create',
-    validate: () => false
+    submitButtonText: 'Create'
   };
 
   static propTypes = {
@@ -25,8 +24,7 @@ export class AttributeForm extends Component {
     attribute: PropTypes.any.isRequired,
     dispatch: PropTypes.any.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    submitButtonText: PropTypes.string,
-    validate: PropTypes.func
+    submitButtonText: PropTypes.string
   };
 
   componentWillUnmount() {
@@ -99,11 +97,7 @@ export class AttributeForm extends Component {
           </If>
         </div>
         <div className="box-footer">
-          <button
-            className="btn btn-success"
-            type="submit"
-            disabled={this.props.validate(attribute)}
-          >
+          <button className="btn btn-success" type="submit">
             {this.props.submitButtonText}
           </button>
         </div>

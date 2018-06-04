@@ -22,8 +22,7 @@ export class TemplateForm extends Component {
     match: {
       params: {}
     },
-    submitButtonText: 'Create',
-    validate: () => false
+    submitButtonText: 'Create'
   };
 
   static propTypes = {
@@ -31,8 +30,7 @@ export class TemplateForm extends Component {
     template: PropTypes.any.isRequired,
     attributes: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired,
-    submitButtonText: PropTypes.string,
-    validate: PropTypes.func
+    submitButtonText: PropTypes.string
   };
 
   constructor(props) {
@@ -128,11 +126,7 @@ export class TemplateForm extends Component {
           </If>
         </div>
         <div className="box-footer">
-          <button
-            className="btn btn-success"
-            type="submit"
-            disabled={this.props.validate(template)}
-          >
+          <button className="btn btn-success" type="submit">
             {this.props.submitButtonText}
           </button>
         </div>

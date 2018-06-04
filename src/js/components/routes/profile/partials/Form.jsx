@@ -9,15 +9,10 @@ import { $$profileUpdate } from 'Store/thunks/profile';
 
 @autobind
 export class ProfileForm extends Component {
-  static defaultProps = {
-    validate: () => false
-  };
-
   static propTypes = {
     profile: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    validate: PropTypes.func
+    onSubmit: PropTypes.func.isRequired
   };
 
   /**
@@ -90,11 +85,7 @@ export class ProfileForm extends Component {
           </div>
         </div>
         <div className="box-footer">
-          <button
-            className="btn btn-success"
-            type="submit"
-            disabled={this.props.validate(profile)}
-          >
+          <button className="btn btn-success" type="submit">
             Update
           </button>
         </div>

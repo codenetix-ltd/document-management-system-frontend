@@ -41,8 +41,13 @@
     "filterSet": {}
   },
   "document": {
+    "ownerId": null,
+    "substituteDocumentId": null,
     "actualVersion": {
       "name": "",
+      "templateId": null,
+      "labelIds": [],
+      "fileIds": [],
       "comment": "",
       "attributeValues": []
     }

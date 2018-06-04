@@ -6,15 +6,13 @@ import autobind from 'autobind-decorator';
 export default class LabelForm extends Component {
   static defaultProps = {
     label: null,
-    submitButtonText: 'Create',
-    validate: () => false
+    submitButtonText: 'Create'
   };
 
   static propTypes = {
     label: PropTypes.any,
     onSubmit: PropTypes.func.isRequired,
-    submitButtonText: PropTypes.string,
-    validate: PropTypes.func
+    submitButtonText: PropTypes.string
   };
 
   constructor(props) {
@@ -71,11 +69,7 @@ export default class LabelForm extends Component {
           </div>
         </div>
         <div className="box-footer">
-          <button
-            className="btn btn-success"
-            type="submit"
-            disabled={this.props.validate(this.state)}
-          >
+          <button className="btn btn-success" type="submit">
             {this.props.submitButtonText}
           </button>
         </div>

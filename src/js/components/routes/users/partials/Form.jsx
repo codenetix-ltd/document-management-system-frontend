@@ -9,16 +9,14 @@ import FileUpload from 'Components/common/FileUpload';
 export default class UserForm extends Component {
   static defaultProps = {
     user: null,
-    submitButtonText: 'Create',
-    validate: () => false
+    submitButtonText: 'Create'
   };
 
   static propTypes = {
     user: PropTypes.any,
     onSubmit: PropTypes.func.isRequired,
     getTemplateOptions: PropTypes.func.isRequired,
-    submitButtonText: PropTypes.string,
-    validate: PropTypes.func
+    submitButtonText: PropTypes.string
   };
 
   constructor(props) {
@@ -169,11 +167,7 @@ export default class UserForm extends Component {
           </div>
         </div>
         <div className="box-footer">
-          <button
-            className="btn btn-success"
-            type="submit"
-            disabled={this.props.validate(this.state)}
-          >
+          <button className="btn btn-success" type="submit">
             {this.props.submitButtonText}
           </button>
         </div>

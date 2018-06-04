@@ -3,7 +3,6 @@ import autobind from 'autobind-decorator';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import pick from 'lodash/pick';
 
 import AuthForm from 'Routes/auth/partials/Form';
 
@@ -33,14 +32,6 @@ export class Login extends Component {
     });
   }
 
-  validate(formFields) {
-    if (formFields) {
-      const pickedFields = pick(formFields, ['email', 'password']);
-      return !Object.keys(pickedFields).every(key => !!formFields[key]);
-    }
-    return true;
-  }
-
   render() {
     const { auth: { isAuthorized } } = this.props;
     if (isAuthorized) return <Redirect to="/" />;
@@ -51,7 +42,7 @@ export class Login extends Component {
         </div>
         <div className="login-box-body">
           <p className="login-box-msg">Sign in to start your session</p>
-          <AuthForm onSubmit={this.onSubmit} validate={this.validate} />
+          <AuthForm onSubmit={this.onSubmit} />
         </div>
       </div>
     );

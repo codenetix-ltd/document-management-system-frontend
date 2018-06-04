@@ -6,6 +6,7 @@ import cln from 'classnames';
 
 let showTimeout = null;
 let hideTimeout = null;
+let errorClear = () => {};
 
 @autobind
 export class ErrorMessage extends Component {
@@ -41,6 +42,7 @@ export class ErrorMessage extends Component {
     const { dispatch } = this.props;
     if (this.state.visible) {
       import('Store/thunks/error').then(({ $$errorClear }) => {
+        errorClear = $$errorClear;
         hideTimeout = setTimeout(() => {
           this.setState({ visible: false }, this.props.onHide);
           $$errorClear(dispatch);
@@ -55,6 +57,10 @@ export class ErrorMessage extends Component {
     }
     if (hideTimeout) {
       clearTimeout(hideTimeout);
+    }
+    errorClear(this.props.dispatch);
+    if (this.state.visible) {
+      this.setState({ visible: false });
     }
   }
 

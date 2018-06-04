@@ -9,12 +9,31 @@ if (!token) {
 }
 
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-/* todo: rewrite this as a set of methods to avoid executing on synchronous import */
-export const request = axios.create({
-  headers: {
-    'Content-Type': 'application/json',
-  }
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.interceptors.response.use(res => res, err => {
+  return Promise.reject(err);
 });
+
+export const request = {
+  get(url, config) {
+    return axios.get(url, config);
+  },
+
+  put(url, config) {
+    return axios.put(url, config);
+  },
+
+  post(url, config) {
+    return axios.post(url, config);
+  },
+
+  delete(url, config) {
+    return axios.delete(url, config);
+  },
+
+  patch(url, config) {
+    return axios.patch(url, config);
+  }
+};
 
 export default request;

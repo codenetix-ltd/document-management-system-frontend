@@ -11,13 +11,11 @@ import { $$templatesFetch } from 'Store/thunks/templates';
 @autobind
 export class RoleForm extends Component {
   static defaultProps = {
-    role: null,
-    validate: () => false
+    role: null
   };
 
   static propTypes = {
     role: PropTypes.any,
-    validate: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -221,11 +219,7 @@ export class RoleForm extends Component {
           </Then>
         </If>
         <div>
-          <button
-            type="submit"
-            className="btn btn-success"
-            disabled={this.props.validate(this.state)}
-          >
+          <button type="submit" className="btn btn-success">
             { role ? 'Update' : 'Create' }
           </button>
         </div>

@@ -50,13 +50,6 @@ export class UserAdd extends Component {
     return axios.get(API.templates);
   }
 
-  validate(formFields) {
-    if (formFields) {
-      return !Object.keys(formFields).every(key => !!formFields[key]);
-    }
-    return true;
-  }
-
   breadcrumbs = [
     { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
   ];
@@ -80,7 +73,6 @@ export class UserAdd extends Component {
           <UserForm
             onSubmit={this.onFormSubmit}
             getTemplateOptions={this.getTemplateOptions}
-            validate={this.validate}
           />
         </ContentWrapper>
       </div>

@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { If, Then } from 'qc-react-conditionals/lib';
 import { withRouter, Redirect } from 'react-router-dom';
 
+import get from 'lodash/get';
+
+import AlertMessage from 'Components/common/AlertMessage';
+import ErrorMessage from 'Components/common/ErrorMessage';
+
 import axios from 'Services/request';
 import { API } from 'Config';
 
@@ -15,7 +20,8 @@ import AttributesForm from './AttributesForm';
 export class DocumentContent extends Component {
   static propTypes = {
     match: PropTypes.any.isRequired,
-    document: PropTypes.any.isRequired
+    document: PropTypes.any.isRequired,
+    profile: PropTypes.any.isRequired
   };
 
   constructor(props) {
@@ -26,24 +32,19 @@ export class DocumentContent extends Component {
   }
 
   onFormSubmit() {
-    const { document, match } = this.props;
+    const { document, profile, match } = this.props;
     const { documentID } = match.params;
+    const doc = { ...document };
+    doc.ownerId = profile.id;
+    doc.actualVersion.templateId = get(document, 'actualVersion.template.id');
     if (documentID) {
-      axios.put(API.documents, document).catch(e => {
-        console.trace(e);
-      });
+      axios.put(`${API.documents}/${documentID}`, doc);
     } else {
-      axios.post(API.documents, document).then(({ data }) => {
+      axios.post(API.documents, doc).then(({ data }) => {
         if (!data.id) throw new Error('No id field in response.');
         this.setState({ newDocumentID: data.id });
-      }).catch(e => {
-        console.trace(e);
       });
     }
-  }
-
-  validate(document) {
-    return Object.keys(document).every(key => !!document[key]);
   }
 
   render() {
@@ -55,6 +56,8 @@ export class DocumentContent extends Component {
     }
     return (
       <div>
+        <AlertMessage />
+        <ErrorMessage />
         <div className="box-header with-border">
           <h3 className="box-title">General information</h3>
         </div>
@@ -72,7 +75,6 @@ export class DocumentContent extends Component {
             className="btn btn-success"
             type="button"
             onClick={this.onFormSubmit}
-            disabled={!this.validate(document)}
           >
             { documentID ? 'Update' : 'Create' }
           </button>
@@ -82,7 +84,7 @@ export class DocumentContent extends Component {
   }
 }
 
-const mapStateToProps = ({ document }) => ({ document });
+const mapStateToProps = ({ document, profile }) => ({ document, profile });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 

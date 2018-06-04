@@ -93,7 +93,7 @@ export class DocumentForm extends Component {
           <If is={document.version}>
             <Then>
               <div className="form-group">
-                <label htmlFor="owner" className="col-sm-2 control-label">Actual version</label>
+                <label htmlFor="version" className="col-sm-2 control-label">Actual version</label>
                 <div className="col-sm-6">
                   <Select
                     name="version"

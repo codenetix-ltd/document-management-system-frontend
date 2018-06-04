@@ -6,6 +6,7 @@ import cln from 'classnames';
 
 let showTimeout = null;
 let hideTimeout = null;
+let messageClear = () => {};
 
 @autobind
 export class AlertMessage extends Component {
@@ -41,6 +42,7 @@ export class AlertMessage extends Component {
     const { dispatch } = this.props;
     if (this.state.visible) {
       import('Store/thunks/message').then(({ $$messageClear }) => {
+        messageClear = $$messageClear;
         hideTimeout = setTimeout(() => {
           this.setState({ visible: false }, this.props.onHide);
           $$messageClear(dispatch);
@@ -55,6 +57,10 @@ export class AlertMessage extends Component {
     }
     if (hideTimeout) {
       clearTimeout(hideTimeout);
+    }
+    messageClear(this.props.dispatch);
+    if (this.state.visible) {
+      this.setState({ visible: false });
     }
   }
 

@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { If, Then } from 'qc-react-conditionals/lib';
 import { Tabs, Tab } from 'react-bootstrap';
 
-import pick from 'lodash/pick';
-
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
 
@@ -49,23 +47,16 @@ export class DocumentEdit extends Component {
   onFormSubmit() {
     const { document, match } = this.props;
     const { documentID } = match.params;
+    const doc = { ...document };
     if (documentID) {
-      axios.put(API.documents, document).catch(e => {
-        console.trace(e);
-      });
+      doc.createNewVersion = false; // todo: implement this
+      axios.put(`${API.documents}/${documentID}`, doc);
     } else {
-      axios.post(API.documents, document).then(({ data }) => {
+      axios.post(API.documents, doc).then(({ data }) => {
         if (!data.id) throw new Error('No id field in response.');
         this.setState({ newDocumentID: data.id });
-      }).catch(e => {
-        console.trace(e);
-      });
+      }).catch(console.trace);
     }
-  }
-
-  validate(document) {
-    const doc = pick(document, ['name']);
-    return Object.keys(doc).every(key => !!document[key]);
   }
 
   breadcrumbs = [
@@ -102,7 +93,6 @@ export class DocumentEdit extends Component {
                   type="button"
                   className="btn btn-success"
                   onClick={this.onFormSubmit}
-                  disabled={!this.validate(actualVersion)}
                 >
                   { documentID ? 'Update' : 'Create' }
                 </button>

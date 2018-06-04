@@ -29,10 +29,6 @@ export default class RoleAdd extends Component {
     });
   }
 
-  validate({ name }) {
-    return !(name && name.length > 2);
-  }
-
   breadcrumbs = [
     { pageName: 'Roles', pageLink: '/roles', iconCls: 'fa fa-plus' }
   ];
@@ -48,10 +44,7 @@ export default class RoleAdd extends Component {
             <h3 className="box-title">Role</h3>
           </div>
           <div className="box-body">
-            <RoleForm
-              onSubmit={this.onFormSubmit}
-              validate={this.validate}
-            />
+            <RoleForm onSubmit={this.onFormSubmit} />
           </div>
         </ContentWrapper>
       </div>

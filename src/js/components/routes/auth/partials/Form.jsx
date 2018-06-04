@@ -7,14 +7,12 @@ import ls from 'Services/SecureLS';
 @autobind
 export default class AuthForm extends Component {
   static defaultProps = {
-    submitButtonText: 'Login',
-    validate: () => false
+    submitButtonText: 'Login'
   };
 
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
-    submitButtonText: PropTypes.string,
-    validate: PropTypes.func
+    submitButtonText: PropTypes.string
   };
 
   constructor(props) {
@@ -102,7 +100,6 @@ export default class AuthForm extends Component {
             <button
               type="submit"
               className="btn btn-primary btn-block btn-flat"
-              disabled={this.props.validate(this.state)}
             >
               {this.props.submitButtonText}
             </button>

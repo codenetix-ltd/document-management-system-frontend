@@ -7,11 +7,6 @@ import TemplateForm from 'Routes/templates/partials/Form';
 
 @autobind
 export default class TemplateAdd extends Component {
-  validate(formFields) {
-    if (!formFields) return true;
-    return !Object.keys(formFields).every(key => !!formFields[key]);
-  }
-
   breadcrumbs = [
     { pageName: 'Templates', pageLink: '/templates/list', iconCls: 'fa fa-copy' },
     { pageName: 'Template create', pageLink: '/templates', iconCls: 'fa fa-plus' }
@@ -25,10 +20,7 @@ export default class TemplateAdd extends Component {
           <div className="box-header with-border">
             <h3 className="box-title">Template data</h3>
           </div>
-          <TemplateForm
-            match={{ params: {} }}
-            validate={this.validate}
-          />
+          <TemplateForm match={{ params: {} }} />
         </ContentWrapper>
       </div>
     );

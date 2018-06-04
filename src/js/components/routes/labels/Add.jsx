@@ -36,13 +36,6 @@ export class LabelAdd extends Component {
     });
   }
 
-  validate(formFields) {
-    if (formFields) {
-      return !Object.keys(formFields).every(key => !!formFields[key]);
-    }
-    return true;
-  }
-
   breadcrumbs = [
     { pageName: 'Labels', pageLink: '/labels', iconCls: 'fa fa-plus' }
   ];
@@ -63,10 +56,7 @@ export class LabelAdd extends Component {
           <div className="box-header with-border">
             <h3 className="box-title">Label</h3>
           </div>
-          <LabelForm
-            onSubmit={this.onFormSubmit}
-            validate={this.validate}
-          />
+          <LabelForm onSubmit={this.onFormSubmit} />
         </ContentWrapper>
       </div>
     );

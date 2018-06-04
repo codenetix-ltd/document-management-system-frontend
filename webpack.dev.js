@@ -1,8 +1,6 @@
 /* eslint-disable */
-const apiMocker = require('connect-api-mocker');
 const common = require('./webpack.config.js');
 const merge = require('webpack-merge');
-/* eslint-enable */
 
 const development = {
   mode: 'development',
@@ -12,8 +10,17 @@ const development = {
       warnings: true,
       errors: true
     },
-    before: app => {
-      app.use(apiMocker('/api', 'mocks/api'));
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8081',
+        secure: false,
+        bypass: (req, res, proxyOptions) => {
+          if (req.url.indexOf('api') !== -1) {
+            return false;
+          }
+          return req.url;
+        }
+      }
     }
   }
 };
