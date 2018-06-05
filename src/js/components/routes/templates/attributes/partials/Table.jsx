@@ -33,87 +33,87 @@ export class AttributesTable extends Component {
 
   componentDidMount() {
     const { attribute } = this.props;
-    const { columns, rows } = attribute.table || initialTable;
-    this.generateTableData(columns, rows);
+    const { headers, rows } = attribute.data || initialTable;
+    this.generateTableData(headers, rows);
   }
 
   onCellTypeChange({ colIndex, rowIndex }, value) {
     const { attribute } = this.props;
-    const { columns, rows } = { ...attribute.table };
+    const { headers, rows } = { ...attribute.data };
     rows[rowIndex].columns[colIndex].type = {
       ...value,
       machineName: value.name.toLowerCase()
     };
-    this.generateTableData(columns, rows);
+    this.generateTableData(headers, rows);
   }
 
   onCellLockChange({ colIndex, rowIndex, isLocked }) {
     const { attribute } = this.props;
-    const { columns, rows } = { ...attribute.table };
+    const { headers, rows } = { ...attribute.data };
     rows[rowIndex].columns[colIndex].isLocked = isLocked;
-    this.generateTableData(columns, rows);
+    this.generateTableData(headers, rows);
   }
 
   onColumnTitleChange(event, index) {
     const { value } = event.target;
     const { attribute } = this.props;
-    const { columns, rows } = { ...attribute.table };
-    columns[index].name = value;
-    this.generateTableData(columns, rows);
+    const { headers, rows } = { ...attribute.data };
+    headers[index].name = value;
+    this.generateTableData(headers, rows);
   }
 
   onRowTitleChange(event, { viewIndex }) {
     const { value } = event.target;
     const { attribute } = this.props;
-    const { columns, rows } = { ...attribute.table };
+    const { headers, rows } = { ...attribute.data };
     rows[viewIndex].name = value;
-    this.generateTableData(columns, rows);
+    this.generateTableData(headers, rows);
   }
 
   onColumnAdd() {
     const { attribute } = this.props;
-    const { columns, rows } = { ...attribute.table };
-    columns.push(getTpl('column'));
+    const { headers, rows } = { ...attribute.data };
+    headers.push(getTpl('column'));
     const newRows = rows.map(row => {
       const r = { ...row };
-      r.columns = [...row.columns, getTpl('columnData')];
+      r.headers = [...row.headers, getTpl('columnData')];
       return r;
     });
-    this.generateTableData(columns, newRows);
+    this.generateTableData(headers, newRows);
   }
 
   onColumnDelete({ indexToRemove }) {
     const { attribute } = this.props;
-    const { columns, rows } = { ...attribute.table };
-    columns.splice(indexToRemove, 1);
+    const { headers, rows } = { ...attribute.data };
+    headers.splice(indexToRemove, 1);
     const newRows = rows.map(row => {
       row.columns.splice(indexToRemove, 1);
       return row;
     });
-    this.generateTableData(columns, newRows);
+    this.generateTableData(headers, newRows);
   }
 
   onRowAdd() {
     const { attribute } = this.props;
-    const { columns, rows } = { ...attribute.table };
-    const cols = Array.from({ length: columns.length }, () => getTpl('columnData'));
+    const { headers, rows } = { ...attribute.data };
+    const cols = Array.from({ length: headers.length }, () => getTpl('columnData'));
     rows.push({
       name: 'Enter title',
       columns: cols
     });
-    this.generateTableData(columns, rows);
+    this.generateTableData(headers, rows);
   }
 
   onRowDelete({ viewIndex }) {
     const { attribute } = this.props;
-    const { columns, rows } = { ...attribute.table };
+    const { headers, rows } = { ...attribute.data };
     rows.splice(viewIndex, 1);
-    this.generateTableData(columns, rows);
+    this.generateTableData(headers, rows);
   }
 
-  generateTableData(columns, rows) {
+  generateTableData(headers, rows) {
     const { dispatch } = this.props;
-    $$attributeUpdate(dispatch, { table: { columns, rows } });
+    $$attributeUpdate(dispatch, { data: { headers, rows } });
 
     // data passed to every table cell
     const data = rows.map((row, rowIndex) => {
@@ -128,7 +128,7 @@ export class AttributesTable extends Component {
 
     data.push({}); // last row with remove buttons
 
-    const extendedColumns = [...columns];
+    const extendedColumns = [...headers];
     extendedColumns.unshift({ name: 'rowTitle' }); // row title column
     extendedColumns.push({ name: 'lastColumn' }); // column for remove buttons
 

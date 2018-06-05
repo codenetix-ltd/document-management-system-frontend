@@ -193,8 +193,8 @@ export class RoleForm extends Component {
                                               className="form-control input-sm"
                                             >
                                               {
-                                                qualifier['accessTypes'].map(accessType => (
-                                                  <option key={accessType.id} value={accessType.id}>
+                                                qualifier['accessType'].map((accessType, index) => (
+                                                  <option key={index} value={accessType.id}>
                                                     {accessType.label}
                                                   </option>
                                                 ))

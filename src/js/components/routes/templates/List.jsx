@@ -70,7 +70,7 @@ export class TemplatesList extends Component {
         <ContentHeader title="Templates" breadcrumbs={this.breadcrumbs} />
         <ContentWrapper boxClass="">
           <div className="box-header clearfix">
-            <Link to="/users" className="btn btn-success btn-xs pull-right">
+            <Link to="/templates" className="btn btn-success btn-xs pull-right">
               <i className="fa fa-plus" /> Add template
             </Link>
           </div>

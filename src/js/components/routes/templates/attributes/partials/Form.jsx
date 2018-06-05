@@ -34,10 +34,11 @@ export class AttributeForm extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { attribute } = this.props;
-    const { name, type } = { ...attribute };
+    const { name, type, data } = { ...attribute };
     this.props.onSubmit({
       name,
-      typeId: type.id
+      typeId: type.id,
+      data
     });
   }
 

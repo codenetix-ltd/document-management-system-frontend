@@ -15,7 +15,8 @@ import { $updateAttributeValues } from 'Store/actions';
 export class AttributesForm extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    document: PropTypes.any.isRequired
+    document: PropTypes.any.isRequired,
+    types: PropTypes.array.isRequired
   };
 
   onAttrChange({ target }, data) {
@@ -33,6 +34,10 @@ export class AttributesForm extends Component {
     dispatch($updateAttributeValues([{ id, value: !value }]));
   }
 
+  getType(typeId) {
+    return this.props.types.find(type => type.id === typeId);
+  }
+
   render() {
     const { document: { actualVersion } } = this.props;
     const { attributeValues: attrValues, template } = actualVersion;
@@ -41,8 +46,13 @@ export class AttributesForm extends Component {
         <tbody>
           {
             template.attributes.map((attr, index) => {
-              if (attr.typeId === 5) {
-                const { columns: cols, rows } = attr.data;
+              const type = this.getType(attr.typeId);
+              if (type.machineName === 'table') {
+                if (!attr.data.length) {
+                  console.trace('no data in attribute');
+                  return null;
+                }
+                const { headers: cols, rows } = attr.data;
                 return (
                   <tr key={index}>
                     <td>{attr.name}</td>
@@ -78,7 +88,7 @@ export class AttributesForm extends Component {
                     </td>
                   </tr>
                 );
-              } else if (attr.typeId === 1) {
+              } else if (type.machineName === 'boolean') {
                 const found = attrValues.find(at => at.id === attr.id);
                 const val = found ? found.value : false;
                 return (
@@ -93,7 +103,7 @@ export class AttributesForm extends Component {
                     </td>
                   </tr>
                 );
-              } else if (attr.typeId === 2) {
+              } else if (type.machineName === 'value_with_deviations') {
                 const found = attrValues.find(at => at.id === attr.id);
                 const val = found ? found.value : '';
                 return (
@@ -119,7 +129,7 @@ export class AttributesForm extends Component {
   }
 }
 
-const mapStateToProps = ({ document }) => ({ document });
+const mapStateToProps = ({ document, types }) => ({ document, types });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 
