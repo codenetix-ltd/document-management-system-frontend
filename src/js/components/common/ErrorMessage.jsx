@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import cln from 'classnames';
+import isEmpty from 'lodash/isEmpty';
+
+import { $$errorClear } from 'Store/thunks/error';
 
 let showTimeout = null;
 let hideTimeout = null;
-let errorClear = () => {};
 
 @autobind
 export class ErrorMessage extends Component {
@@ -30,8 +32,10 @@ export class ErrorMessage extends Component {
   }
 
   componentDidMount() {
-    const { error } = this.props;
-    this.showMessage(error);
+    const { error, dispatch } = this.props;
+    if (!isEmpty(error)) {
+      $$errorClear(dispatch);
+    }
   }
 
   componentWillReceiveProps({ error }) {
@@ -41,13 +45,10 @@ export class ErrorMessage extends Component {
   componentDidUpdate() {
     const { dispatch } = this.props;
     if (this.state.visible) {
-      import('Store/thunks/error').then(({ $$errorClear }) => {
-        errorClear = $$errorClear;
-        hideTimeout = setTimeout(() => {
-          this.setState({ visible: false }, this.props.onHide);
-          $$errorClear(dispatch);
-        }, 5000);
-      });
+      hideTimeout = setTimeout(() => {
+        this.setState({ visible: false }, this.props.onHide);
+        $$errorClear(dispatch);
+      }, 5000);
     }
   }
 
@@ -57,10 +58,6 @@ export class ErrorMessage extends Component {
     }
     if (hideTimeout) {
       clearTimeout(hideTimeout);
-    }
-    errorClear(this.props.dispatch);
-    if (this.state.visible) {
-      this.setState({ visible: false });
     }
   }
 
