@@ -30,7 +30,8 @@ export class DocumentEdit extends Component {
     super(props);
     this.state = {
       activeKey: 1,
-      newDocumentID: null
+      newDocumentID: null,
+      increaseVersion: false
     };
   }
 
@@ -45,11 +46,13 @@ export class DocumentEdit extends Component {
   }
 
   onFormSubmit() {
+    const { increaseVersion } = this.state;
     const { document, match } = this.props;
     const { documentID } = match.params;
     const doc = { ...document };
+    doc.actualVersion.labelIds = doc.actualVersion.labels.map(l => l.id);
     if (documentID) {
-      doc.createNewVersion = false; // todo: implement this
+      doc.createNewVersion = increaseVersion;
       axios.put(`${API.documents}/${documentID}`, doc);
     } else {
       axios.post(API.documents, doc).then(({ data }) => {
@@ -59,13 +62,19 @@ export class DocumentEdit extends Component {
     }
   }
 
+  toggleIncreaseVersion() {
+    this.setState({
+      increaseVersion: !this.state.increaseVersion
+    });
+  }
+
   breadcrumbs = [
     { pageName: 'Documents', pageLink: '/documents/list', iconCls: 'fa fa-copy' },
     { pageName: 'Edit document', pageLink: '', iconCls: 'fa fa-pencil' }
   ];
 
   render() {
-    const { activeKey, newDocumentID } = this.state;
+    const { activeKey, newDocumentID, increaseVersion } = this.state;
     const { document: { actualVersion }, match, match: { params: { documentID } } } = this.props;
     if (newDocumentID) {
       return <Redirect to={`/documents/${newDocumentID}`} />;
@@ -96,6 +105,15 @@ export class DocumentEdit extends Component {
                 >
                   { documentID ? 'Update' : 'Create' }
                 </button>
+                <div className="checkbox increase-version">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={increaseVersion}
+                      onClick={this.toggleIncreaseVersion}
+                    /> Increase version
+                  </label>
+                </div>
               </div>
             </Tab>
             <Tab eventKey={2} title="Versions">

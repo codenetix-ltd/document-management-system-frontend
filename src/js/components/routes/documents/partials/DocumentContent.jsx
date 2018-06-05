@@ -37,6 +37,7 @@ export class DocumentContent extends Component {
     const doc = { ...document };
     doc.ownerId = profile.id;
     doc.actualVersion.templateId = get(document, 'actualVersion.template.id');
+    doc.actualVersion.labelIds = doc.actualVersion.labels.map(l => l.id);
     if (documentID) {
       axios.put(`${API.documents}/${documentID}`, doc);
     } else {
