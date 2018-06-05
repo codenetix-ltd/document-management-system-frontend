@@ -66,7 +66,7 @@ export class FiltersWrapper extends Component {
       value = value.map(item => item.value).join(','); // eslint-disable-line
     }
     dispatch($documentsFilter({
-      [`filter[${filterType}]`]: value
+      [`filters[${filterType}]`]: value
     }));
     setTimeout(() => {
       const { documents: docs } = this.props;
@@ -92,13 +92,13 @@ export class FiltersWrapper extends Component {
             </div>
 
             <div className="form-group col-lg-2 col-md-4 col-sm-6">
-              <InputFilter label="Owner" filterType="owner" placeholder="Username" onChange={this.onFilterChange} />
+              <InputFilter label="Owner" filterType="ownerId" placeholder="Username" onChange={this.onFilterChange} />
             </div>
 
             <div className="form-group col-lg-2 col-md-4 col-sm-6">
               <SelectFilter
                 label="Template"
-                filterType="template"
+                filterType="templateIds"
                 options={templateOptions}
                 onChange={this.onFilterChange}
               />
@@ -107,7 +107,7 @@ export class FiltersWrapper extends Component {
             <div className="form-group col-lg-2 col-md-4 col-sm-6">
               <SelectFilter
                 label="Labels"
-                filterType="label"
+                filterType="labelIds"
                 options={labelOptions}
                 onChange={this.onFilterChange}
               />

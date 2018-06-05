@@ -24,7 +24,7 @@ export const $$documentsFetch = (dispatch, params, callback = fn) => {
   const picked = pick(params, ['page', 'orderBy', 'sortedBy', 'ownerID']);
   const filters = pickBy(params.filterSet, identity);
   const extra = {
-    with: 'user,template'
+    // with: 'user,template'
   };
   dispatch($loading(true));
   axios.get(API.documents, {
