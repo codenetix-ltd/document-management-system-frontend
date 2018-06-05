@@ -46,7 +46,7 @@ export class FiltersWrapper extends Component {
       value = value.map(item => item.value).join(','); // eslint-disable-line
     }
     dispatch($logsFilter({
-      [`filter[${filterType}]`]: value
+      [`filters[${filterType}]`]: value
     }));
     setTimeout(() => {
       const { logs: _logs } = this.props;

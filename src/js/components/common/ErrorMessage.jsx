@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import cln from 'classnames';
-import isEmpty from 'lodash/isEmpty';
+import { withRouter } from 'react-router-dom';
 
 import { $$errorClear } from 'Store/thunks/error';
 
@@ -21,6 +21,7 @@ export class ErrorMessage extends Component {
     onShow: PropTypes.func,
     onHide: PropTypes.func,
     dispatch: PropTypes.func.isRequired,
+    history: PropTypes.any.isRequired,
     error: PropTypes.any.isRequired
   };
 
@@ -32,8 +33,11 @@ export class ErrorMessage extends Component {
   }
 
   componentDidMount() {
-    const { error, dispatch } = this.props;
-    if (!isEmpty(error)) {
+    const { error, history, dispatch } = this.props;
+    const isRedirect = history.action === 'REPLACE';
+    if (isRedirect) {
+      this.showMessage(error);
+    } else {
       $$errorClear(dispatch);
     }
   }
@@ -90,4 +94,6 @@ const mapStateToProps = ({ error }) => ({ error });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorMessage);
+const Connected = connect(mapStateToProps, mapDispatchToProps)(ErrorMessage);
+
+export default withRouter(Connected);
