@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import { Async as Select } from 'react-select';
+import { If, Then } from 'qc-react-conditionals/lib';
 
 import FileUpload from 'Components/common/FileUpload';
 
@@ -16,18 +17,21 @@ export default class UserForm extends Component {
     user: PropTypes.any,
     onSubmit: PropTypes.func.isRequired,
     getTemplateOptions: PropTypes.func.isRequired,
+    getRoleOptions: PropTypes.func.isRequired,
     submitButtonText: PropTypes.string
   };
 
   constructor(props) {
     super(props);
     this.state = {
+      avatar: {},
+      avatarId: '',
       fullName: '',
       email: '',
       templatesIds: [],
-      // roles: [],
+      roles: [],
       password: '',
-      passwordConfirmed: ''
+      passwordConfirmation: ''
     };
   }
 
@@ -82,6 +86,12 @@ export default class UserForm extends Component {
     });
   }
 
+  handleRolesSelect(value) {
+    this.setState({
+      roles: value
+    });
+  }
+
   render() {
     return (
       <form className="form-horizontal" onSubmit={this.onSubmit}>
@@ -129,7 +139,16 @@ export default class UserForm extends Component {
           </div>
           <div className="form-group">
             <label className="col-sm-2 control-label">Roles</label>
-            <div className="col-sm-6" />
+            <div className="col-sm-6">
+              <Select
+                multi
+                autoload
+                name="roles"
+                value={this.state.roles}
+                onChange={this.handleRolesSelect}
+                loadOptions={this.props.getRoleOptions}
+              />
+            </div>
           </div>
           <div className="form-group">
             <label htmlFor="password" className="col-sm-2 control-label">Password</label>
@@ -153,8 +172,8 @@ export default class UserForm extends Component {
                 className="form-control"
                 placeholder="Repeat password"
                 type="password"
-                name="passwordConfirmed"
-                value={this.state.passwordConfirmed}
+                name="passwordConfirmation"
+                value={this.state.passwordConfirmation}
                 onChange={this.handleChange}
               />
             </div>
@@ -163,6 +182,11 @@ export default class UserForm extends Component {
             <label htmlFor="file" className="col-sm-2 control-label">Avatar</label>
             <div className="col-sm-6">
               <FileUpload onSuccess={this.handleAvatarUpload} />
+              <If is={this.state.avatar.url}>
+                <Then>
+                  <img src={`/${this.state.avatar.url}`} alt="User avatar" />
+                </Then>
+              </If>
             </div>
           </div>
         </div>

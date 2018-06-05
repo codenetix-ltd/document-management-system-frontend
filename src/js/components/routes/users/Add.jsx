@@ -46,8 +46,22 @@ export class UserAdd extends Component {
     }).catch(callback);
   }
 
+  getRoleOptions(input, callback) {
+    this.fetchRoles().then(({ data }) => {
+      const list = data.data.map(({ id, name }) => ({ label: name, value: id }));
+      callback(null, {
+        options: list,
+        complete: true
+      });
+    }).catch(callback);
+  }
+
   fetchTemplates() {
     return axios.get(API.templates);
+  }
+
+  fetchRoles() {
+    return axios.get(API.roles);
   }
 
   breadcrumbs = [
@@ -73,6 +87,7 @@ export class UserAdd extends Component {
           <UserForm
             onSubmit={this.onFormSubmit}
             getTemplateOptions={this.getTemplateOptions}
+            getRoleOptions={this.getRoleOptions}
           />
         </ContentWrapper>
       </div>

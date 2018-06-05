@@ -41,15 +41,34 @@ export default class UserEdit extends Component {
     }).catch(callback);
   }
 
+  getRoleOptions(input, callback) {
+    this.fetchRoles().then(({ data }) => {
+      const list = data.data.map(({ id, name }) => ({ label: name, value: id }));
+      callback(null, {
+        options: list,
+        complete: true
+      });
+    }).catch(callback);
+  }
+
   fetchTemplates() {
     return axios.get(API.templates);
+  }
+
+  fetchRoles() {
+    return axios.get(API.roles);
   }
 
   // todo: move this to a thunk
   fetchUser() {
     const { userID } = this.props.match.params;
     axios.get(`${API.users}/${userID}`).then(({ data }) => {
-      const { fullName, email, templatesIds } = data;
+      const {
+        fullName,
+        email,
+        templatesIds,
+        ...rest
+      } = data;
       this.fetchTemplates().then(res => {
         const options = res.data.data.map(({ id, name }) => ({ label: name, value: id }));
         const selected = options.filter(option => templatesIds.includes(option.value));
@@ -57,6 +76,7 @@ export default class UserEdit extends Component {
           user: {
             fullName,
             email,
+            ...rest,
             templatesIds: selected
           }
         });
@@ -82,6 +102,7 @@ export default class UserEdit extends Component {
             user={this.state.user}
             onSubmit={this.onFormSubmit}
             getTemplateOptions={this.getTemplateOptions}
+            getRoleOptions={this.getRoleOptions}
             submitButtonText="Update"
           />
         </ContentWrapper>
