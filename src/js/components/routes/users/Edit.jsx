@@ -28,7 +28,7 @@ export default class UserEdit extends Component {
 
   onFormSubmit(formData) {
     const { userID } = this.props.match.params;
-    axios.put(`${API.users}/${userID}`, formData).catch(console.trace);
+    axios.put(`${API.users}/${userID}`, formData);
   }
 
   getTemplateOptions(input, callback) {

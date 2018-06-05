@@ -20,18 +20,20 @@ export class AttributesForm extends Component {
   };
 
   onAttrChange({ target }, data) {
-    const { id } = data;
+    const { id, typeId } = data;
     const { value } = target;
     const { dispatch } = this.props;
-    dispatch($updateAttributeValues([{ id, value }]));
+    const { machineName } = this.getType(typeId);
+    dispatch($updateAttributeValues([{ id, value, type: machineName }]));
   }
 
   onCheckboxToggle(e, data) {
-    const { id } = data;
+    const { id, typeId } = data;
     const { dispatch, document: { actualVersion: { attributeValues } } } = this.props;
     const found = attributeValues.find(at => at.id === id);
     const value = found ? found.value : false;
-    dispatch($updateAttributeValues([{ id, value: !value }]));
+    const { machineName } = this.getType(typeId);
+    dispatch($updateAttributeValues([{ id, value: !value, type: machineName }]));
   }
 
   getType(typeId) {
@@ -48,10 +50,6 @@ export class AttributesForm extends Component {
             template.attributes.map((attr, index) => {
               const type = this.getType(attr.typeId);
               if (type.machineName === 'table') {
-                if (!attr.data.length) {
-                  console.trace('no data in attribute');
-                  return null;
-                }
                 const { headers: cols, rows } = attr.data;
                 return (
                   <tr key={index}>

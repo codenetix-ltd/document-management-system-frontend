@@ -107,6 +107,7 @@ export default class UserForm extends Component {
                 name="fullName"
                 value={this.state.fullName}
                 onChange={this.handleChange}
+                autoComplete="nope"
               />
             </div>
           </div>

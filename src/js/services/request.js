@@ -11,6 +11,11 @@ if (!token) {
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.interceptors.response.use(res => res, err => {
+  /* todo: replace this with token refreshing */
+  if (err.response.status === 401) {
+    localStorage.removeItem('auth');
+    document.location.reload();
+  }
   return Promise.reject(err);
 });
 

@@ -30,7 +30,6 @@ export const $$attributesFetch = (dispatch, templateID, tableComponent, callback
     dispatch($attributesList({ list }));
     callback(list);
   }).catch(err => {
-    console.trace(err);
     $$errorSet(dispatch, err);
   });
 };
@@ -43,7 +42,6 @@ export const $$attributeFetch = (dispatch, templateID, attributeID, callback = f
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });

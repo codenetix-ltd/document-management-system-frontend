@@ -58,7 +58,7 @@ export class DocumentEdit extends Component {
       axios.post(API.documents, doc).then(({ data }) => {
         if (!data.id) throw new Error('No id field in response.');
         this.setState({ newDocumentID: data.id });
-      }).catch(console.trace);
+      });
     }
   }
 

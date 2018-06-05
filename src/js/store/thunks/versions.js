@@ -19,7 +19,6 @@ export const $$versionsFetch = (dispatch, documentID, callback = fn) => {
     dispatch($versionsList({ list: data }));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     $$errorSet(dispatch, err);
   });
 };
@@ -32,7 +31,6 @@ export const $$versionFetch = (dispatch, documentID, versionID, callback = fn) =
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });

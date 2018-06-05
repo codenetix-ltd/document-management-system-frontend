@@ -17,7 +17,6 @@ export const $$typesFetch = (dispatch, callback = fn) => {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });

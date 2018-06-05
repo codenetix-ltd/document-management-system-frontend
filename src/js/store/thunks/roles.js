@@ -28,7 +28,6 @@ export const $$rolesFetch = (dispatch, page, callback = fn) => {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
@@ -41,7 +40,6 @@ export const $$roleFetch = (dispatch, roleID, callback = fn) => {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
@@ -64,7 +62,6 @@ export const $$roleDelete = (dispatch, { id, name }, close = fn) => {
     });
     close();
   }).catch(err => {
-    console.trace(err);
     close();
     $$errorSet(dispatch, err);
   });
@@ -77,7 +74,6 @@ export const $$permissionGroupsFetch = (dispatch, callback = fn) => {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });

@@ -36,7 +36,6 @@ export const $$logsFetch = (dispatch, {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });

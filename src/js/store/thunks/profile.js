@@ -14,7 +14,7 @@ export const $$profileFetch = (dispatch, callback = fn) => {
     request.get(`${API.profile}`).then(({ data }) => {
       dispatch($profile({ ...data }));
       callback(data);
-    }).catch(console.trace);
+    });
   });
 };
 

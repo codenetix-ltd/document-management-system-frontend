@@ -38,7 +38,6 @@ export const $$documentsFetch = (dispatch, params, callback = fn) => {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
@@ -55,7 +54,6 @@ export const $$documentFetch = (dispatch, documentID, callback = fn) => {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
@@ -80,7 +78,6 @@ export const $$documentArchive = (dispatch, { id, name }, substDocId, close = fn
     });
     close();
   }).catch(err => {
-    console.trace(err);
     close();
     $$errorSet(dispatch, err);
   });
@@ -95,7 +92,6 @@ export const $$documentDelete = (dispatch, { id, name }, close = fn) => {
     });
     close();
   }).catch(err => {
-    console.trace(err);
     close();
     $$errorSet(dispatch, err);
   });
@@ -115,7 +111,6 @@ export const $$documentsMassArchive = (dispatch, ids, substDocId, close = fn) =>
     });
     close();
   }).catch(err => {
-    console.trace(err);
     close();
     $$errorSet(dispatch, err);
   });
@@ -131,7 +126,6 @@ export const $$documentsMassDelete = (dispatch, ids, close = fn) => {
     });
     close();
   }).catch(err => {
-    console.trace(err);
     close();
     $$errorSet(dispatch, err);
   });
@@ -142,7 +136,5 @@ export const $$comparedDocumentsFetch = (dispatch, ids, callback = fn) => {
   p.then(d => {
     dispatch($setComparedDocuments(d.map(({ data }) => data)));
     callback(d);
-  }).catch(err => {
-    console.trace(err);
   });
 };

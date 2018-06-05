@@ -27,7 +27,6 @@ export const $$labelsFetch = (dispatch, page, callback = fn) => {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
@@ -40,7 +39,6 @@ export const $$labelFetch = (dispatch, labelID, callback = fn) => {
     dispatch($loading(false));
     callback(data);
   }).catch(err => {
-    console.trace(err);
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
@@ -63,7 +61,6 @@ export const $$labelDelete = (dispatch, { id, name }, close = fn) => {
     });
     close();
   }).catch(err => {
-    console.trace(err);
     close();
     $$errorSet(dispatch, err);
   });

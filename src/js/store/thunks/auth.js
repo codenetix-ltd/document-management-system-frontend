@@ -24,7 +24,7 @@ export const $$authFetch = (dispatch, user, callback = fn) => {
     dispatch($setAuth(auth));
     ls.set('auth', auth);
     callback(data);
-  }).catch(console.trace);
+  });
 };
 
 /* export const $$authUpdate = (dispatch, part) => {
@@ -50,6 +50,6 @@ export const $$logOut = (dispatch) => {
       const auth = ls.get('auth');
       auth.isAuthorized = false;
       ls.set('auth', auth);
-    }).catch(console.trace);
+    });
   });
 };
