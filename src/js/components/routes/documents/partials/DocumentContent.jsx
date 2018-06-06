@@ -13,8 +13,6 @@ import ErrorMessage from 'Components/common/ErrorMessage';
 import axios from 'Services/request';
 import { API } from 'Config';
 
-import { $$errorsSet } from 'Store/thunks/errors';
-
 import DocumentForm from './Form';
 import AttributesForm from './AttributesForm';
 
@@ -23,8 +21,7 @@ export class DocumentContent extends Component {
   static propTypes = {
     match: PropTypes.any.isRequired,
     document: PropTypes.any.isRequired,
-    profile: PropTypes.any.isRequired,
-    dispatch: PropTypes.func.isRequired
+    profile: PropTypes.any.isRequired
   };
 
   constructor(props) {
@@ -36,7 +33,6 @@ export class DocumentContent extends Component {
 
   onFormSubmit() {
     const {
-      dispatch,
       document,
       profile,
       match
@@ -55,9 +51,6 @@ export class DocumentContent extends Component {
       axios.post(API.documents, doc).then(({ data }) => {
         if (!data.id) throw new Error('No id field in response.');
         this.setState({ newDocumentID: data.id });
-      }).catch(err => {
-        const { errors } = err.response.data;
-        if (errors) $$errorsSet(dispatch, errors);
       });
     }
   }

@@ -1,7 +1,9 @@
-/* eslint-disable */
 import axios from 'axios';
 import { API } from 'Config';
 import ls from 'Services/SecureLS';
+
+import store from 'Store';
+import { $$errorsSet } from 'Store/thunks/errors';
 
 const auth = ls.get('auth');
 const { access_token, refresh_token } = auth;
@@ -15,7 +17,8 @@ axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 /* if request fails with 401 try to refresh the token and reload the page */
 axios.interceptors.response.use(res => res, err => {
-  if (err.response.status === 401) {
+  const { response } = err;
+  if (response.status === 401) {
     const { email, password } = ls.get('c_cache');
     axios.defaults.headers.common['Authorization'] = `Bearer ${refresh_token}`;
     return new Promise((resolve, reject) => {
@@ -26,15 +29,18 @@ axios.interceptors.response.use(res => res, err => {
         username: email,
         password
       }).then(({ data }) => {
-        const auth = { ...data };
-        auth.isAuthorized = true;
-        ls.set('auth', auth);
+        const authData = { ...data };
+        authData.isAuthorized = true;
+        ls.set('auth', authData);
         document.location.reload();
       }).catch(reject);
     });
-  } else {
+  } else if (response.status === 422) {
+    const { errors } = response.data;
+    if (errors) $$errorsSet(store.dispatch, errors);
     return Promise.reject(err);
   }
+  return Promise.reject(err);
 });
 
 export const request = {
