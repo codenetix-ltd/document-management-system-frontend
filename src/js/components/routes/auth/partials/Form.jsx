@@ -17,11 +17,11 @@ export default class AuthForm extends Component {
 
   constructor(props) {
     super(props);
-    const { email, password } = ls.get('c_cache');
+    const { email, password, remember } = ls.get('c_cache');
     this.state = {
-      email: email || '',
-      password: password || '',
-      remember: false
+      email: remember ? (email || '') : '',
+      password: remember ? (password || '') : '',
+      remember: !!remember
     };
   }
 
@@ -32,7 +32,7 @@ export default class AuthForm extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { email, password, remember } = this.state;
-    if (remember) ls.set('c_cache', { email, password });
+    ls.set('c_cache', { email, password, remember });
     this.props.onSubmit({ email, password });
   }
 

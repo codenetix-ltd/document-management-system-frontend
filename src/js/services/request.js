@@ -1,22 +1,40 @@
+/* eslint-disable */
 import axios from 'axios';
+import { API } from 'Config';
 import ls from 'Services/SecureLS';
 
 const auth = ls.get('auth');
-const token = auth['access_token'];
+const { access_token, refresh_token } = auth;
 
-if (!token) {
+if (!access_token) {
   throw new Error('No access_token found. Probably attempting to use request prior to authorization!');
 }
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
+
+/* if request fails with 401 try to refresh the token and reload the page */
 axios.interceptors.response.use(res => res, err => {
-  /* todo: replace this with token refreshing */
   if (err.response.status === 401) {
-    localStorage.removeItem('auth');
-    document.location.reload();
+    const { email, password } = ls.get('c_cache');
+    axios.defaults.headers.common['Authorization'] = `Bearer ${refresh_token}`;
+    return new Promise((resolve, reject) => {
+      axios.post(`${API.token}`, {
+        grant_type: 'password',
+        client_id: 1,
+        client_secret: 'PASSWORD_GRANT_CLIENT_SECRET_PUBLIC',
+        username: email,
+        password
+      }).then(({ data }) => {
+        const auth = { ...data };
+        auth.isAuthorized = true;
+        ls.set('auth', auth);
+        document.location.reload();
+      }).catch(reject);
+    });
+  } else {
+    return Promise.reject(err);
   }
-  return Promise.reject(err);
 });
 
 export const request = {
