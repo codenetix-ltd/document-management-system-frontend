@@ -7,6 +7,7 @@ import { If, Then } from 'qc-react-conditionals/lib';
 import pick from 'lodash/pick';
 
 import FileUpload from 'Components/common/FileUpload';
+import FormError from 'Components/common/FormError';
 
 import {
   $$documentUpdate,
@@ -15,6 +16,7 @@ import {
 import { $$templatesFetch } from 'Store/thunks/templates';
 import { $$labelsFetch } from 'Store/thunks/labels';
 import { $setAttributeValues } from 'Store/actions';
+import { $$errorsReset, $$errorsUpdate } from 'Store/thunks/errors';
 
 @autobind
 export class DocumentForm extends Component {
@@ -27,7 +29,9 @@ export class DocumentForm extends Component {
   };
 
   componentWillUnmount() {
-    $$documentReset(this.props.dispatch);
+    const { dispatch } = this.props;
+    $$errorsReset(dispatch);
+    $$documentReset(dispatch);
   }
 
   getLabelOptions(input, callback) {
@@ -49,10 +53,16 @@ export class DocumentForm extends Component {
   }
 
   handleChange({ target }) {
-    const { name, value } = target;
-    $$documentUpdate(this.props.dispatch, {
+    const { dispatch } = this.props;
+    const { name, value, dataset } = target;
+    $$documentUpdate(dispatch, {
       [name]: value
     });
+    if (dataset.field) {
+      $$errorsUpdate(dispatch, {
+        [dataset.field]: ''
+      });
+    }
   }
 
   handleLabelsSelect(value) {
@@ -65,6 +75,7 @@ export class DocumentForm extends Component {
     const { dispatch } = this.props;
     dispatch($setAttributeValues([]));
     $$documentUpdate(dispatch, { template: value });
+    $$errorsUpdate(dispatch, { 'actualVersion.templateId': '' });
   }
 
   handleFileUpload(fileIds) {
@@ -80,14 +91,15 @@ export class DocumentForm extends Component {
             <label htmlFor="name" className="col-sm-2 control-label">Name</label>
             <div className="col-sm-6">
               <input
-                id="name"
-                className="form-control"
-                placeholder="Document name"
                 type="text"
                 name="name"
+                className="form-control"
+                placeholder="Document name"
                 value={actualVersion.name}
                 onChange={this.handleChange}
+                data-field="actualVersion.name"
               />
+              <FormError field="actualVersion.name" />
             </div>
           </div>
           <If is={document.version}>
@@ -119,6 +131,7 @@ export class DocumentForm extends Component {
                 labelKey="name"
                 valueKey="id"
               />
+              <FormError field="actualVersion.templateId" />
             </div>
           </div>
           <div className="form-group">

@@ -33,3 +33,5 @@ export const LOGS_FILTER_SET = 'LOGS_FILTER_SET';
 export const TYPES_LIST_SET = 'TYPES_LIST_SET';
 export const MESSAGE_SET = 'MESSAGE_SET';
 export const ERROR_SET = 'ERROR_SET';
+export const ERRORS_SET = 'ERRORS_SET';
+export const ERRORS_UPDATE = 'ERRORS_UPDATE';

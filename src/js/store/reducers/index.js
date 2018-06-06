@@ -37,7 +37,9 @@ import {
   LOGS_FILTER_SET,
   TYPES_LIST_SET,
   MESSAGE_SET,
-  ERROR_SET
+  ERROR_SET,
+  ERRORS_SET,
+  ERRORS_UPDATE
 } from 'Store/types';
 
 import initialState from './initialState.json';
@@ -309,6 +311,21 @@ export default function Reducer(state = initialState, action) {
       return {
         ...state,
         error: {
+          ...action.data
+        }
+      };
+    case ERRORS_SET:
+      return {
+        ...state,
+        errors: {
+          ...action.data
+        }
+      };
+    case ERRORS_UPDATE:
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
           ...action.data
         }
       };

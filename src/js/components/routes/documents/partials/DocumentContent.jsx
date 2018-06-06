@@ -13,6 +13,8 @@ import ErrorMessage from 'Components/common/ErrorMessage';
 import axios from 'Services/request';
 import { API } from 'Config';
 
+import { $$errorsSet } from 'Store/thunks/errors';
+
 import DocumentForm from './Form';
 import AttributesForm from './AttributesForm';
 
@@ -21,7 +23,8 @@ export class DocumentContent extends Component {
   static propTypes = {
     match: PropTypes.any.isRequired,
     document: PropTypes.any.isRequired,
-    profile: PropTypes.any.isRequired
+    profile: PropTypes.any.isRequired,
+    dispatch: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -32,18 +35,29 @@ export class DocumentContent extends Component {
   }
 
   onFormSubmit() {
-    const { document, profile, match } = this.props;
+    const {
+      dispatch,
+      document,
+      profile,
+      match
+    } = this.props;
     const { documentID } = match.params;
     const doc = { ...document };
     doc.ownerId = profile.id;
     doc.actualVersion.templateId = get(document, 'actualVersion.template.id');
-    doc.actualVersion.labelIds = doc.actualVersion.labels.map(l => l.id);
+    if (doc.actualVersion.labels) {
+      doc.actualVersion.labelIds = doc.actualVersion.labels.map(l => l.id);
+    }
     if (documentID) {
+      /* todo: this is likely never executed thus safe to remove */
       axios.put(`${API.documents}/${documentID}`, doc);
     } else {
       axios.post(API.documents, doc).then(({ data }) => {
         if (!data.id) throw new Error('No id field in response.');
         this.setState({ newDocumentID: data.id });
+      }).catch(err => {
+        const { errors } = err.response.data;
+        if (errors) $$errorsSet(dispatch, errors);
       });
     }
   }

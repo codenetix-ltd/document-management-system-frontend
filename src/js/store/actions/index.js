@@ -33,7 +33,9 @@ import {
   LOGS_FILTER_SET,
   TYPES_LIST_SET,
   MESSAGE_SET,
-  ERROR_SET
+  ERROR_SET,
+  ERRORS_SET,
+  ERRORS_UPDATE
 } from 'Store/types';
 
 /** Authentication */
@@ -213,14 +215,25 @@ export const $typesList = data => ({
   data
 });
 
-/** Messages */
+/** Message */
 export const $message = data => ({
   type: MESSAGE_SET,
   data
 });
 
-/** Errors */
+/** Error */
 export const $error = data => ({
   type: ERROR_SET,
+  data
+});
+
+/** Errors */
+export const $errors = data => ({
+  type: ERRORS_SET,
+  data
+});
+
+export const $updateErrors = data => ({
+  type: ERRORS_UPDATE,
   data
 });

@@ -38,7 +38,7 @@ export class Login extends Component {
     return (
       <div className="login-box">
         <div className="login-logo">
-          <a href="/"><b>Foodunion</b> DMS</a>
+          <a href="/"><b>DMS</b></a>
         </div>
         <div className="login-box-body">
           <p className="login-box-msg">Sign in to start your session</p>
