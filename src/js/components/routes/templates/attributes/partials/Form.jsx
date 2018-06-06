@@ -5,6 +5,7 @@ import autobind from 'autobind-decorator';
 import { If, Then } from 'qc-react-conditionals/lib';
 import Select from 'react-select';
 
+import FormError from 'Components/common/FormError';
 import { DataInput as Input } from 'Components/common/dataControls';
 import AttributesTable from 'Routes/templates/attributes/partials/Table';
 
@@ -12,6 +13,11 @@ import {
   $$attributeUpdate,
   $$attributeReset
 } from 'Store/thunks/attributes';
+
+import {
+  $$errorsReset,
+  $$errorsUpdate
+} from 'Store/thunks/errors';
 
 @autobind
 export class AttributeForm extends Component {
@@ -28,7 +34,9 @@ export class AttributeForm extends Component {
   };
 
   componentWillUnmount() {
-    $$attributeReset(this.props.dispatch);
+    const { dispatch } = this.props;
+    $$attributeReset(dispatch);
+    $$errorsReset(dispatch);
   }
 
   onSubmit(e) {
@@ -37,20 +45,22 @@ export class AttributeForm extends Component {
     const { name, type, data } = { ...attribute };
     this.props.onSubmit({
       name,
-      typeId: type.id,
-      data
+      data,
+      typeId: type && type.id
     });
   }
 
   handleChange(e) {
-    const { value, name } = e.target;
+    const { value } = e.target;
     const { dispatch } = this.props;
-    $$attributeUpdate(dispatch, { [name]: value });
+    $$attributeUpdate(dispatch, { name: value });
+    $$errorsUpdate(dispatch, { name: '' });
   }
 
   handleSelectChange(type) {
     const { dispatch } = this.props;
     $$attributeUpdate(dispatch, { type });
+    $$errorsUpdate(dispatch, { typeId: '' });
   }
 
   render() {
@@ -71,6 +81,7 @@ export class AttributeForm extends Component {
                 placeholder="Attribute name"
                 onChange={this.handleChange}
               />
+              <FormError field="name" />
             </div>
           </div>
           <div className="form-group">
@@ -84,6 +95,7 @@ export class AttributeForm extends Component {
                 valueKey="id"
                 labelKey="name"
               />
+              <FormError field="typeId" />
             </div>
           </div>
           <If is={attribute.type && attribute.type.name === 'Table'}>

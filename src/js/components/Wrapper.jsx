@@ -7,6 +7,8 @@ import {
   Footer
 } from 'Components';
 
+import { ToastContainer } from 'react-toastify';
+
 const menuData = [
   {
     name: 'Documents',
@@ -35,6 +37,7 @@ export default function Wrapper() {
       <Header />
       <Sidebar menuData={menuData} />
       <Content />
+      <ToastContainer hideProgressBar />
       <Footer />
     </div>
   );

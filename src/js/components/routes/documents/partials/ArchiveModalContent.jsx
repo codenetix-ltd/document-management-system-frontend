@@ -30,7 +30,10 @@ export class ArchiveModalContent extends Component {
       substituteDocument,
       selectedDocuments
     } = this.props;
-    const options = list.map(({ actualVersion }) => actualVersion);
+    const selectedIds = selectedDocuments.map(({ actualVersion }) => actualVersion.id);
+    const options = list.map(({ actualVersion }) => actualVersion).filter(doc => {
+      return !selectedIds.includes(doc.id);
+    });
     const titlePart = selectedDocuments.length > 1 ? 'selected documents' : 'the document';
     return (
       <div>

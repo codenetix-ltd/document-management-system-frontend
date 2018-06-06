@@ -1,8 +1,11 @@
+/* eslint-disable */
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { API } from 'Config';
 import ls from 'Services/SecureLS';
 
 import store from 'Store';
+
 import { $$errorsSet } from 'Store/thunks/errors';
 
 const auth = ls.get('auth');
@@ -35,9 +38,15 @@ axios.interceptors.response.use(res => res, err => {
         document.location.reload();
       }).catch(reject);
     });
+    /* if request fails with validation error */
   } else if (response.status === 422) {
-    const { errors } = response.data;
-    if (errors) $$errorsSet(store.dispatch, errors);
+    const { errors, message } = response.data;
+    if (errors) {
+      $$errorsSet(store.dispatch, errors);
+      message && toast.error(message);
+    } else {
+      message && toast.info(message);
+    }
     return Promise.reject(err);
   }
   return Promise.reject(err);
