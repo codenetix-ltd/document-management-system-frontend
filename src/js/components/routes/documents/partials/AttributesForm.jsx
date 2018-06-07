@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
 import {
-  DeviationInput,
   DataInput as Input,
   DataCheckbox as Checkbox
 } from 'Components/common/dataControls';
@@ -99,15 +98,6 @@ export class AttributesForm extends Component {
                         checked={val}
                       />
                     </td>
-                  </tr>
-                );
-              } else if (type.machineName === 'value_with_deviations') {
-                const found = attrValues.find(at => at.id === attr.id);
-                const val = found ? found.value : '';
-                return (
-                  <tr key={index}>
-                    <td>{attr.name}</td>
-                    <td><DeviationInput data={attr} onChange={this.onAttrChange} value={val} /></td>
                   </tr>
                 );
               }

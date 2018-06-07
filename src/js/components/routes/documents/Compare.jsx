@@ -46,13 +46,6 @@ export class DocumentsCompare extends Component {
     this.setState({ showAll });
   }
 
-  getDeviationCells(currentSet, attr, subValue) {
-    return currentSet.map(doc => {
-      const { value } = doc.attributeValues.find(at => at.id === attr.id);
-      return <td key={doc.id}>{value[subValue]}</td>;
-    });
-  }
-
   /**
    * Checks if a value of cellID differs in one of the docs of currentSet
    * @param currentSet - set of documents that have the same templateID
@@ -191,15 +184,6 @@ export class DocumentsCompare extends Component {
                               );
                             });
                             return rows.unshift(firstRow) && rows;
-                          } else if (attr.type.name === 'Value with deviations') {
-                            const valueCells = this.getDeviationCells(currentSet, attr, 'value');
-                            const leftCells = this.getDeviationCells(currentSet, attr, 'left');
-                            const rightCells = this.getDeviationCells(currentSet, attr, 'right');
-                            return [
-                              <tr key={1}><td>{attr.name}</td>{valueCells}</tr>,
-                              <tr key={2}><td>Deviation(-)</td>{leftCells}</tr>,
-                              <tr key={3}><td>Deviation(+)</td>{rightCells}</tr>
-                            ];
                           }
                           return (
                             <tr key={attr.id}>

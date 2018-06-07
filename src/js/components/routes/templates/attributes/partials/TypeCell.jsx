@@ -19,7 +19,9 @@ export default class TypeCell extends Component {
   constructor(props) {
     super(props);
     this.typeOptions = [
-      'String', 'Numeric', 'Boolean', 'Inherit', 'Value with deviations'
+      'String',
+      'Numeric',
+      'Boolean'
     ].map((name, index) => ({ id: index + 1, name }));
   }
 
