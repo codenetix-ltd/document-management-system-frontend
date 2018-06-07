@@ -19,7 +19,8 @@ export class DocumentsCompare extends Component {
   static propTypes = {
     location: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired,
-    comparedDocuments: PropTypes.array.isRequired
+    comparedDocuments: PropTypes.array.isRequired,
+    types: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -44,6 +45,10 @@ export class DocumentsCompare extends Component {
 
   onFiltersClick(showAll) {
     this.setState({ showAll });
+  }
+
+  getType(typeId) {
+    return this.props.types.find(type => type.id === typeId);
   }
 
   /**
@@ -151,7 +156,8 @@ export class DocumentsCompare extends Component {
                     <tbody>
                       {
                         attrs.map(attr => {
-                          if (attr.type.name === 'Table') {
+                          const type = this.getType(attr.typeId);
+                          if (type.machineName === 'table') {
                             const firstRow = (
                               <tr key={attr.id}>
                                 <td><i className="fa fa-table" /> {attr.name}</td>
@@ -213,7 +219,7 @@ export class DocumentsCompare extends Component {
   }
 }
 
-const mapStateToProps = ({ comparedDocuments }) => ({ comparedDocuments });
+const mapStateToProps = ({ comparedDocuments, types }) => ({ comparedDocuments, types });
 
 const mapDispatchToProps = (dispatch) => ({ dispatch });
 
