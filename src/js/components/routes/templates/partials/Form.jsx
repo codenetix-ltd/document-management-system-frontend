@@ -5,7 +5,12 @@ import autobind from 'autobind-decorator';
 import { Link, Redirect } from 'react-router-dom';
 import { If, Then } from 'qc-react-conditionals/lib';
 
+import axios from 'Services/request';
+import { API } from 'Config';
+
 import AttributesList from 'Routes/templates/partials/AttributesListSortable';
+
+import FormError from 'Components/common/FormError';
 
 import {
   $$templateFetch,
@@ -13,8 +18,10 @@ import {
   $$templateReset
 } from 'Store/thunks/templates';
 
-import axios from 'Services/request';
-import { API } from 'Config';
+import {
+  $$errorsReset,
+  $$errorsUpdate
+} from 'Store/thunks/errors';
 
 @autobind
 export class TemplateForm extends Component {
@@ -47,7 +54,9 @@ export class TemplateForm extends Component {
   }
 
   componentWillUnmount() {
-    $$templateReset(this.props.dispatch);
+    const { dispatch } = this.props;
+    $$templateReset(dispatch);
+    $$errorsReset(dispatch);
   }
 
   onSubmit(event) {
@@ -82,6 +91,9 @@ export class TemplateForm extends Component {
     $$templateUpdate(dispatch, {
       [name]: value
     });
+    $$errorsUpdate(dispatch, {
+      name: ''
+    });
   }
 
   render() {
@@ -109,6 +121,7 @@ export class TemplateForm extends Component {
                 value={template.name}
                 onChange={this.handleChange}
               />
+              <FormError field="name" />
             </div>
           </div>
           <If is={templateID}>
