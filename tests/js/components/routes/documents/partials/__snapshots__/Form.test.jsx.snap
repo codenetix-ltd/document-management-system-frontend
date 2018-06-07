@@ -21,11 +21,14 @@ exports[`Documents Form should render correctly 1`] = `
       >
         <input
           className="form-control"
-          id="name"
+          data-field="actualVersion.name"
           name="name"
           onChange={[Function]}
           placeholder="Document name"
           type="text"
+        />
+        <Connect(FormError)
+          field="actualVersion.name"
         />
       </div>
     </div>
@@ -36,7 +39,7 @@ exports[`Documents Form should render correctly 1`] = `
         >
           <label
             className="col-sm-2 control-label"
-            htmlFor="owner"
+            htmlFor="version"
           >
             Actual version
           </label>
@@ -97,6 +100,9 @@ exports[`Documents Form should render correctly 1`] = `
             }
           }
           valueKey="id"
+        />
+        <Connect(FormError)
+          field="actualVersion.templateId"
         />
       </div>
     </div>

@@ -24,6 +24,9 @@ describe('Documents DocumentContent', () => {
       },
       document: {
         actualVersion: {}
+      },
+      profile: {
+        id: 1
       }
     };
     wrapper = shallow(<DocumentContent {...props} />);
@@ -38,12 +41,5 @@ describe('Documents DocumentContent', () => {
     axios.put.mockResolvedValue({});
     instance.onFormSubmit();
     expect(axios.put.mock.calls.length).toBe(1);
-  });
-
-  it('should call validate method', () => {
-    const doc = { name: '' };
-    expect(instance.validate(doc)).toBe(false);
-    doc.name = 'John Doe';
-    expect(instance.validate(doc)).toBe(true);
   });
 });

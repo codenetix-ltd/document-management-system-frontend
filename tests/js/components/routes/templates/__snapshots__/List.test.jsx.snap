@@ -24,7 +24,7 @@ exports[`Templates list should render correctly 1`] = `
       <Link
         className="btn btn-success btn-xs pull-right"
         replace={false}
-        to="/users"
+        to="/templates"
       >
         <i
           className="fa fa-plus"
@@ -41,8 +41,8 @@ exports[`Templates list should render correctly 1`] = `
         <div
           className="col-sm-12"
         >
-          <Connect(AlertMessage) />
-          <Connect(ErrorMessage) />
+          <withRouter(Connect(AlertMessage)) />
+          <withRouter(Connect(ErrorMessage)) />
           <ReactTable
             AggregatedComponent={[Function]}
             ExpanderComponent={[Function]}

@@ -25,7 +25,8 @@ describe('Documents AttributesForm', () => {
             attributes: []
           }
         }
-      }
+      },
+      types: [{ id: 1, name: 'String', machineName: 'string' }]
     };
     wrapper = shallow(<AttributesForm {...props} />);
     instance = wrapper.instance();
@@ -42,7 +43,8 @@ describe('Documents AttributesForm', () => {
           value: ''
         }
       }, {
-        id: 1
+        id: 1,
+        typeId: 1
       }
     );
     expect($updateAttributeValues.mock.calls.length).toBe(1);
@@ -55,7 +57,8 @@ describe('Documents AttributesForm', () => {
           value: ''
         }
       }, {
-        id: 1
+        id: 1,
+        typeId: 1
       }
     );
     expect($updateAttributeValues.mock.calls.length).toBe(1);

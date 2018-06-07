@@ -47,13 +47,4 @@ describe('Documents Edit', () => {
     instance.onTabSelect(2);
     expect(instance.state.activeKey).toBe(2);
   });
-
-  it('should call validate method', () => {
-    const doc = {
-      name: ''
-    };
-    expect(instance.validate(doc)).toBe(false);
-    doc.name = 'Lorem ipsum';
-    expect(instance.validate(doc)).toBe(true);
-  });
 });

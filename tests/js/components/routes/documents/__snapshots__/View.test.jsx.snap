@@ -23,8 +23,8 @@ exports[`Documents View should render correctly 1`] = `
     boxClass=""
     noBox={true}
   >
-    <Connect(AlertMessage) />
-    <Connect(ErrorMessage) />
+    <withRouter(Connect(AlertMessage)) />
+    <withRouter(Connect(ErrorMessage)) />
     <Uncontrolled(Tabs)
       activeKey={1}
       animation={false}

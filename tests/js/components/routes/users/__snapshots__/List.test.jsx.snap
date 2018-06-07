@@ -41,8 +41,8 @@ exports[`Users list should render correctly 1`] = `
         <div
           className="col-sm-12"
         >
-          <Connect(AlertMessage) />
-          <Connect(ErrorMessage) />
+          <withRouter(Connect(AlertMessage)) />
+          <withRouter(Connect(ErrorMessage)) />
           <ReactTable
             AggregatedComponent={[Function]}
             ExpanderComponent={[Function]}

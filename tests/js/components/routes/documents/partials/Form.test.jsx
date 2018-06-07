@@ -86,7 +86,10 @@ describe('Documents Form', () => {
     instance.handleChange({
       target: {
         name: 'lorem',
-        value: 'ipsum'
+        value: 'ipsum',
+        dataset: {
+          field: ''
+        }
       }
     });
     expect($$documentUpdate).toHaveBeenCalledTimes(1);

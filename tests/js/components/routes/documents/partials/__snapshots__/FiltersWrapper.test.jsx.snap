@@ -34,7 +34,7 @@ exports[`Documents FiltersWrapper should render correctly 1`] = `
         className="form-group col-lg-2 col-md-4 col-sm-6"
       >
         <InputFilter
-          filterType="owner"
+          filterType="ownerId"
           label="Owner"
           onChange={[Function]}
           placeholder="Username"
@@ -44,7 +44,7 @@ exports[`Documents FiltersWrapper should render correctly 1`] = `
         className="form-group col-lg-2 col-md-4 col-sm-6"
       >
         <SelectFilter
-          filterType="template"
+          filterType="templateIds"
           label="Template"
           onChange={[Function]}
           options={Array []}
@@ -54,7 +54,7 @@ exports[`Documents FiltersWrapper should render correctly 1`] = `
         className="form-group col-lg-2 col-md-4 col-sm-6"
       >
         <SelectFilter
-          filterType="label"
+          filterType="labelIds"
           label="Labels"
           onChange={[Function]}
           options={Array []}
