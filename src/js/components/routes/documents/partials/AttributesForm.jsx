@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
+import isNull from 'lodash/isNull';
 
 import {
   DataInput as Input,
@@ -66,12 +67,22 @@ export class AttributesForm extends Component {
                                 <tr key={idx}>
                                   <td>{name}</td>
                                   {
-                                    columns.map((col, i) => {
-                                      const found = attrValues.find(at => at.id === col.id);
-                                      const val = found ? found.value : '';
+                                    columns.map((cell, i) => {
+                                      const found = attrValues.find(at => at.id === cell.id);
+                                      const cellType = this.getType(cell.typeId);
+                                      const value = found ? found.value : null;
+                                      if (cellType.machineName === 'boolean') {
+                                        const checked = isNull(value) ? false : value;
+                                        return (
+                                          <td key={i}>
+                                            <Checkbox data={cell} onChange={this.onCheckboxToggle} checked={checked} />
+                                          </td>
+                                        );
+                                      }
+                                      const val = isNull(value) ? '' : value;
                                       return (
                                         <td key={i}>
-                                          <Input data={col} onChange={this.onAttrChange} value={val} />
+                                          <Input data={cell} onChange={this.onAttrChange} value={val} />
                                         </td>
                                       );
                                     })

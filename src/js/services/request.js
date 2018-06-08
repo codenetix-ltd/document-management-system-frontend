@@ -1,8 +1,8 @@
-/* eslint-disable */
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { API } from 'Config';
 import ls from 'Services/SecureLS';
+import isString from 'lodash/isString';
 
 import store from 'Store';
 
@@ -11,17 +11,23 @@ import { $$errorsSet } from 'Store/thunks/errors';
 const auth = ls.get('auth');
 const { access_token, refresh_token } = auth;
 
-if (!access_token) {
-  throw new Error('No access_token found. Probably attempting to use request prior to authorization!');
-}
-
-axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
-/* if request fails with 401 try to refresh the token and reload the page */
-axios.interceptors.response.use(res => res, err => {
+if (access_token) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+}
+
+axios.interceptors.response.use(res => {
+  if (res.config.method === 'put' && res.status === 200) {
+    const resource = res.config.url.split('/').reverse()[1].slice(0, -1);
+    isString(resource) && toast.success(`The ${resource} successully updated.`);
+  }
+  return res;
+}, err => {
   const { response } = err;
-  if (response.status === 401) {
+
+  /* if request fails with 401 try to refresh the token and reload the page */
+  if (response.status === 401 && access_token) {
     const { email, password } = ls.get('c_cache');
     axios.defaults.headers.common['Authorization'] = `Bearer ${refresh_token}`;
     return new Promise((resolve, reject) => {
@@ -38,6 +44,7 @@ axios.interceptors.response.use(res => res, err => {
         document.location.reload();
       }).catch(reject);
     });
+
     /* if request fails with validation error */
   } else if (response.status === 422) {
     const { errors, message } = response.data;
