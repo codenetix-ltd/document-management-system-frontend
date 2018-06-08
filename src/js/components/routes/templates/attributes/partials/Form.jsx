@@ -58,13 +58,14 @@ export class AttributeForm extends Component {
     if (type.machineName === 'table') {
       $$attributeUpdate(dispatch, { typeId: type.id });
     } else {
-      $$attributeUpdate(dispatch, { typeId: type.id, data: [] });
+      $$attributeUpdate(dispatch, { typeId: type.id, data: null });
     }
     $$errorsUpdate(dispatch, { typeId: '' });
   }
 
   render() {
-    const { attribute, types } = this.props;
+    const { attribute, types, submitButtonText } = this.props;
+    const isEditing = submitButtonText !== 'Create';
     const type = types.find(({ id }) => id === attribute.typeId);
     return (
       <form className="form-horizontal" onSubmit={this.onSubmit}>
@@ -95,6 +96,7 @@ export class AttributeForm extends Component {
                 options={types}
                 valueKey="id"
                 labelKey="name"
+                disabled={isEditing}
               />
               <FormError field="typeId" />
             </div>
