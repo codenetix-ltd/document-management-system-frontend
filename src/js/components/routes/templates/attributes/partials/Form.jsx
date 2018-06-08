@@ -42,12 +42,8 @@ export class AttributeForm extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { attribute } = this.props;
-    const { name, type, data } = { ...attribute };
-    this.props.onSubmit({
-      name,
-      data,
-      typeId: type && type.id
-    });
+    const { name, typeId, data } = { ...attribute };
+    this.props.onSubmit({ name, typeId, data });
   }
 
   handleChange(e) {
@@ -60,9 +56,9 @@ export class AttributeForm extends Component {
   handleSelectChange(type) {
     const { dispatch } = this.props;
     if (type.machineName === 'table') {
-      $$attributeUpdate(dispatch, { type });
+      $$attributeUpdate(dispatch, { typeId: type.id });
     } else {
-      $$attributeUpdate(dispatch, { type, data: [] });
+      $$attributeUpdate(dispatch, { typeId: type.id, data: [] });
     }
     $$errorsUpdate(dispatch, { typeId: '' });
   }
