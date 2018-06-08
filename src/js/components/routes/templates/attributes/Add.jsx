@@ -9,9 +9,7 @@ import ContentWrapper from 'Components/ContentWrapper';
 import AttributeForm from 'Routes/templates/attributes/partials/Form';
 
 import axios from 'Services/request';
-import { getAPI } from 'Config';
-
-const API = getAPI();
+import { API } from 'Config';
 
 @autobind
 export default class AttributeAdd extends Component {

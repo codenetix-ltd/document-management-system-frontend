@@ -185,7 +185,7 @@ export default class UserForm extends Component {
               <FileUpload onSuccess={this.handleAvatarUpload} />
               <If is={this.state.avatar.url}>
                 <Then>
-                  <img src={`/${this.state.avatar.url}`} alt="User avatar" />
+                  <img src={`${this.state.avatar.url}`} alt="User avatar" />
                 </Then>
               </If>
             </div>

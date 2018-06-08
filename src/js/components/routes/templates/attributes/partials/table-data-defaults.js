@@ -1,21 +1,13 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 const column = {
-  name: 'Enter title',
-  type: {
-    name: 'String',
-    machineName: 'string',
-    id: 1
-  }
+  name: 'Enter column title',
+  typeId: 1
 };
 
 const columnData = {
   isLocked: false,
-  type: {
-    name: 'String',
-    machineName: 'string',
-    id: 1
-  }
+  typeId: 1
 };
 
 const data = {

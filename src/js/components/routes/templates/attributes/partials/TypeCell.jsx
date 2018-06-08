@@ -37,8 +37,9 @@ export default class TypeCell extends Component {
 
   render() {
     const { rowData, colIndex } = this.props;
-    const { type, isLocked } = rowData.value[`${colIndex}-${rowData.viewIndex}`];
-    const selectValue = { id: type.id, name: type.name };
+    const { typeId, isLocked } = rowData.value[`${colIndex}-${rowData.viewIndex}`];
+    const { name } = this.typeOptions.find(({ id }) => id === typeId);
+    const selectValue = { id: typeId, name };
     const lockCls = cln('fa', { 'fa-lock': isLocked }, { 'fa-unlock': !isLocked });
 
     return (

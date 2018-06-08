@@ -24,7 +24,9 @@ export class AttributeEdit extends Component {
   };
 
   componentDidMount() {
-    this.fetchAttribute();
+    const { dispatch, match } = this.props;
+    const { templateID, attributeID } = match.params;
+    $$attributeFetch(dispatch, templateID, attributeID);
   }
 
   onFormSubmit(formData) {
@@ -39,12 +41,6 @@ export class AttributeEdit extends Component {
       { pageName: `Edit template ${templateID}`, pageLink: `/templates/${templateID}`, iconCls: 'fa fa-pencil' },
       { pageName: 'Template attribute edit', pageLink: '', iconCls: 'fa fa-plus' }
     ];
-  }
-
-  fetchAttribute() {
-    const { dispatch, match } = this.props;
-    const { templateID, attributeID } = match.params;
-    $$attributeFetch(dispatch, templateID, attributeID);
   }
 
   render() {

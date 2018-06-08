@@ -59,12 +59,17 @@ export class AttributeForm extends Component {
 
   handleSelectChange(type) {
     const { dispatch } = this.props;
-    $$attributeUpdate(dispatch, { type });
+    if (type.machineName === 'table') {
+      $$attributeUpdate(dispatch, { type });
+    } else {
+      $$attributeUpdate(dispatch, { type, data: [] });
+    }
     $$errorsUpdate(dispatch, { typeId: '' });
   }
 
   render() {
     const { attribute, types } = this.props;
+    const type = types.find(({ id }) => id === attribute.typeId);
     return (
       <form className="form-horizontal" onSubmit={this.onSubmit}>
         <div className="box-body">
@@ -89,7 +94,7 @@ export class AttributeForm extends Component {
             <div className="col-sm-6">
               <Select
                 name="type"
-                value={attribute.type}
+                value={attribute.typeId}
                 onChange={this.handleSelectChange}
                 options={types}
                 valueKey="id"
@@ -98,7 +103,7 @@ export class AttributeForm extends Component {
               <FormError field="typeId" />
             </div>
           </div>
-          <If is={attribute.type && attribute.type.name === 'Table'}>
+          <If is={type && type.machineName === 'table'}>
             <Then>
               <div className="form-group form-group-table">
                 <label className="col-sm-2 control-label">Table definition</label>

@@ -37,13 +37,10 @@ export class AttributesTable extends Component {
     this.generateTableData(headers, rows);
   }
 
-  onCellTypeChange({ colIndex, rowIndex }, value) {
+  onCellTypeChange({ colIndex, rowIndex }, type) {
     const { attribute } = this.props;
     const { headers, rows } = { ...attribute.data };
-    rows[rowIndex].columns[colIndex].type = {
-      ...value,
-      machineName: value.name.toLowerCase()
-    };
+    rows[rowIndex].columns[colIndex].typeId = type.id;
     this.generateTableData(headers, rows);
   }
 
@@ -76,7 +73,7 @@ export class AttributesTable extends Component {
     headers.push(getTpl('column'));
     const newRows = rows.map(row => {
       const r = { ...row };
-      r.headers = [...row.headers, getTpl('columnData')];
+      r.columns = [...row.columns, getTpl('columnData')];
       return r;
     });
     this.generateTableData(headers, newRows);
