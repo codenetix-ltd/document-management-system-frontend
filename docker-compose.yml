@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  frontend_app:
+  frontend-app:
     image: codenetix/laravel-dms-frontend:dev
-    container_name: dms_frontend_app
+    container_name: dms-frontend-app
     build:
       context: ./
       dockerfile: Dockerfile
