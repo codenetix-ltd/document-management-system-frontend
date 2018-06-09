@@ -90,6 +90,7 @@ export class LabelsList extends Component {
                   defaultPageSize={15}
                   onFetchData={this.onFetchData}
                   PaginationComponent={Pagination}
+                  minRows={1}
                 />
               </div>
             </div>

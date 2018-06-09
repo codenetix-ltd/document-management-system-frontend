@@ -72,6 +72,8 @@ export default class ReactTablePagination extends Component {
       nextText
     } = this.props;
 
+    if (pages === 1) return <span />;
+
     const pagesList = Array.from({ length: pages }, () => '').map((p, index) => {
       const thresholdMax = page + 5;
       const thresholdMin = thresholdMax - 5;

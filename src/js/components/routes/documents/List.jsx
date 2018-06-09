@@ -179,6 +179,7 @@ export class DocumentsList extends Component {
                     PaginationComponent={Pagination}
                     multiSort={false}
                     resizable={false}
+                    minRows={1}
                   />
                 </div>
               </div>
