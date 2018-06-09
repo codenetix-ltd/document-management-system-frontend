@@ -105,7 +105,8 @@ export class AttributesListSortable extends Component {
   onSortEnd({ oldIndex, newIndex }) {
     const { attributes, dispatch } = this.props;
     const list = arrayMove(attributes.list, oldIndex, newIndex);
-    dispatch($attributesList({ list }));
+    const reordered = list.map((attr, i) => ({ ...attr, order: i }));
+    dispatch($attributesList({ list: reordered }));
   }
 
   fetchAttributes() {
@@ -115,6 +116,9 @@ export class AttributesListSortable extends Component {
 
   render() {
     const { attributes } = this.props;
+    attributes.list.sort((a, b) => {
+      return a.order - b.order;
+    });
     return (
       <div>
         <SortableTable
