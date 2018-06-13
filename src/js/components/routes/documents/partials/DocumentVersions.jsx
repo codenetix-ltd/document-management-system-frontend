@@ -57,7 +57,7 @@ export class DocumentVersions extends Component {
     const rows = list.sort(this.sortDesc).map(doc => {
       return (
         <tr key={doc.id}>
-          <td>{doc.id}</td>
+          <td>{doc.versionName}</td>
           <td>{doc.comment}</td>
           <td>{moment.unix(doc['createdAt']).format('YYYY-MM-DD HH:MM:SS')}</td>
           <td>
