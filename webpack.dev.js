@@ -10,18 +10,6 @@ const development = {
     overlay: {
       warnings: true,
       errors: true
-    },
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8081',
-        secure: false,
-        bypass: (req, res, proxyOptions) => {
-          if (req.url.indexOf('api') !== -1) {
-            return false;
-          }
-          return req.url;
-        }
-      }
     }
   }
 };

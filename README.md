@@ -9,16 +9,16 @@ To build the project run the following commands in terminal inside root director
 By default the app assumes that the server that serves *index.html* is the same that serves all /api calls. If it's not true you should open *src/config/API.json* and change the following settings:
 
 - change **useSameURL** setting to false;
-- edit **baseURL.production** to match your API server.
-- run `npm run build` to rebuild the project
+- edit **baseURL.production** to match your API server url;
+- run `npm run build` to rebuild the project.
 
 To start a development server:
 
 1. `npm install`
-2. if needed open *webpack.dev.js* and edit  **target** property of **devServer.proxy** setting so that it points to a working API server;
-3. if needed change development server port by editing **port** property of **devServer.proxy**;
-4. `npm start` to start a development server and watch for changes
-5. open http://localhost:8080 (default port)
+2. change **useSameURL** setting to false;
+3. edit **baseURL.development** to match your API server url;
+4. `npm start` to start a development server and watch for changes;
+5. open http://localhost:8080.
 
 To run tests:
 

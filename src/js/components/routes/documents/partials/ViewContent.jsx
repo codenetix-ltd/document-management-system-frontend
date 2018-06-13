@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import getFileURL from 'Utils/getFileURL';
 
 export default function DocumentViewContent(props) {
   const { document, document: { actualVersion } } = props;
@@ -35,8 +36,9 @@ export default function DocumentViewContent(props) {
             <td>
               {
                 actualVersion.files && actualVersion.files.map(file => {
+                  const url = getFileURL(file.url);
                   return (
-                    <a key={file.id} href={file.url} target="_blank">{file.name}&nbsp;</a>
+                    <a key={file.id} href={url} target="_blank">{file.name}&nbsp;</a>
                   );
                 })
               }

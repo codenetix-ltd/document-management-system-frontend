@@ -150,8 +150,8 @@ export class RoleForm extends Component {
                 <hr />
                 <div id="permission-list-wrapper">
                   {
-                    permissionGroups.map(group => (
-                      <div key={group.id} className="permissionGroup">
+                    permissionGroups.map((group, i) => (
+                      <div key={i} className="permissionGroup">
                         <h4>{group.label}</h4>
                         <table className="table table-bordered table-permissions">
                           <thead>

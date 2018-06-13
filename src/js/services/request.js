@@ -12,6 +12,7 @@ const auth = ls.get('auth');
 const { access_token, refresh_token } = auth;
 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 
 if (access_token) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
@@ -27,7 +28,7 @@ axios.interceptors.response.use(res => {
   const { response } = err;
 
   /* if request fails with 401 try to refresh the token and reload the page */
-  if (response.status === 401 && access_token) {
+  if (response && response.status === 401 && access_token) {
     const { email, password } = ls.get('c_cache');
     axios.defaults.headers.common['Authorization'] = `Bearer ${refresh_token}`;
     return new Promise((resolve, reject) => {
@@ -46,7 +47,7 @@ axios.interceptors.response.use(res => {
     });
 
     /* if request fails with validation error */
-  } else if (response.status === 422) {
+  } else if (response && response.status === 422) {
     const { errors, message } = response.data;
     if (errors) {
       $$errorsSet(store.dispatch, errors);
@@ -78,6 +79,10 @@ export const request = {
 
   patch(url, config) {
     return axios.patch(url, config);
+  },
+
+  getCancelToken() {
+    return axios.CancelToken;
   }
 };
 

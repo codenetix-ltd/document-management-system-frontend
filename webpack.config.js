@@ -89,6 +89,7 @@ module.exports = {
       Config: resolve(__dirname, 'src', 'config/'),
       Images: resolve(__dirname, 'src', 'images/'),
       Store: resolve(__dirname, 'src', 'js', 'store/'),
+      Utils: resolve(__dirname, 'src', 'js', 'utils/'),
       Services: resolve(__dirname, 'src', 'js', 'services/'),
       Components: resolve(__dirname, 'src', 'js', 'components/'),
       Routes: resolve(__dirname, 'src', 'js', 'components', 'routes/')
