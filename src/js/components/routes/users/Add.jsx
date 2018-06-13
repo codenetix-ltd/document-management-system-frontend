@@ -36,34 +36,6 @@ export class UserAdd extends Component {
     });
   }
 
-  getTemplateOptions(input, callback) {
-    this.fetchTemplates().then(({ data }) => {
-      const list = data.data.map(({ id, name }) => ({ label: name, value: id }));
-      callback(null, {
-        options: list,
-        complete: true
-      });
-    }).catch(callback);
-  }
-
-  getRoleOptions(input, callback) {
-    this.fetchRoles().then(({ data }) => {
-      const list = data.data.map(({ id, name }) => ({ label: name, value: id }));
-      callback(null, {
-        options: list,
-        complete: true
-      });
-    }).catch(callback);
-  }
-
-  fetchTemplates() {
-    return axios.get(API.templates);
-  }
-
-  fetchRoles() {
-    return axios.get(API.roles);
-  }
-
   breadcrumbs = [
     { pageName: 'Users', pageLink: '/users', iconCls: 'fa fa-users' }
   ];
@@ -84,11 +56,7 @@ export class UserAdd extends Component {
           <div className="box-header with-border">
             <h3 className="box-title">Profile data</h3>
           </div>
-          <UserForm
-            onSubmit={this.onFormSubmit}
-            getTemplateOptions={this.getTemplateOptions}
-            getRoleOptions={this.getRoleOptions}
-          />
+          <UserForm onSubmit={this.onFormSubmit} match={{ params: {} }} />
         </ContentWrapper>
       </div>
     );

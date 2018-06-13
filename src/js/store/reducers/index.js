@@ -7,6 +7,8 @@ import {
   AUTH_UPDATE,
   LOADING_STATUS_SET,
   USERS_LIST_SET,
+  USER_SET,
+  USER_UPDATE,
   PROFILE_SET,
   PROFILE_UPDATE,
   TEMPLATES_LIST_SET,
@@ -80,6 +82,19 @@ export default function Reducer(state = initialState, action) {
           ...state.users,
           list: action.data.list,
           lastPage: action.data.lastPage
+        }
+      };
+    case USER_SET:
+      return {
+        ...state,
+        user: action.data
+      };
+    case USER_UPDATE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.data
         }
       };
     case PROFILE_SET:

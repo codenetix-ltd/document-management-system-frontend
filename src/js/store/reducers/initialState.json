@@ -12,7 +12,13 @@
     "lastPage": -1
   },
   "user": {
-    "fullName": ""
+    "fullName": "",
+    "email": "",
+    "avatar": {
+      "url": ""
+    },
+    "password": "",
+    "passwordConfirmation": ""
   },
   "profile": {
     "id": 1,

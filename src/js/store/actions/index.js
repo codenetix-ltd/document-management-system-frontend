@@ -3,6 +3,8 @@ import {
   AUTH_UPDATE,
   LOADING_STATUS_SET,
   USERS_LIST_SET,
+  USER_SET,
+  USER_UPDATE,
   PROFILE_SET,
   PROFILE_UPDATE,
   TEMPLATES_LIST_SET,
@@ -58,6 +60,16 @@ export const $loading = status => ({
 /** Users */
 export const $usersList = data => ({
   type: USERS_LIST_SET,
+  data
+});
+
+export const $user = data => ({
+  type: USER_SET,
+  data
+});
+
+export const $updateUser = data => ({
+  type: USER_UPDATE,
   data
 });
 

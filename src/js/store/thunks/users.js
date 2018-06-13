@@ -3,11 +3,15 @@ import axios from 'Services/request';
 
 import {
   $loading,
+  $user,
+  $updateUser,
   $usersList,
 } from 'Store/actions';
 
 import { $$messageSet } from 'Store/thunks/message';
 import { $$errorSet } from 'Store/thunks/error';
+
+import initialState from 'Store/reducers/initialState.json';
 
 const fn = () => {};
 
@@ -26,6 +30,26 @@ export const $$usersFetch = (dispatch, page, callback = fn) => {
     dispatch($loading(false));
     $$errorSet(dispatch, err);
   });
+};
+
+export const $$userFetch = (dispatch, userID, callback = fn) => {
+  dispatch($loading(true));
+  axios.get(`${API.users}/${userID}`).then(({ data }) => {
+    dispatch($user({ ...data }));
+    dispatch($loading(false));
+    callback(data);
+  }).catch(err => {
+    dispatch($loading(false));
+    $$errorSet(dispatch, err);
+  });
+};
+
+export const $$userUpdate = (dispatch, part) => {
+  dispatch($updateUser(part));
+};
+
+export const $$userReset = (dispatch) => {
+  dispatch($user(initialState.user));
 };
 
 export const $$userDelete = (dispatch, user, close = fn) => {
