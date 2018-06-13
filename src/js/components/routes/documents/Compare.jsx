@@ -59,8 +59,10 @@ export class DocumentsCompare extends Component {
    */
   valueDiffers(currentSet, cellID) {
     return currentSet.some(doc => {
-      const { value: firstVal } = currentSet[0].attributeValues.find(at => at.id === cellID);
-      const { value: currVal } = doc.attributeValues.find(at => at.id === cellID);
+      const firstFound = currentSet[0].attributeValues.find(at => at.id === cellID);
+      const currentFound = doc.attributeValues.find(at => at.id === cellID);
+      const { value: firstVal } = firstFound || {};
+      const { value: currVal } = currentFound || {};
       return firstVal !== currVal;
     });
   }
@@ -170,7 +172,7 @@ export class DocumentsCompare extends Component {
                                 cells.push({
                                   id: col.id,
                                   rowTitle: row.name,
-                                  colTitle: attr.data.columns[colIndex].name
+                                  colTitle: attr.data.headers[colIndex].name
                                 });
                               });
                             });
@@ -178,11 +180,12 @@ export class DocumentsCompare extends Component {
                               const valueDiffers = this.valueDiffers(currentSet, cell.id);
                               if (!this.state.showAll && !valueDiffers) return null;
                               return (
-                                <tr key={cell.id}>
+                                <tr key={cell.id} className="table-attr-row">
                                   <td>{`${cell.rowTitle} ${cell.colTitle}`}</td>
                                   {
                                     currentSet.map(doc => {
-                                      const { value } = doc.attributeValues.find(at => at.id === cell.id);
+                                      const found = doc.attributeValues.find(at => at.id === cell.id);
+                                      const { value } = found || { value: '-' };
                                       return <td key={doc.id}>{value}</td>;
                                     })
                                   }
@@ -196,7 +199,8 @@ export class DocumentsCompare extends Component {
                               <td>{attr.name}</td>
                               {
                                 currentSet.map(doc => {
-                                  const { value } = doc.attributeValues.find(at => at.id === attr.id);
+                                  const found = doc.attributeValues.find(at => at.id === attr.id);
+                                  const { value } = found || { value: '-' };
                                   if (isBool(value)) {
                                     return <td key={doc.id}>{value ? 'Yes' : 'No'}</td>;
                                   }
