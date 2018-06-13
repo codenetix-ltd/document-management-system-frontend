@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import cln from 'classnames';
 import onClickOutside from 'react-onclickoutside';
+import getFileURL from 'Utils/getFileURL';
 
 import { DataLink } from 'Components/common/dataControls';
 
@@ -57,18 +58,18 @@ export class ProfileDropdown extends Component {
           <li className={userMenuCls}>
             <DataLink cls="dropdown-toggle" onClick={this.toggleProfileDropdown}>
               <img
-                src={require('Images/user-default.jpeg')}
-                className="user-image"
-                alt=""
-                width="25"
-                height="25"
+                src={getFileURL(profile.avatar.url)}
+                className="img-circle"
+                alt="User Image"
+                width={25}
+                height={25}
               />
               <span className="hidden-xs">{profile.fullName}</span>
             </DataLink>
             <ul className="dropdown-menu">
               <li className="user-header">
                 <img
-                  src={require('Images/user-default.jpeg')}
+                  src={getFileURL(profile.avatar.url)}
                   className="img-circle"
                   alt="User Image"
                 />

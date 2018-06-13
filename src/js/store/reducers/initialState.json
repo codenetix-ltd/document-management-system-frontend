@@ -23,7 +23,10 @@
   "profile": {
     "id": 1,
     "fullName": "",
-    "email": ""
+    "email": "",
+    "avatar": {
+      "url": ""
+    }
   },
   "templates": {
     "list": [],

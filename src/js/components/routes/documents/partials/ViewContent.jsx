@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import getFileURL from 'Utils/getFileURL';
+import isBoolean from 'lodash/isBoolean';
 
 export class DocumentViewContent extends Component {
   static propTypes = {
@@ -73,7 +74,7 @@ export class DocumentViewContent extends Component {
                 const type = this.getType(attr.typeId);
                 const { value } = attrValues.find(({ id }) => id === attr.id) || { value: '' };
                 if (type.machineName === 'table') {
-                  const { columns: cols, rows } = attr.data;
+                  const { headers, rows } = attr.data;
                   return (
                     <tr key={index}>
                       <td>{attr.name}</td>
@@ -82,7 +83,7 @@ export class DocumentViewContent extends Component {
                           <tbody>
                             <tr>
                               <td>&nbsp;</td>
-                              {cols.map(({ name }, i) => <td key={i}><b>{name}</b></td>)}
+                              {headers.map(({ name }, i) => <td key={i}><b>{name}</b></td>)}
                             </tr>
                             {
                               rows.map(({ name, columns }, idx) => {
@@ -91,7 +92,11 @@ export class DocumentViewContent extends Component {
                                     <td>{name}</td>
                                     {
                                       columns.map((col, i) => {
-                                        const { value: val } = attrValues.find(({ id }) => id === col.id);
+                                        const found = attrValues.find(({ id }) => id === col.id);
+                                        const { value: val } = found || { value: '-' };
+                                        if (isBoolean(val)) {
+                                          return <td key={i}>{val ? 'Yes' : 'No'}</td>;
+                                        }
                                         return <td key={i}>{val}</td>;
                                       })
                                     }

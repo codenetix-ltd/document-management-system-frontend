@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
+import { If, Then } from 'qc-react-conditionals/lib';
 
 import FileUpload from 'Components/common/FileUpload';
 
 import { $$profileUpdate } from 'Store/thunks/profile';
+import getFileURL from 'Utils/getFileURL';
 
 @autobind
 export class ProfileForm extends Component {
@@ -81,6 +83,11 @@ export class ProfileForm extends Component {
             <label htmlFor="file" className="col-sm-2 control-label">Avatar</label>
             <div className="col-sm-6">
               <FileUpload onSuccess={this.handleAvatarUpload} />
+              <If is={profile.avatar.url}>
+                <Then>
+                  <img className="user-avatar-small" src={`${getFileURL(profile.avatar.url)}`} alt="Profile avatar" />
+                </Then>
+              </If>
             </div>
           </div>
         </div>

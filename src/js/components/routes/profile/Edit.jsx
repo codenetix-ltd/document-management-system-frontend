@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
+import pick from 'lodash/pick';
 
 import ContentHeader from 'Components/ContentHeader';
 import ContentWrapper from 'Components/ContentWrapper';
@@ -24,7 +25,8 @@ export class ProfileEdit extends Component {
   }
 
   onFormSubmit() {
-    const formData = this.props.profile;
+    const { profile } = this.props;
+    const formData = pick(profile, ['fullName', 'email', 'avatarId', 'templatesIds']);
     axios.put(`${API.profile}`, formData).catch(err => {
       throw err;
     });
